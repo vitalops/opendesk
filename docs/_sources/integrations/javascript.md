@@ -39,6 +39,9 @@ const client = new OpenDeskClient();
 await client.screenshot({ marks: true });
 await client.ui({ action: "click", app: "Safari", title: "Go" });
 await client.keyboard({ action: "type", text: "Hello" });
+
+// Screen memory (after `npx opendesk-js memory start`)
+await client.memory({ action: "search", query: "invoice", since: "last week" });
 ```
 
 ## Native MCP server

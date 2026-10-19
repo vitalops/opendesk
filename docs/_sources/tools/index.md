@@ -2,19 +2,30 @@
 
 All tools share the same interface: `await tool.execute(ctx, params) -> ToolResult`.
 
-**Tool priority rule:** `ui` → `screenshot(marks=True)` → `mouse` with image dimensions.
+**Tool priority rule:** scripts / APIs when no visual interaction is needed → `ui` → `screenshot(marks=True)` → `mouse` with image dimensions.
 
-| Tool | Description |
-|---|---|
-| [`ui`](ui.md) | Accessibility-based UI interaction — click by name, type, read values |
-| [`screenshot`](screenshot.md) | Screen capture with optional Set-of-Marks overlay |
-| [`mouse`](mouse.md) | Pixel-level mouse control with HiDPI coordinate translation |
-| [`keyboard`](keyboard.md) | Type text, press keys, send hotkeys |
-| [`app`](app.md) | Open, close, focus, and list applications |
-| [`clipboard`](clipboard.md) | Read and write clipboard text |
-| [`ocr`](ocr.md) | Extract text from any screen region |
-| [`audit`](audit.md) | Read the session audit log |
-| [`learn`](learn.md) | Record and replay desktop workflows |
+| Tool | Kind | Description |
+|---|---|---|
+| [`script`](script.md) | acts | Run a script or API call when the task needs no GUI |
+| [`ui`](ui.md) | acts | Accessibility-based UI interaction — click by name, type, read values |
+| [`screenshot`](screenshot.md) | read-only | Screen capture with optional Set-of-Marks overlay |
+| [`mouse`](mouse.md) | acts | Pixel-level mouse control with HiDPI coordinate translation |
+| [`keyboard`](keyboard.md) | acts | Type text, press keys, send hotkeys |
+| [`app`](app.md) | acts | Open, close, focus, and list applications |
+| [`clipboard`](clipboard.md) | changes state | Read and write clipboard text |
+| [`ocr`](ocr.md) | read-only | Extract text from any screen region |
+| [`browser`](browser.md) | acts | Drive a web browser through its automation interface |
+| [`audit`](audit.md) | acts (replay) | Read the session audit log, replay a session |
+| [`learn`](learn.md) | acts | Record and replay desktop workflows |
+| `schedule` | acts | Run a task or learned workflow on a timer (see [Scheduler](../automation/scheduler.md)) |
+| [`memory`](memory.md) | read-only | Screen memory — search a local, OCR'd history of what was on screen |
+| [`memory_manage`](memory.md) | acts | Pause / resume capture, deny list, config, delete history |
+| [`fleet`](fleet.md) | acts | Run a task across several paired machines |
+
+**Kind** mirrors the MCP annotations each tool declares: *read-only* tools set `readOnlyHint: true`;
+*acts* tools set `destructiveHint: true` because they change the desktop or stored data; `clipboard` changes
+state but is marked non-destructive. Every tool also has a human-readable `title`. MCP clients use these hints to
+decide what to confirm with you. The peer admin tools (`opendesk_*`) are listed in [MCP](../mcp/index.md).
 
 ---
 

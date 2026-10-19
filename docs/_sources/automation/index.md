@@ -31,3 +31,4 @@ Record a task once  →  opendesk captures clicks, keys, and screenshots
 - [In Claude Code](claude-code.md) — record, replay, and schedule via natural language
 - [Python API](python-api.md) — `learn` and `schedule` tool usage
 - [Scheduler](scheduler.md) — background daemon, timing formats, storage, platform support
+- [Compiled replay](compiled-replay.md) — deterministic, LLM-free `learn run` with postconditions, self-heal and `patch`

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Advanced: In-process Server &amp; Restrictions &#8212; opendesk</title>
+    <title>Advanced: HTTP Transport, In-process Server &amp; Restrictions &#8212; opendesk</title>
   
   
   
@@ -27,48 +27,55 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=4418a689" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
 
-    <script src="../_static/documentation_options.js?v=7f7c277e"></script>
+    <script src="../_static/documentation_options.js?v=83a61292"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'mcp/advanced';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="canonical" href="https://vitalops.github.io/opendesk/docs/mcp/advanced.html" />
     <link rel="icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Troubleshooting" href="troubleshooting.html" />
-    <link rel="prev" title="Continue (VS Code)" href="continue.html" />
+    <link rel="prev" title="Continue (VS Code / JetBrains)" href="continue.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  
+  
+  
   
   <dialog id="pst-search-dialog">
     
@@ -97,7 +104,51 @@
 </aside>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
     </header>
   
 
@@ -155,6 +206,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/python.html">Python Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/javascript.html">JavaScript / TypeScript Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/permissions.html">Permissions</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MCP</span></p>
 <ul class="current nav bd-sidenav">
@@ -162,9 +214,9 @@
 <li class="toctree-l1"><a class="reference internal" href="install.html">Install</a></li>
 <li class="toctree-l1"><a class="reference internal" href="claude-code.html">Claude Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="claude-desktop.html">Claude Desktop</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cursor.html">Cursor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="continue.html">Continue (VS Code)</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Advanced: In-process Server &amp; Restrictions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cursor.html">Cursor &amp; VS Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="continue.html">Continue (VS Code / JetBrains)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Advanced: HTTP Transport, In-process Server &amp; Restrictions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Integrations</span></p>
@@ -188,6 +240,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../tools/ocr.html"><code class="docutils literal notranslate"><span class="pre">ocr</span></code> — Text Extraction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/audit.html"><code class="docutils literal notranslate"><span class="pre">audit</span></code> — Session Audit Log &amp; Replay</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/learn.html"><code class="docutils literal notranslate"><span class="pre">learn</span></code> — Record and Replay Tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/memory.html"><code class="docutils literal notranslate"><span class="pre">memory</span></code> — Screen Memory (searchable desktop history)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/script.html"><code class="docutils literal notranslate"><span class="pre">script</span></code> — Shell, AppleScript, JXA &amp; PowerShell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/browser.html"><code class="docutils literal notranslate"><span class="pre">browser</span></code> — Chrome / Edge / Brave over DevTools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fleet.html"><code class="docutils literal notranslate"><span class="pre">fleet</span></code> — One Call, Many Machines</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Safety &amp; Evaluation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../safety.html">Safety — policy, approvals, kill switch, injection guard, audit, secrets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eval.html">Evaluation harness</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Automation</span></p>
 <ul class="nav bd-sidenav">
@@ -195,6 +256,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../automation/claude-code.html">Automation in Claude Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../automation/python-api.html">Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../automation/scheduler.html">Scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../automation/compiled-replay.html">Compiled replay — deterministic <code class="docutils literal notranslate"><span class="pre">learn</span></code> programs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Architecture</span></p>
 <ul class="nav bd-sidenav">
@@ -204,6 +266,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../architecture/remote-layer.html">Remote &amp; Integrations Layers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture/data-flow.html">Data Flow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture/custom-tools.html">Adding a Custom Tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/native-helper.html">Native helper (<code class="docutils literal notranslate"><span class="pre">opendesk-ax</span></code>)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Protocol</span></p>
 <ul class="nav bd-sidenav">
@@ -400,11 +463,18 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
 
 
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -423,7 +493,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Advanced: In-process Server & Restrictions</h1>
+    <h1>Advanced: HTTP Transport, In-process Server & Restrictions</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -432,10 +502,12 @@
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#streamable-http-transport">Streamable HTTP transport</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-the-server-tells-the-agent">What the server tells the agent</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-mcp-server-in-python">Running the MCP server in Python</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#restricting-what-the-agent-can-do">Restricting what the agent can do</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#audit-log">Audit log</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#audit-log">Audit log</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-permission-handler-with-mcp">Custom permission handler with MCP</a></li>
 </ul>
 </li>
@@ -450,8 +522,99 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="advanced-in-process-server-restrictions">
-<h1>Advanced: In-process Server &amp; Restrictions<a class="headerlink" href="#advanced-in-process-server-restrictions" title="Link to this heading">#</a></h1>
+  <section id="advanced-http-transport-in-process-server-restrictions">
+<h1>Advanced: HTTP Transport, In-process Server &amp; Restrictions<a class="headerlink" href="#advanced-http-transport-in-process-server-restrictions" title="Link to this heading">#</a></h1>
+<section id="streamable-http-transport">
+<h2>Streamable HTTP transport<a class="headerlink" href="#streamable-http-transport" title="Link to this heading">#</a></h2>
+<p>stdio is the default. For clients that connect over HTTP, or to run the server in one process and connect
+from another, start it with the streamable HTTP transport:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>opendesk-mcp<span class="w"> </span>--transport<span class="w"> </span>http<span class="w"> </span>--host<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span>--port<span class="w"> </span><span class="m">8765</span>
+opendesk<span class="w"> </span>mcp<span class="w"> </span>--http<span class="w"> </span>--port<span class="w"> </span><span class="m">8765</span><span class="w">                  </span><span class="c1"># same thing via the main CLI</span>
+uvx<span class="w"> </span>opendesk<span class="w"> </span>mcp<span class="w"> </span>--http<span class="w"> </span>--port<span class="w"> </span><span class="m">8765</span><span class="w">              </span><span class="c1"># no install</span>
+opendesk-js<span class="w"> </span>mcp<span class="w"> </span>--http<span class="w"> </span>--port<span class="w"> </span><span class="m">8765</span><span class="w">               </span><span class="c1"># JavaScript server</span>
+</pre></div>
+</div>
+<p>The endpoint is <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8765/mcp</span></code>.</p>
+<p><strong>Bearer auth is on by default.</strong> Every request must send <code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Bearer</span> <span class="pre">&lt;token&gt;</span></code>. The token is taken from:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--token</span> <span class="pre">&lt;value&gt;</span></code></p></li>
+<li><p>else <code class="docutils literal notranslate"><span class="pre">$OPENDESK_MCP_TOKEN</span></code></p></li>
+<li><p>else generated once and stored in <code class="docutils literal notranslate"><span class="pre">~/.opendesk/mcp-token</span></code> (mode 0600), then reused</p></li>
+</ol>
+<p>The server prints the token on start.</p>
+<p>Safety rules:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--no-auth</span></code> disables the token, and is only accepted on loopback addresses (<code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code>, <code class="docutils literal notranslate"><span class="pre">::1</span></code>, <code class="docutils literal notranslate"><span class="pre">localhost</span></code>).</p></li>
+<li><p>Binding to a non-loopback address (e.g. <code class="docutils literal notranslate"><span class="pre">--host</span> <span class="pre">0.0.0.0</span></code>) refuses to start without auth and prints a warning:
+anyone with the token controls this desktop. Prefer <a class="reference internal" href="../remote/index.html"><span class="std std-doc">paired remote peers</span></a>, which are end-to-end encrypted.</p></li>
+<li><p>On loopback binds, requests with a foreign <code class="docutils literal notranslate"><span class="pre">Host</span></code> or <code class="docutils literal notranslate"><span class="pre">Origin</span></code> header are rejected (DNS-rebinding protection).</p></li>
+</ul>
+<p>Client config:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"mcpServers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"opendesk"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://127.0.0.1:8765/mcp"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"Authorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bearer &lt;token&gt;"</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Claude Code:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>claude<span class="w"> </span>mcp<span class="w"> </span>add<span class="w"> </span>--transport<span class="w"> </span>http<span class="w"> </span>opendesk<span class="w"> </span>http://127.0.0.1:8765/mcp<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--header<span class="w"> </span><span class="s2">"Authorization: Bearer </span><span class="k">$(</span>cat<span class="w"> </span>~/.opendesk/mcp-token<span class="k">)</span><span class="s2">"</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="what-the-server-tells-the-agent">
+<h2>What the server tells the agent<a class="headerlink" href="#what-the-server-tells-the-agent" title="Link to this heading">#</a></h2>
+<p><strong>Titles and annotations.</strong> Every tool has a human-readable <code class="docutils literal notranslate"><span class="pre">title</span></code> and MCP annotations so clients can decide
+what needs confirmation:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Hint</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>Tools</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">readOnlyHint:</span> <span class="pre">true</span></code></p></td>
+<td><p>Only observes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">screenshot</span></code>, <code class="docutils literal notranslate"><span class="pre">ocr</span></code>, <code class="docutils literal notranslate"><span class="pre">memory</span></code>, <code class="docutils literal notranslate"><span class="pre">opendesk_peers</span></code>, <code class="docutils literal notranslate"><span class="pre">opendesk_status</span></code>, <code class="docutils literal notranslate"><span class="pre">opendesk_describe</span></code>, <code class="docutils literal notranslate"><span class="pre">opendesk_capabilities</span></code>, <code class="docutils literal notranslate"><span class="pre">opendesk_discover</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">destructiveHint:</span> <span class="pre">true</span></code></p></td>
+<td><p>Acts on the desktop or deletes data</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mouse</span></code>, <code class="docutils literal notranslate"><span class="pre">keyboard</span></code>, <code class="docutils literal notranslate"><span class="pre">app</span></code>, <code class="docutils literal notranslate"><span class="pre">ui</span></code>, <code class="docutils literal notranslate"><span class="pre">learn</span></code>, <code class="docutils literal notranslate"><span class="pre">schedule</span></code>, <code class="docutils literal notranslate"><span class="pre">audit</span></code> (replay), <code class="docutils literal notranslate"><span class="pre">memory_manage</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">destructiveHint:</span> <span class="pre">false</span></code></p></td>
+<td><p>Changes state, safely</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">clipboard</span></code>; <code class="docutils literal notranslate"><span class="pre">opendesk_use</span></code> and <code class="docutils literal notranslate"><span class="pre">opendesk_disconnect</span></code> (also <code class="docutils literal notranslate"><span class="pre">idempotentHint:</span> <span class="pre">true</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">openWorldHint:</span> <span class="pre">true</span></code></p></td>
+<td><p>Touches the real desktop or network</p></td>
+<td><p>the input tools, <code class="docutils literal notranslate"><span class="pre">opendesk_discover</span></code>, <code class="docutils literal notranslate"><span class="pre">opendesk_capabilities</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Errors.</strong> Failed calls (tool errors, invalid arguments, unknown tools or peers, denied permissions, exceptions)
+return <code class="docutils literal notranslate"><span class="pre">isError:</span> <span class="pre">true</span></code> with an <code class="docutils literal notranslate"><span class="pre">ERROR:</span> <span class="pre">…</span></code> message. Missing macOS permissions include the fix
+(which app needs Accessibility / Screen Recording, and <code class="docutils literal notranslate"><span class="pre">opendesk</span> <span class="pre">check</span> <span class="pre">--open</span></code>).</p>
+<p><strong>Instructions.</strong> On initialize the server sends <code class="docutils literal notranslate"><span class="pre">instructions</span></code> describing the preferred workflow:</p>
+<ol class="arabic simple">
+<li><p>If no visual interaction is needed, use scripts or APIs instead of the GUI.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ui</span></code> (accessibility API): inspect the tree, act on elements by name.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">screenshot(marks=true)</span></code> when the tree isn’t enough.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mouse</span></code> / <code class="docutils literal notranslate"><span class="pre">keyboard</span></code> as a last resort, with coordinates scaled from the latest screenshot.</p></li>
+<li><p>Verify each state-changing step with a fresh screenshot.</p></li>
+</ol>
+<p>It also covers remote peers (<code class="docutils literal notranslate"><span class="pre">opendesk_peers</span></code>, <code class="docutils literal notranslate"><span class="pre">opendesk_use</span></code>, the <code class="docutils literal notranslate"><span class="pre">peer</span></code> argument), screen memory
+(<code class="docutils literal notranslate"><span class="pre">memory</span></code> to search, <code class="docutils literal notranslate"><span class="pre">memory_manage</span></code> to control), and safety: some actions may need user approval, denied calls
+must not be retried, and the user’s kill switch halts everything.</p>
+</section>
+<hr class="docutils" />
 <section id="running-the-mcp-server-in-python">
 <h2>Running the MCP server in Python<a class="headerlink" href="#running-the-mcp-server-in-python" title="Link to this heading">#</a></h2>
 <p>If you need to embed the server in your own process or customize permissions:</p>
@@ -459,15 +622,14 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">mcp.server.stdio</span><span class="w"> </span><span class="kn">import</span> <span class="n">stdio_server</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">opendesk.integrations.mcp</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_mcp_server</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">opendesk.registry</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_registry</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">opendesk.tools.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">ToolContext</span><span class="p">,</span> <span class="n">PermissionDeniedError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">opendesk.tools.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">PermissionDeniedError</span>
 
 <span class="c1"># Custom permission policy: block any app launch</span>
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">my_policy</span><span class="p">(</span><span class="n">tool</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">argument</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">tool</span> <span class="o">==</span> <span class="s2">&quot;app&quot;</span> <span class="ow">and</span> <span class="s2">&quot;open&quot;</span> <span class="ow">in</span> <span class="n">argument</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">PermissionDeniedError</span><span class="p">(</span><span class="s2">&quot;App launching is disabled in this session.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">tool</span> <span class="o">==</span> <span class="s2">"app"</span> <span class="ow">and</span> <span class="s2">"open"</span> <span class="ow">in</span> <span class="n">argument</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">PermissionDeniedError</span><span class="p">(</span><span class="s2">"App launching is disabled in this session."</span><span class="p">)</span>
 
-<span class="n">ctx</span> <span class="o">=</span> <span class="n">ToolContext</span><span class="p">(</span><span class="n">session_id</span><span class="o">=</span><span class="s2">&quot;my-session&quot;</span><span class="p">,</span> <span class="n">permission_handler</span><span class="o">=</span><span class="n">my_policy</span><span class="p">)</span>
-<span class="n">server</span> <span class="o">=</span> <span class="n">create_mcp_server</span><span class="p">(</span><span class="n">registry</span><span class="o">=</span><span class="n">create_registry</span><span class="p">(),</span> <span class="n">ctx</span><span class="o">=</span><span class="n">ctx</span><span class="p">)</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">create_mcp_server</span><span class="p">(</span><span class="n">registry</span><span class="o">=</span><span class="n">create_registry</span><span class="p">(),</span> <span class="n">permission_handler</span><span class="o">=</span><span class="n">my_policy</span><span class="p">)</span>
 
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="k">async</span> <span class="k">with</span> <span class="n">stdio_server</span><span class="p">()</span> <span class="k">as</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
@@ -476,23 +638,24 @@
 <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </pre></div>
 </div>
+<p>A denied action comes back to the agent as an <code class="docutils literal notranslate"><span class="pre">isError:</span> <span class="pre">true</span></code> result.</p>
+<p>To serve it over HTTP instead, wrap it with <code class="docutils literal notranslate"><span class="pre">opendesk.integrations.mcp_http.build_http_app(server,</span> <span class="pre">token=...)</span></code>
+and run the returned ASGI app with uvicorn.</p>
 </section>
 <hr class="docutils" />
 <section id="restricting-what-the-agent-can-do">
 <h2>Restricting what the agent can do<a class="headerlink" href="#restricting-what-the-agent-can-do" title="Link to this heading">#</a></h2>
-<p>Lock down the sandbox before starting the server:</p>
+<p>Lock down the sandbox before starting the server. MCP calls on the local machine use the session id <code class="docutils literal notranslate"><span class="pre">mcp-local</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">opendesk.computer.sandbox</span><span class="w"> </span><span class="kn">import</span> <span class="n">configure_sandbox</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">opendesk.tools.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">ToolContext</span>
 
 <span class="c1"># Only allow Safari and Terminal; only act within the left half of the screen</span>
 <span class="n">configure_sandbox</span><span class="p">(</span>
-    <span class="n">session_id</span><span class="o">=</span><span class="s2">&quot;restricted&quot;</span><span class="p">,</span>
-    <span class="n">allowed_apps</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Safari&quot;</span><span class="p">,</span> <span class="s2">&quot;Terminal&quot;</span><span class="p">],</span>
+    <span class="n">session_id</span><span class="o">=</span><span class="s2">"mcp-local"</span><span class="p">,</span>
+    <span class="n">allowed_apps</span><span class="o">=</span><span class="p">[</span><span class="s2">"Safari"</span><span class="p">,</span> <span class="s2">"Terminal"</span><span class="p">],</span>
     <span class="n">screen_region</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1280</span><span class="p">,</span> <span class="mi">1600</span><span class="p">),</span>
 <span class="p">)</span>
 
-<span class="n">ctx</span> <span class="o">=</span> <span class="n">ToolContext</span><span class="p">(</span><span class="n">session_id</span><span class="o">=</span><span class="s2">&quot;restricted&quot;</span><span class="p">)</span>
-<span class="n">server</span> <span class="o">=</span> <span class="n">create_mcp_server</span><span class="p">(</span><span class="n">ctx</span><span class="o">=</span><span class="n">ctx</span><span class="p">)</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">create_mcp_server</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>All screenshots and mouse clicks outside <code class="docutils literal notranslate"><span class="pre">(0,0,1280,1600)</span></code> will be rejected with an error
@@ -504,27 +667,27 @@ the LLM sees, so it knows to stay in bounds.</p>
 <p>Every action is recorded in the session sandbox:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">opendesk.computer.sandbox</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_sandbox</span>
 
-<span class="n">sandbox</span> <span class="o">=</span> <span class="n">get_sandbox</span><span class="p">(</span><span class="s2">&quot;my-session&quot;</span><span class="p">)</span>
+<span class="n">sandbox</span> <span class="o">=</span> <span class="n">get_sandbox</span><span class="p">(</span><span class="s2">"mcp-local"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">sandbox</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
-<span class="c1"># session=my-session… | 12 actions: 3x screenshot, 4x ui_action, 2x keyboard_type, 3x mouse_click</span>
+<span class="c1"># session=mcp-local | 12 actions: 3x screenshot, 4x ui_action, 2x keyboard_type, 3x mouse_click</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">sandbox</span><span class="o">.</span><span class="n">export_audit_log</span><span class="p">()</span>
-<span class="c1"># [{&quot;id&quot;: &quot;...&quot;, &quot;timestamp&quot;: 1234567890.0, &quot;action&quot;: &quot;screenshot&quot;, &quot;params&quot;: {...}, ...}, ...]</span>
+<span class="c1"># [{"id": "...", "timestamp": 1234567890.0, "action": "screenshot", "params": {...}, ...}, ...]</span>
 </pre></div>
 </div>
+<p>The agent can read the same log with the <code class="docutils literal notranslate"><span class="pre">audit</span></code> tool.</p>
 <section id="custom-permission-handler-with-mcp">
 <h3>Custom permission handler with MCP<a class="headerlink" href="#custom-permission-handler-with-mcp" title="Link to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">opendesk.tools.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">ToolContext</span><span class="p">,</span> <span class="n">PermissionDeniedError</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">opendesk.tools.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">PermissionDeniedError</span>
 
-<span class="n">BLOCKED_APPS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;System Preferences&quot;</span><span class="p">,</span> <span class="s2">&quot;Keychain Access&quot;</span><span class="p">}</span>
+<span class="n">BLOCKED_APPS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"System Settings"</span><span class="p">,</span> <span class="s2">"Keychain Access"</span><span class="p">}</span>
 
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">policy</span><span class="p">(</span><span class="n">tool</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">argument</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">blocked</span> <span class="ow">in</span> <span class="n">BLOCKED_APPS</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">blocked</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">argument</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
-            <span class="k">raise</span> <span class="n">PermissionDeniedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Blocked: </span><span class="si">{</span><span class="n">blocked</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">PermissionDeniedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Blocked: </span><span class="si">{</span><span class="n">blocked</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="n">ctx</span> <span class="o">=</span> <span class="n">ToolContext</span><span class="p">(</span><span class="n">session_id</span><span class="o">=</span><span class="s2">&quot;mcp&quot;</span><span class="p">,</span> <span class="n">permission_handler</span><span class="o">=</span><span class="n">policy</span><span class="p">)</span>
-<span class="n">server</span> <span class="o">=</span> <span class="n">create_mcp_server</span><span class="p">(</span><span class="n">ctx</span><span class="o">=</span><span class="n">ctx</span><span class="p">)</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">create_mcp_server</span><span class="p">(</span><span class="n">permission_handler</span><span class="o">=</span><span class="n">policy</span><span class="p">)</span>
 </pre></div>
 </div>
 <hr class="docutils" />
@@ -550,7 +713,7 @@ the LLM sees, so it knows to stay in bounds.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Continue (VS Code)</p>
+        <p class="prev-next-title">Continue (VS Code / JetBrains)</p>
       </div>
     </a>
     <a class="right-next"
@@ -579,10 +742,12 @@ the LLM sees, so it knows to stay in bounds.</p>
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#streamable-http-transport">Streamable HTTP transport</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-the-server-tells-the-agent">What the server tells the agent</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-mcp-server-in-python">Running the MCP server in Python</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#restricting-what-the-agent-can-do">Restricting what the agent can do</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#audit-log">Audit log</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#audit-log">Audit log</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-permission-handler-with-mcp">Custom permission handler with MCP</a></li>
 </ul>
 </li>
@@ -634,8 +799,8 @@ By Abhigith Neil Abraham, Fariz Rahman, Fadil Rahman
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
 
   <footer class="bd-footer">
   </footer>

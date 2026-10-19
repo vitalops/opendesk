@@ -15,7 +15,12 @@ Requires `pip install 'opendesk[learn]'` (installs `pynput`).
 | `stop` | — | Stop recording; returns trajectory summary and screenshots |
 | `save` | `task_name`, `procedure` | Save a procedure JSON string to `.opendesk/learned/` |
 | `replay` | `task_name` | Load a procedure and return step-by-step replay instructions |
-| `list` | — | List all saved procedures in the current directory |
+| `list` | — | List all saved procedures in the current directory (`[compiled]` marks tasks with a program) |
+| `compile` | `task_name`, `source?`, `program?`, `description?` | Build `<name>.program.json` from the recorded trajectory, from this session (`source="session"`), or from program JSON you supply |
+| `save_session` | `task_name`, `description?`, `session_id?` | Compile this session's audited actions into a program (and a basic procedure if none exists) |
+| `run` | `task_name`, `start_at?` | Execute the compiled program deterministically, with no LLM, and verify postconditions. On failure, returns a self-heal result with the failed step, reason, screenshot, remaining steps and NL procedure |
+| `patch` | `task_name`, `step_id?`, `step`, `mode?` | Replace, insert or delete one program step (`replace`, `insert_before`, `insert_after`, `append`, `delete`) |
+| `show` | `task_name` | Print the compiled program |
 
 ## Ask Claude
 
@@ -69,5 +74,7 @@ print(result.output)  # step-by-step instructions for the agent
 result = await tool.execute(ctx, params(action="list"))
 print(result.output)
 ```
+
+For deterministic, LLM-free replay (`compile`, `save_session`, `run`, `patch`, `show`) see [Compiled replay](../automation/compiled-replay.md).
 
 See [Automation](../automation/index.md) for the full guide including scheduling, storage format, and platform support.

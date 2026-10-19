@@ -1,0 +1,869 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Compiled replay — deterministic learn programs &#8212; opendesk</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../_static/documentation_options.js?v=83a61292"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'automation/compiled-replay';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="canonical" href="https://vitalops.github.io/opendesk/docs/automation/compiled-replay.html" />
+    <link rel="icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Architecture" href="../architecture/index.html" />
+    <link rel="prev" title="Scheduler" href="scheduler.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">opendesk — Open Computer Use Agent for any AI framework</div>
+</aside>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="opendesk - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="opendesk - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/python.html">Python Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/javascript.html">JavaScript / TypeScript Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/permissions.html">Permissions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MCP</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../mcp/index.html">MCP Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcp/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcp/claude-code.html">Claude Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcp/claude-desktop.html">Claude Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcp/cursor.html">Cursor &amp; VS Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcp/continue.html">Continue (VS Code / JetBrains)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcp/advanced.html">Advanced: HTTP Transport, In-process Server &amp; Restrictions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcp/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Integrations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../integrations/index.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations/anthropic.html">Anthropic SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations/openai.html">OpenAI Function Calling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations/langchain.html">LangChain / LangGraph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations/javascript.html">JavaScript / TypeScript SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations/custom.html">Custom / Generic Integration</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/ui.html"><code class="docutils literal notranslate"><span class="pre">ui</span></code> — Accessibility-based UI Interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/screenshot.html"><code class="docutils literal notranslate"><span class="pre">screenshot</span></code> — Screen Capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/mouse.html"><code class="docutils literal notranslate"><span class="pre">mouse</span></code> — Mouse Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/keyboard.html"><code class="docutils literal notranslate"><span class="pre">keyboard</span></code> — Keyboard Input</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/app.html"><code class="docutils literal notranslate"><span class="pre">app</span></code> — Application Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/clipboard.html"><code class="docutils literal notranslate"><span class="pre">clipboard</span></code> — Clipboard Read/Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/ocr.html"><code class="docutils literal notranslate"><span class="pre">ocr</span></code> — Text Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/audit.html"><code class="docutils literal notranslate"><span class="pre">audit</span></code> — Session Audit Log &amp; Replay</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/learn.html"><code class="docutils literal notranslate"><span class="pre">learn</span></code> — Record and Replay Tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/memory.html"><code class="docutils literal notranslate"><span class="pre">memory</span></code> — Screen Memory (searchable desktop history)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/script.html"><code class="docutils literal notranslate"><span class="pre">script</span></code> — Shell, AppleScript, JXA &amp; PowerShell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/browser.html"><code class="docutils literal notranslate"><span class="pre">browser</span></code> — Chrome / Edge / Brave over DevTools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fleet.html"><code class="docutils literal notranslate"><span class="pre">fleet</span></code> — One Call, Many Machines</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Safety &amp; Evaluation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../safety.html">Safety — policy, approvals, kill switch, injection guard, audit, secrets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eval.html">Evaluation harness</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Automation</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Automation — Learn, Replay &amp; Schedule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="claude-code.html">Automation in Claude Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python-api.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scheduler.html">Scheduler</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Compiled replay — deterministic <code class="docutils literal notranslate"><span class="pre">learn</span></code> programs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Architecture</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/layers.html">Computer &amp; Tools Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/protocol-layer.html">Protocol Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/remote-layer.html">Remote &amp; Integrations Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/data-flow.html">Data Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/custom-tools.html">Adding a Custom Tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/native-helper.html">Native helper (<code class="docutils literal notranslate"><span class="pre">opendesk-ax</span></code>)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Protocol</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../protocol/index.html">Protocol Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol/transport.html">Transport &amp; Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol/encryption.html">Encryption &amp; Identity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol/pairing.html">Pairing Handshake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol/auth.html">Auth Handshake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol/frames.html">Frames &amp; Errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol/session.html">Session Lifecycle &amp; Method Namespace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol/discovery.html">Discovery, Admin IPC &amp; Cryptographic Summary</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Remote — Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Computer Use — Python / CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/setup.html">One-time Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/running.html">Running</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/mcp.html">MCP Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/security.html">Trust &amp; Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/cli.html">CLI Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/service.html">Service Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/concurrency.html">Concurrency: One Controller at a Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/programmatic.html">Programmatic Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Remote — JS/TS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/index.html">Remote Computer Use — JavaScript / TypeScript SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/setup.html">One-time Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/running.html">Running</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/mcp.html">MCP Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/audit.html">Audit Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/security.html">Trust &amp; Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/cli.html">CLI Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/concurrency.html">Concurrency: One Controller at a Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/programmatic.html">Programmatic Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/vitalops/opendesk" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/vitalops/opendesk/issues/new?title=Issue%20on%20page%20%2Fautomation/compiled-replay.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/automation/compiled-replay.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Compiled replay — deterministic learn programs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ask-claude">Ask Claude</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#files">Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#program-format">Program format</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-targets-are-resolved">How targets are resolved</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#postconditions">Postconditions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-programs-come-from">Where programs come from</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-recording-learn-start-learn-stop">1. A recording (<code class="docutils literal notranslate"><span class="pre">learn</span> <span class="pre">start</span></code> → <code class="docutils literal notranslate"><span class="pre">learn</span> <span class="pre">stop</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-current-session-learn-save-session">2. The current session (<code class="docutils literal notranslate"><span class="pre">learn</span> <span class="pre">save_session</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#written-by-the-agent">3. Written by the agent</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running">Running</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#self-heal">Self-heal</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scheduler">Scheduler</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learn-regression-in-the-eval-harness">Learn regression in the eval harness</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="compiled-replay-deterministic-learn-programs">
+<h1>Compiled replay — deterministic <code class="docutils literal notranslate"><span class="pre">learn</span></code> programs<a class="headerlink" href="#compiled-replay-deterministic-learn-programs" title="Link to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">learn(action=&quot;replay&quot;)</span></code> hands a natural-language procedure to an agent, which re-plans every step with an LLM. That adapts well but is slow, costs tokens, and needs an API key or a Claude login.</p>
+<p>A <strong>compiled program</strong> is the same learned task turned into a fixed list of tool calls that target UI elements by <strong>semantic identity</strong> (app, role, title, accessibility identifier), not pixel coordinates. Each step can carry a <strong>postcondition</strong> that is checked after it runs. <code class="docutils literal notranslate"><span class="pre">learn(action=&quot;run&quot;)</span></code> executes the program with <strong>no LLM</strong>. If a step can’t be completed, the run stops and returns a <strong>self-heal</strong> result so an agent can finish the task and then fix the program.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>record / do the task once ──► learn(stop) or learn(save_session)
+                                     │
+                     &lt;name&gt;.json (NL procedure)  +  &lt;name&gt;.program.json (compiled)
+                                     │
+                         learn(run) ── ok ──► done (no LLM, no API key)
+                                     │
+                                  failed step
+                                     ▼
+          self-heal: failed step + reason + screenshot + remaining steps + NL procedure
+                                     ▼
+                agent finishes the task ──► learn(patch) ──► next run passes
+</pre></div>
+</div>
+<section id="ask-claude">
+<h2>Ask Claude<a class="headerlink" href="#ask-claude" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“Remember what you just did as <code class="docutils literal notranslate"><span class="pre">export-report</span></code>.” → <code class="docutils literal notranslate"><span class="pre">learn(action=&quot;save_session&quot;,</span> <span class="pre">task_name=&quot;export-report&quot;)</span></code></p>
+</div></blockquote>
+<blockquote>
+<div><p>“Run export-report.” → <code class="docutils literal notranslate"><span class="pre">learn(action=&quot;run&quot;,</span> <span class="pre">task_name=&quot;export-report&quot;)</span></code></p>
+</div></blockquote>
+<blockquote>
+<div><p>“Show me the compiled steps for export-report.” → <code class="docutils literal notranslate"><span class="pre">learn(action=&quot;show&quot;,</span> <span class="pre">...)</span></code></p>
+</div></blockquote>
+<blockquote>
+<div><p>“That step targets the wrong button. Patch it to click ‘Export…’.” → <code class="docutils literal notranslate"><span class="pre">learn(action=&quot;patch&quot;,</span> <span class="pre">...)</span></code></p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="files">
+<h2>Files<a class="headerlink" href="#files" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">project</span><span class="o">&gt;/.</span><span class="n">opendesk</span><span class="o">/</span><span class="n">learned</span><span class="o">/</span>
+  <span class="n">export</span><span class="o">-</span><span class="n">report</span><span class="o">.</span><span class="n">json</span>             <span class="c1"># NL procedure (learn save / replay)</span>
+  <span class="n">export</span><span class="o">-</span><span class="n">report</span><span class="o">.</span><span class="n">program</span><span class="o">.</span><span class="n">json</span>     <span class="c1"># compiled program (learn compile / run / patch)</span>
+  <span class="n">export</span><span class="o">-</span><span class="n">report</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">json</span>  <span class="c1"># raw recording, no screenshots (written by learn stop)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">learn(action=&quot;list&quot;)</span></code> shows only procedures and tags the compiled ones with <code class="docutils literal notranslate"><span class="pre">[compiled]</span></code>.</p>
+</section>
+<section id="program-format">
+<h2>Program format<a class="headerlink" href="#program-format" title="Link to this heading">#</a></h2>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"export-report"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Export the weekly report as PDF"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trajectory"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"s1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"tool"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app"</span><span class="p">,</span><span class="w"> </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"open"</span><span class="p">,</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Numbers"</span><span class="p">},</span>
+<span class="w">     </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Numbers"</span><span class="p">},</span>
+<span class="w">     </span><span class="nt">"postcondition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_frontmost"</span><span class="p">,</span><span class="w"> </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Numbers"</span><span class="p">},</span><span class="w"> </span><span class="nt">"wait_ms"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"s2"</span><span class="p">,</span><span class="w"> </span><span class="nt">"tool"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ui"</span><span class="p">,</span><span class="w"> </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"click_menu"</span><span class="p">,</span><span class="w"> </span><span class="nt">"menu"</span><span class="p">:</span><span class="w"> </span><span class="s2">"File"</span><span class="p">,</span><span class="w"> </span><span class="nt">"menu_item"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Export To"</span><span class="p">},</span>
+<span class="w">     </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Numbers"</span><span class="p">},</span><span class="w"> </span><span class="nt">"wait_ms"</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"s3"</span><span class="p">,</span><span class="w"> </span><span class="nt">"tool"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ui"</span><span class="p">,</span><span class="w"> </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"click"</span><span class="p">},</span>
+<span class="w">     </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Numbers"</span><span class="p">,</span><span class="w"> </span><span class="nt">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AXButton"</span><span class="p">,</span><span class="w"> </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PDF"</span><span class="p">,</span><span class="w"> </span><span class="nt">"identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"export-pdf"</span><span class="p">},</span>
+<span class="w">     </span><span class="nt">"postcondition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"window_title_contains"</span><span class="p">,</span><span class="w"> </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Export"</span><span class="p">,</span><span class="w"> </span><span class="nt">"timeout_ms"</span><span class="p">:</span><span class="w"> </span><span class="mi">5000</span><span class="p">},</span>
+<span class="w">     </span><span class="nt">"wait_ms"</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">id</span></code></p></td>
+<td><p>Stable step id (<code class="docutils literal notranslate"><span class="pre">s1</span></code>, <code class="docutils literal notranslate"><span class="pre">s2</span></code>, …). Ids are never renumbered, so self-heal output and patches keep pointing at the right step.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ui</span></code>, <code class="docutils literal notranslate"><span class="pre">keyboard</span></code>, <code class="docutils literal notranslate"><span class="pre">app</span></code>, <code class="docutils literal notranslate"><span class="pre">mouse</span></code>, <code class="docutils literal notranslate"><span class="pre">clipboard</span></code>, or <code class="docutils literal notranslate"><span class="pre">wait</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">params</span></code></p></td>
+<td><p>That tool’s parameters. For <code class="docutils literal notranslate"><span class="pre">ui</span></code> steps the app, role and title come from <code class="docutils literal notranslate"><span class="pre">target</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">target</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">app</span></code>, <code class="docutils literal notranslate"><span class="pre">role</span></code>, <code class="docutils literal notranslate"><span class="pre">title</span></code>, <code class="docutils literal notranslate"><span class="pre">identifier</span></code>, and optional <code class="docutils literal notranslate"><span class="pre">ref</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">postcondition</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">app_frontmost</span></code>, <code class="docutils literal notranslate"><span class="pre">window_title_contains</span></code>, <code class="docutils literal notranslate"><span class="pre">element_exists</span></code> (a string title or a target-like dict), or <code class="docutils literal notranslate"><span class="pre">text_visible</span></code>. <code class="docutils literal notranslate"><span class="pre">timeout_ms</span></code> defaults to 5000.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">wait_ms</span></code></p></td>
+<td><p>Pause after the action, before the postcondition is checked.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">note</span></code></p></td>
+<td><p>Free text. The compiler uses it to flag brittle steps, such as coordinate fallbacks.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="how-targets-are-resolved">
+<h3>How targets are resolved<a class="headerlink" href="#how-targets-are-resolved" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">ui</span> <span class="pre">click</span></code>, <code class="docutils literal notranslate"><span class="pre">mouse</span></code> clicks with an element target, and <code class="docutils literal notranslate"><span class="pre">ui</span> <span class="pre">get_value</span></code> look the element up in <code class="docutils literal notranslate"><span class="pre">computer.ui_tree(app=target.app)</span></code>. Lookup is retried until <code class="docutils literal notranslate"><span class="pre">resolve_timeout_ms</span></code> (default 5 s) runs out, in this order:</p>
+<ol class="arabic simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">ref</span></code></strong>: used when a node carries the same ref (as <code class="docutils literal notranslate"><span class="pre">UIElement.ref</span></code> or <code class="docutils literal notranslate"><span class="pre">metadata[&quot;ref&quot;]</span></code>) <strong>and</strong> that node still matches the role and title. Stale refs are ignored rather than trusted.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">identifier</span></code></strong>: the accessibility identifier (<code class="docutils literal notranslate"><span class="pre">AXIdentifier</span></code>, UIA AutomationId, <code class="docutils literal notranslate"><span class="pre">metadata[&quot;identifier&quot;]</span></code>).</p></li>
+<li><p><strong>Role plus exact title</strong>, then <strong>role plus substring title</strong>. Matching is case-insensitive, and <code class="docutils literal notranslate"><span class="pre">AXButton</span></code>, <code class="docutils literal notranslate"><span class="pre">button</span></code> and <code class="docutils literal notranslate"><span class="pre">push</span> <span class="pre">button</span></code> all count as the same role. If several elements match, one that can be clicked wins.</p></li>
+</ol>
+<p>Clicks use the native accessibility action when the backend has one, and otherwise click the centre of the element’s bounds. Other steps, such as typing, pressing keys and app actions, go through the normal tools, so permissions and the audit log behave as usual.</p>
+</section>
+<section id="postconditions">
+<h3>Postconditions<a class="headerlink" href="#postconditions" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Kind</p></th>
+<th class="head"><p>Checked against</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">app_frontmost</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">computer.focused_window().app_name</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">window_title_contains</span></code></p></td>
+<td><p>The focused window title, falling back to the UI-tree window name</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">element_exists</span></code></p></td>
+<td><p>A target lookup in the UI tree</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">text_visible</span></code></p></td>
+<td><p>Element names and values in the UI tree, with one OCR attempt at the deadline as a fallback</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Each postcondition is polled every 250 ms until <code class="docutils literal notranslate"><span class="pre">timeout_ms</span></code> runs out.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="where-programs-come-from">
+<h2>Where programs come from<a class="headerlink" href="#where-programs-come-from" title="Link to this heading">#</a></h2>
+<section id="a-recording-learn-start-learn-stop">
+<h3>1. A recording (<code class="docutils literal notranslate"><span class="pre">learn</span> <span class="pre">start</span></code> → <code class="docutils literal notranslate"><span class="pre">learn</span> <span class="pre">stop</span></code>)<a class="headerlink" href="#a-recording-learn-start-learn-stop" title="Link to this heading">#</a></h3>
+<p>The recorder captures accessibility context (app, window, role, title, identifier) for every click and keystroke. <code class="docutils literal notranslate"><span class="pre">learn(stop)</span></code> saves the trajectory without screenshots and <strong>compiles a program automatically</strong>. The compiler:</p>
+<ul class="simple">
+<li><p>adds an <code class="docutils literal notranslate"><span class="pre">app</span> <span class="pre">open</span></code>/<code class="docutils literal notranslate"><span class="pre">focus</span></code> step with an <code class="docutils literal notranslate"><span class="pre">app_frontmost</span></code> check whenever the frontmost app changes</p></li>
+<li><p>turns clicks on identified elements into <code class="docutils literal notranslate"><span class="pre">ui</span> <span class="pre">click</span></code> steps, and double or right clicks into <code class="docutils literal notranslate"><span class="pre">mouse</span></code> steps that still target the element</p></li>
+<li><p>uses the window title seen at the <em>next</em> event as the step’s <code class="docutils literal notranslate"><span class="pre">window_title_contains</span></code> postcondition</p></li>
+<li><p>turns typed text into <code class="docutils literal notranslate"><span class="pre">ui</span> <span class="pre">type</span></code> and shortcuts into <code class="docutils literal notranslate"><span class="pre">ui</span> <span class="pre">press_key</span></code> with modifiers</p></li>
+<li><p>keeps clicks with no accessibility info as <code class="docutils literal notranslate"><span class="pre">mouse</span></code> coordinate steps and flags them in <code class="docutils literal notranslate"><span class="pre">note</span></code> (patch these)</p></li>
+</ul>
+<p>To re-compile later, call <code class="docutils literal notranslate"><span class="pre">learn(action=&quot;compile&quot;,</span> <span class="pre">task_name=...)</span></code>.</p>
+</section>
+<section id="the-current-session-learn-save-session">
+<h3>2. The current session (<code class="docutils literal notranslate"><span class="pre">learn</span> <span class="pre">save_session</span></code>)<a class="headerlink" href="#the-current-session-learn-save-session" title="Link to this heading">#</a></h3>
+<p>Every input tool records <code class="docutils literal notranslate"><span class="pre">replay_params</span></code> in the session audit log. <code class="docutils literal notranslate"><span class="pre">learn(action=&quot;save_session&quot;,</span> <span class="pre">task_name=...)</span></code> compiles them:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ui</span></code> actions become <code class="docutils literal notranslate"><span class="pre">ui</span></code> steps with app, role and title moved into <code class="docutils literal notranslate"><span class="pre">target</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">app</span> <span class="pre">open/focus</span></code> steps get an <code class="docutils literal notranslate"><span class="pre">app_frontmost</span></code> check</p></li>
+<li><p>keyboard, mouse and clipboard actions are kept</p></li>
+<li><p>reads (screenshots, OCR, <code class="docutils literal notranslate"><span class="pre">get_tree</span></code>) and failed actions are dropped</p></li>
+</ul>
+<p>If the task has no NL procedure yet, a basic one is written next to the program.</p>
+</section>
+<section id="written-by-the-agent">
+<h3>3. Written by the agent<a class="headerlink" href="#written-by-the-agent" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">learn(action=&quot;compile&quot;,</span> <span class="pre">task_name=...,</span> <span class="pre">program='[</span> <span class="pre">...steps...</span> <span class="pre">]')</span></code> validates and saves a program the agent wrote itself, for example from an NL procedure.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="running">
+<h2>Running<a class="headerlink" href="#running" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">opendesk.tools.automation</span><span class="w"> </span><span class="kn">import</span> <span class="n">LearnTool</span>
+<span class="n">tool</span> <span class="o">=</span> <span class="n">LearnTool</span><span class="p">()</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">LearnTool</span><span class="o">.</span><span class="n">Params</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">tool</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">"run"</span><span class="p">,</span> <span class="n">task_name</span><span class="o">=</span><span class="s2">"export-report"</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="p">:</span>                      <span class="c1"># self-heal needed</span>
+    <span class="n">heal</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s2">"self_heal"</span><span class="p">]</span>
+    <span class="n">heal</span><span class="p">[</span><span class="s2">"failed_step"</span><span class="p">],</span> <span class="n">heal</span><span class="p">[</span><span class="s2">"reason"</span><span class="p">],</span> <span class="n">heal</span><span class="p">[</span><span class="s2">"remaining_steps"</span><span class="p">],</span> <span class="n">heal</span><span class="p">[</span><span class="s2">"procedure"</span><span class="p">]</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">attachments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>             <span class="c1"># screenshot at the moment of failure</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">start_at=&quot;s4&quot;</span></code> resumes a partial run.</p>
+<section id="self-heal">
+<h3>Self-heal<a class="headerlink" href="#self-heal" title="Link to this heading">#</a></h3>
+<p>On failure, <code class="docutils literal notranslate"><span class="pre">run</span></code> returns <code class="docutils literal notranslate"><span class="pre">error=True</span></code> with:</p>
+<ul class="simple">
+<li><p><strong>failed step</strong>: the full JSON for the step</p></li>
+<li><p><strong>reason</strong>: for example <code class="docutils literal notranslate"><span class="pre">target</span> <span class="pre">not</span> <span class="pre">found</span> <span class="pre">after</span> <span class="pre">5000</span> <span class="pre">ms:</span> <span class="pre">no</span> <span class="pre">element</span> <span class="pre">matching</span> <span class="pre">[AXButton]</span> <span class="pre">'PDF'</span> <span class="pre">in</span> <span class="pre">Numbers</span></code> or <code class="docutils literal notranslate"><span class="pre">postcondition</span> <span class="pre">window_title_contains='Export'</span> <span class="pre">not</span> <span class="pre">met</span> <span class="pre">within</span> <span class="pre">5000</span> <span class="pre">ms</span> <span class="pre">(window</span> <span class="pre">title</span> <span class="pre">is</span> <span class="pre">'Report.numbers')</span></code></p></li>
+<li><p><strong>screenshot</strong>: attached as an image</p></li>
+<li><p><strong>remaining steps</strong>: the steps after the failed one</p></li>
+<li><p><strong>NL procedure</strong>: the original goal and steps</p></li>
+</ul>
+<p>The text output tells the agent to finish the task with its normal tools, then repair the program:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">await</span> <span class="n">tool</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">"patch"</span><span class="p">,</span> <span class="n">task_name</span><span class="o">=</span><span class="s2">"export-report"</span><span class="p">,</span> <span class="n">step_id</span><span class="o">=</span><span class="s2">"s3"</span><span class="p">,</span>
+                          <span class="n">step</span><span class="o">=</span><span class="s1">'{"tool":"ui","params":{"action":"click"},'</span>
+                               <span class="s1">'"target":{"app":"Numbers","role":"button","title":"Export…"}}'</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Patch modes are <code class="docutils literal notranslate"><span class="pre">replace</span></code> (the default when <code class="docutils literal notranslate"><span class="pre">step_id</span></code> is given), <code class="docutils literal notranslate"><span class="pre">insert_before</span></code>, <code class="docutils literal notranslate"><span class="pre">insert_after</span></code>, <code class="docutils literal notranslate"><span class="pre">append</span></code> (the default without <code class="docutils literal notranslate"><span class="pre">step_id</span></code>), and <code class="docutils literal notranslate"><span class="pre">delete</span></code>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="scheduler">
+<h2>Scheduler<a class="headerlink" href="#scheduler" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">schedule(action=&quot;add&quot;,</span> <span class="pre">task=&quot;replay</span> <span class="pre">export-report&quot;,</span> <span class="pre">...)</span></code> now runs the compiled program first, with no LLM and no API key. The scheduler falls back to an LLM only when:</p>
+<ul class="simple">
+<li><p>there is no compiled program, or</p></li>
+<li><p>the program stops at a step. The LLM then gets the NL procedure <strong>plus the self-heal context</strong> and is told to continue from the failed step instead of starting over.</p></li>
+</ul>
+<p>The LLM fallback uses <code class="docutils literal notranslate"><span class="pre">ANTHROPIC_API_KEY</span></code> when it is set. Otherwise it uses headless Claude Code (<code class="docutils literal notranslate"><span class="pre">claude</span> <span class="pre">-p</span></code>, on your subscription login) if the <code class="docutils literal notranslate"><span class="pre">claude</span></code> CLI is installed.</p>
+</section>
+<section id="learn-regression-in-the-eval-harness">
+<h2>Learn regression in the eval harness<a class="headerlink" href="#learn-regression-in-the-eval-harness" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">opendesk</span> <span class="pre">eval</span> <span class="pre">run</span> <span class="pre">learn-regression</span> <span class="pre">--project</span> <span class="pre">.</span></code> runs every compiled program in <code class="docutils literal notranslate"><span class="pre">./.opendesk/learned/</span></code> deterministically and reports which ones still pass their postconditions. See <a class="reference internal" href="../eval.html"><span class="std std-doc">Evaluation</span></a>.</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="scheduler.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Scheduler</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../architecture/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Architecture</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ask-claude">Ask Claude</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#files">Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#program-format">Program format</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-targets-are-resolved">How targets are resolved</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#postconditions">Postconditions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-programs-come-from">Where programs come from</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-recording-learn-start-learn-stop">1. A recording (<code class="docutils literal notranslate"><span class="pre">learn</span> <span class="pre">start</span></code> → <code class="docutils literal notranslate"><span class="pre">learn</span> <span class="pre">stop</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-current-session-learn-save-session">2. The current session (<code class="docutils literal notranslate"><span class="pre">learn</span> <span class="pre">save_session</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#written-by-the-agent">3. Written by the agent</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running">Running</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#self-heal">Self-heal</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scheduler">Scheduler</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learn-regression-in-the-eval-harness">Learn regression in the eval harness</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Abhigith Neil Abraham, Fariz Rahman, Fadil Rahman
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Vitalops Technologies.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

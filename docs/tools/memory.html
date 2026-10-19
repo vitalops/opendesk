@@ -1,0 +1,1364 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>memory — Screen Memory (searchable desktop history) &#8212; opendesk</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../_static/documentation_options.js?v=83a61292"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tools/memory';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="canonical" href="https://vitalops.github.io/opendesk/docs/tools/memory.html" />
+    <link rel="icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="script — Shell, AppleScript, JXA &amp; PowerShell" href="script.html" />
+    <link rel="prev" title="learn — Record and Replay Tasks" href="learn.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">opendesk — Open Computer Use Agent for any AI framework</div>
+</aside>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="opendesk - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="opendesk - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/python.html">Python Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/javascript.html">JavaScript / TypeScript Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/permissions.html">Permissions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MCP</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../mcp/index.html">MCP Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcp/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcp/claude-code.html">Claude Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcp/claude-desktop.html">Claude Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcp/cursor.html">Cursor &amp; VS Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcp/continue.html">Continue (VS Code / JetBrains)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcp/advanced.html">Advanced: HTTP Transport, In-process Server &amp; Restrictions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcp/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Integrations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../integrations/index.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations/anthropic.html">Anthropic SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations/openai.html">OpenAI Function Calling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations/langchain.html">LangChain / LangGraph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations/javascript.html">JavaScript / TypeScript SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations/custom.html">Custom / Generic Integration</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ui.html"><code class="docutils literal notranslate"><span class="pre">ui</span></code> — Accessibility-based UI Interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="screenshot.html"><code class="docutils literal notranslate"><span class="pre">screenshot</span></code> — Screen Capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mouse.html"><code class="docutils literal notranslate"><span class="pre">mouse</span></code> — Mouse Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keyboard.html"><code class="docutils literal notranslate"><span class="pre">keyboard</span></code> — Keyboard Input</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app.html"><code class="docutils literal notranslate"><span class="pre">app</span></code> — Application Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clipboard.html"><code class="docutils literal notranslate"><span class="pre">clipboard</span></code> — Clipboard Read/Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ocr.html"><code class="docutils literal notranslate"><span class="pre">ocr</span></code> — Text Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="audit.html"><code class="docutils literal notranslate"><span class="pre">audit</span></code> — Session Audit Log &amp; Replay</a></li>
+<li class="toctree-l1"><a class="reference internal" href="learn.html"><code class="docutils literal notranslate"><span class="pre">learn</span></code> — Record and Replay Tasks</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">memory</span></code> — Screen Memory (searchable desktop history)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="script.html"><code class="docutils literal notranslate"><span class="pre">script</span></code> — Shell, AppleScript, JXA &amp; PowerShell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="browser.html"><code class="docutils literal notranslate"><span class="pre">browser</span></code> — Chrome / Edge / Brave over DevTools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fleet.html"><code class="docutils literal notranslate"><span class="pre">fleet</span></code> — One Call, Many Machines</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Safety &amp; Evaluation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../safety.html">Safety — policy, approvals, kill switch, injection guard, audit, secrets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eval.html">Evaluation harness</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Automation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../automation/index.html">Automation — Learn, Replay &amp; Schedule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../automation/claude-code.html">Automation in Claude Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../automation/python-api.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../automation/scheduler.html">Scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../automation/compiled-replay.html">Compiled replay — deterministic <code class="docutils literal notranslate"><span class="pre">learn</span></code> programs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Architecture</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/layers.html">Computer &amp; Tools Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/protocol-layer.html">Protocol Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/remote-layer.html">Remote &amp; Integrations Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/data-flow.html">Data Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/custom-tools.html">Adding a Custom Tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/native-helper.html">Native helper (<code class="docutils literal notranslate"><span class="pre">opendesk-ax</span></code>)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Protocol</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../protocol/index.html">Protocol Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol/transport.html">Transport &amp; Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol/encryption.html">Encryption &amp; Identity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol/pairing.html">Pairing Handshake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol/auth.html">Auth Handshake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol/frames.html">Frames &amp; Errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol/session.html">Session Lifecycle &amp; Method Namespace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol/discovery.html">Discovery, Admin IPC &amp; Cryptographic Summary</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Remote — Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Computer Use — Python / CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/setup.html">One-time Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/running.html">Running</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/mcp.html">MCP Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/security.html">Trust &amp; Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/cli.html">CLI Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/service.html">Service Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/concurrency.html">Concurrency: One Controller at a Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/programmatic.html">Programmatic Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Remote — JS/TS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/index.html">Remote Computer Use — JavaScript / TypeScript SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/setup.html">One-time Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/running.html">Running</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/mcp.html">MCP Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/audit.html">Audit Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/security.html">Trust &amp; Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/cli.html">CLI Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/concurrency.html">Concurrency: One Controller at a Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/programmatic.html">Programmatic Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/vitalops/opendesk" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/vitalops/opendesk/issues/new?title=Issue%20on%20page%20%2Ftools/memory.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/tools/memory.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>memory — Screen Memory (searchable desktop history)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ask-claude">Ask Claude</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-recording">Start recording</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-frames-are-captured">When frames are captured</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-the-text-comes-from">Where the text comes from</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redaction">Redaction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encryption-at-rest">Encryption at rest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#privacy-controls">Privacy controls</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-read-only"><code class="docutils literal notranslate"><span class="pre">memory</span></code> (read-only)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-manage-changes-settings-deletes"><code class="docutils literal notranslate"><span class="pre">memory_manage</span></code> (changes settings / deletes)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-keys-config-json">Configuration keys (<code class="docutils literal notranslate"><span class="pre">config.json</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#status-fields">Status fields</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-phrases">Time phrases</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sdk-examples">SDK examples</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#javascript-typescript">JavaScript / TypeScript</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-store-access-python">Direct store access (Python)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cli-reference">CLI reference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How it works</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="memory-screen-memory-searchable-desktop-history">
+<h1><code class="docutils literal notranslate"><span class="pre">memory</span></code> — Screen Memory (searchable desktop history)<a class="headerlink" href="#memory-screen-memory-searchable-desktop-history" title="Link to this heading">#</a></h1>
+<p>A background daemon records what is on your screen when it changes, such as switching apps, windows, or tabs, plus an idle fallback timer. It reads each window’s text from the <strong>accessibility tree</strong> (falling back to local OCR), <strong>redacts secrets</strong>, and stores the text and an <strong>encrypted</strong> thumbnail in <code class="docutils literal notranslate"><span class="pre">~/.opendesk/memory</span></code>. The agent then gets a recall tool over that history.</p>
+<p>Nothing leaves the machine. There is no upload, no cloud index, no telemetry.</p>
+<p>Two agent tools sit on top of the store:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tool</p></th>
+<th class="head"><p>Actions</p></th>
+<th class="head"><p>Side effects</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">memory</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">search</span></code>, <code class="docutils literal notranslate"><span class="pre">show</span></code>, <code class="docutils literal notranslate"><span class="pre">timeline</span></code>, <code class="docutils literal notranslate"><span class="pre">status</span></code></p></td>
+<td><p>Read-only</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">memory_manage</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pause</span></code>, <code class="docutils literal notranslate"><span class="pre">resume</span></code>, <code class="docutils literal notranslate"><span class="pre">deny</span></code>, <code class="docutils literal notranslate"><span class="pre">config</span></code>, <code class="docutils literal notranslate"><span class="pre">delete</span></code></p></td>
+<td><p>Changes capture settings or deletes history</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Keeping the read path separate lets you grant an agent recall without letting it switch capture off or erase anything.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">opendesk.tools.memory</span><span class="w"> </span><span class="kn">import</span> <span class="n">MemoryTool</span>
+<span class="n">tool</span> <span class="o">=</span> <span class="n">MemoryTool</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">OpenDeskClient</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">"@vitalops/opendesk-sdk"</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">OpenDeskClient</span><span class="p">();</span>
+<span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">memory</span><span class="p">({</span><span class="w"> </span><span class="nx">action</span><span class="o">:</span><span class="w"> </span><span class="s2">"search"</span><span class="p">,</span><span class="w"> </span><span class="nx">query</span><span class="o">:</span><span class="w"> </span><span class="s2">"invoice"</span><span class="p">,</span><span class="w"> </span><span class="nx">since</span><span class="o">:</span><span class="w"> </span><span class="s2">"last week"</span><span class="w"> </span><span class="p">});</span>
+</pre></div>
+</div>
+<section id="ask-claude">
+<h2>Ask Claude<a class="headerlink" href="#ask-claude" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“What was the error message I saw in the terminal on Tuesday?”</p>
+</div></blockquote>
+<blockquote>
+<div><p>“Find the invoice number I had open last week”</p>
+</div></blockquote>
+<blockquote>
+<div><p>“Show me every time I opened that Grafana dashboard this month”</p>
+</div></blockquote>
+<blockquote>
+<div><p>“What was on my screen around 3pm yesterday?”</p>
+</div></blockquote>
+<blockquote>
+<div><p>“Pause screen memory for an hour”</p>
+</div></blockquote>
+<blockquote>
+<div><p>“Never record 1Password or anything with ‘bank’ in the title”</p>
+</div></blockquote>
+<blockquote>
+<div><p>“How much space is screen memory using, and is it encrypted?”</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="start-recording">
+<h2>Start recording<a class="headerlink" href="#start-recording" title="Link to this heading">#</a></h2>
+<p>The tools only <em>read</em> and <em>configure</em> the index. Capture happens in a separate daemon:</p>
+<p><strong>Python</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s1">'opendesk[memory]'</span><span class="w">      </span><span class="c1"># capture deps, pause hotkey, encryption</span>
+opendesk<span class="w"> </span>memory<span class="w"> </span>start<span class="w">                          </span><span class="c1"># foreground, Ctrl-C to stop</span>
+</pre></div>
+</div>
+<p><strong>JavaScript / TypeScript</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>npm<span class="w"> </span>install<span class="w"> </span>@vitalops/opendesk-sdk
+npm<span class="w"> </span>install<span class="w"> </span>uiohook-napi<span class="w">             </span><span class="c1"># optional: enables the global pause hotkey</span>
+npx<span class="w"> </span>opendesk-js<span class="w"> </span>memory<span class="w"> </span>start<span class="w">         </span><span class="c1"># foreground, Ctrl-C to stop</span>
+</pre></div>
+</div>
+<p>To run it at login as a user service (launchd / systemd –user / Task Scheduler):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>opendesk<span class="w"> </span>memory<span class="w"> </span>install-service<span class="w">          </span><span class="c1"># Python</span>
+npx<span class="w"> </span>opendesk-js<span class="w"> </span>memory<span class="w"> </span>install-service<span class="w">   </span><span class="c1"># JavaScript</span>
+</pre></div>
+</div>
+<p>On first run on macOS the native Vision OCR helper is compiled once (about a minute) into <code class="docutils literal notranslate"><span class="pre">~/.opendesk/bin</span></code>; both SDKs share that binary and each frame then takes well under a second. Python uses <code class="docutils literal notranslate"><span class="pre">pytesseract</span></code> instead when it is installed; the JS SDK falls back to the bundled <code class="docutils literal notranslate"><span class="pre">tesseract.js</span></code> on Linux (it downloads its English model once and caches it under <code class="docutils literal notranslate"><span class="pre">~/.opendesk/memory/tessdata</span></code>).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>opendesk<span class="w"> </span>memory<span class="w"> </span>status
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>opendesk screen memory
+  daemon:    running (pid 41233, last tick: captured)
+  capture:   active
+  store:     /Users/you/.opendesk/memory
+  frames:    1,842  (2026-08-30 09:12:04 → 2026-09-05 11:40:31)
+  size:      38.0 MB of 2048 MB cap
+  trigger:   events — on app/window change (poll 1s, ≥2s apart), idle fallback 30s
+  retention: 30 days
+  text:      ax ×1,210, none ×31, ocr ×601   redaction on
+  encrypt:   thumbnails on (1842/1842 stored encrypted); text off (0/1842); key: keychain
+  redacted:  14 secret(s) this daemon run
+  deny list: 1Password, Bitwarden, KeePassXC, Keychain Access, LastPass, Dashlane, Private Browsing, Incognito, InPrivate
+  hotkey:    &lt;cmd&gt;+&lt;shift&gt;+&lt;alt&gt;+p
+  search:    FTS5
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="when-frames-are-captured">
+<h2>When frames are captured<a class="headerlink" href="#when-frames-are-captured" title="Link to this heading">#</a></h2>
+<p>The default <code class="docutils literal notranslate"><span class="pre">trigger:</span> <span class="pre">events</span></code> mode works like screenpipe or Windows Recall: it captures when what you are looking at changes, not every N seconds.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Event</p></th>
+<th class="head"><p>Captured?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Frontmost <strong>app</strong> changes</p></td>
+<td><p>Yes, within about <code class="docutils literal notranslate"><span class="pre">poll_seconds</span></code> (1 s). Kept even if few pixels changed, for example a small window on a large display.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Same app, <strong>window or tab title</strong> changes</p></td>
+<td><p>Yes, unless the screen is visually identical to the last frame.</p></td>
+</tr>
+<tr class="row-even"><td><p>Title changes only in digits or symbols, such as spinners <code class="docutils literal notranslate"><span class="pre">◐</span> <span class="pre">◑</span></code>, <code class="docutils literal notranslate"><span class="pre">(3)</span> <span class="pre">Slack</span></code>, <code class="docutils literal notranslate"><span class="pre">45%</span></code>, or clocks</p></td>
+<td><p>No. The title is compared by its letters only.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Nothing changed for <code class="docutils literal notranslate"><span class="pre">interval_seconds</span></code> (30 s)</p></td>
+<td><p>One attempt, kept only if the screen changed. This catches scrolling and typing in the same window.</p></td>
+</tr>
+<tr class="row-even"><td><p>Changes faster than <code class="docutils literal notranslate"><span class="pre">min_interval_seconds</span></code> (2 s)</p></td>
+<td><p>Debounced. The next allowed poll captures the latest state.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The frontmost probe is cheap. On macOS it uses the native accessibility helper when built, otherwise a single <code class="docutils literal notranslate"><span class="pre">osascript</span></code> call (about 0.2 s). It also returns the app’s pid, which the text reader uses.</p>
+<p><code class="docutils literal notranslate"><span class="pre">trigger:</span> <span class="pre">interval</span></code> restores the v1 behaviour: one attempt every <code class="docutils literal notranslate"><span class="pre">interval_seconds</span></code>, with duplicates suppressed.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>opendesk<span class="w"> </span>memory<span class="w"> </span>config<span class="w"> </span>--trigger<span class="w"> </span>events<span class="w"> </span>--poll<span class="w"> </span><span class="m">1</span><span class="w"> </span>--min-interval<span class="w"> </span><span class="m">2</span><span class="w"> </span>--interval<span class="w"> </span><span class="m">30</span>
+opendesk<span class="w"> </span>memory<span class="w"> </span>config<span class="w"> </span>--trigger<span class="w"> </span>interval<span class="w"> </span>--interval<span class="w"> </span><span class="m">60</span>
+</pre></div>
+</div>
+</section>
+<section id="where-the-text-comes-from">
+<h2>Where the text comes from<a class="headerlink" href="#where-the-text-comes-from" title="Link to this heading">#</a></h2>
+<p>For each kept frame the daemon first asks the OS accessibility tree for the focused window’s text (<code class="docutils literal notranslate"><span class="pre">window_text(pid,</span> <span class="pre">max_chars=20000)</span></code> on macOS). This is exact text with no OCR errors, it includes off-screen parts of long documents, and it costs no OCR CPU. When that yields at least <code class="docutils literal notranslate"><span class="pre">ax_min_chars</span></code> (40) characters it becomes the frame text and <strong>OCR is skipped</strong>. Otherwise the screenshot is OCR’d locally.</p>
+<p>Every frame records its <code class="docutils literal notranslate"><span class="pre">text_source</span></code>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">text_source</span></code></p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ax</span></code></p></td>
+<td><p>Accessibility text</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ocr</span></code></p></td>
+<td><p>OCR of the screenshot (all frames recorded before v2)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">none</span></code></p></td>
+<td><p>Neither produced text</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Set <code class="docutils literal notranslate"><span class="pre">ocr_backend:</span> <span class="pre">&quot;always&quot;</span></code> to run OCR even when accessibility text was read. The OCR text is appended to the AX text, which helps with canvas-rendered apps whose AX tree is sparse.</p>
+</section>
+<section id="redaction">
+<h2>Redaction<a class="headerlink" href="#redaction" title="Link to this heading">#</a></h2>
+<p>With <code class="docutils literal notranslate"><span class="pre">redact:</span> <span class="pre">true</span></code> (default) the text <strong>and window title</strong> of every frame are scrubbed <em>before</em> they are written:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Kind</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">card</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">4111</span> <span class="pre">1111</span> <span class="pre">1111</span> <span class="pre">1111</span></code>. Must pass the Luhn checksum, 13–19 digits.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">aws_key</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AKIAIOSFODNN7EXAMPLE</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">github_token</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ghp_…</span></code>, <code class="docutils literal notranslate"><span class="pre">gho_…</span></code>, <code class="docutils literal notranslate"><span class="pre">github_pat_…</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">anthropic_key</span></code> / <code class="docutils literal notranslate"><span class="pre">openai_key</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sk-ant-…</span></code>, <code class="docutils literal notranslate"><span class="pre">sk-proj-…</span></code>, <code class="docutils literal notranslate"><span class="pre">sk-…</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">slack_token</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">xoxb-…</span></code>, <code class="docutils literal notranslate"><span class="pre">xoxp-…</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">jwt</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">eyJ….eyJ….…</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">private_key</span></code></p></td>
+<td><p>PEM <code class="docutils literal notranslate"><span class="pre">-----BEGIN</span> <span class="pre">…</span> <span class="pre">PRIVATE</span> <span class="pre">KEY-----</span></code> blocks, including ones OCR cut short</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">password</span></code> / <code class="docutils literal notranslate"><span class="pre">secret</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">password:</span> <span class="pre">hunter2</span></code>, <code class="docutils literal notranslate"><span class="pre">DB_PASSWORD=&quot;…&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">api_key=…</span></code>, <code class="docutils literal notranslate"><span class="pre">token:</span> <span class="pre">…</span></code>, <code class="docutils literal notranslate"><span class="pre">Bearer</span> <span class="pre">…</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Each hit becomes <code class="docutils literal notranslate"><span class="pre">[REDACTED:&lt;kind&gt;]</span></code>, so <code class="docutils literal notranslate"><span class="pre">password:</span> <span class="pre">hunter2</span></code> is stored as <code class="docutils literal notranslate"><span class="pre">password:</span> <span class="pre">[REDACTED:password]</span></code>. Redaction is pattern-based. It catches common credential shapes, not every secret, so the deny list is still the right tool for sensitive apps. <code class="docutils literal notranslate"><span class="pre">opendesk</span> <span class="pre">memory</span> <span class="pre">reindex</span></code> applies redaction retroactively to frames recorded before it was on.</p>
+</section>
+<section id="encryption-at-rest">
+<h2>Encryption at rest<a class="headerlink" href="#encryption-at-rest" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Setting</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>What it does</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">encrypt_thumbnails</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td><p>Thumbnails are written as <code class="docutils literal notranslate"><span class="pre">thumbs/YYYY-MM-DD/&lt;id&gt;.jpg.enc</span></code> (AES-256-GCM). <code class="docutils literal notranslate"><span class="pre">store.thumbnail()</span></code>, <code class="docutils literal notranslate"><span class="pre">memory</span> <span class="pre">show</span></code>, and <code class="docutils literal notranslate"><span class="pre">opendesk</span> <span class="pre">memory</span> <span class="pre">show</span> <span class="pre">&lt;id&gt;</span> <span class="pre">--save</span> <span class="pre">out.jpg</span></code> decrypt them transparently.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">encrypt_text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td><p>Frame text is stored AES-256-GCM encrypted. The search index holds a <strong>blind index</strong>: sorted, de-duplicated HMAC-SHA256 tokens of the words, so word order and frequency are hidden. Query terms are tokenised and HMAC’d the same way, so exact-word search still works. Snippets are computed after decryption.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Limits of <code class="docutils literal notranslate"><span class="pre">encrypt_text</span></code>:</p>
+<ul class="simple">
+<li><p><strong>No prefix search on encrypted text.</strong> <code class="docutils literal notranslate"><span class="pre">invoice*</span></code> matches only the exact word <code class="docutils literal notranslate"><span class="pre">invoice</span></code> there. App names and titles still match by prefix.</p></li>
+<li><p>Matching is whole-word: <code class="docutils literal notranslate"><span class="pre">refused</span></code> finds “connection refused”, <code class="docutils literal notranslate"><span class="pre">refu</span></code> does not. Quoted phrases must still be contiguous; they are re-checked after decryption.</p></li>
+<li><p><strong>App names and window titles stay plaintext</strong> so <code class="docutils literal notranslate"><span class="pre">app=</span></code> filters and the timeline work. Titles are redacted, but not encrypted.</p></li>
+<li><p>Blind tokens are deterministic per key. Someone with the database but not the key can tell that two frames share a word, but not which word.</p></li>
+</ul>
+<p><strong>The key.</strong> One random 32-byte key, shared by both SDKs:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Platform</p></th>
+<th class="head"><p>Where</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>macOS</p></td>
+<td><p>Login Keychain, generic password <code class="docutils literal notranslate"><span class="pre">service=opendesk</span></code>, <code class="docutils literal notranslate"><span class="pre">account=memory-key</span></code>. Written through <code class="docutils literal notranslate"><span class="pre">security</span> <span class="pre">-i</span></code>, so the secret never appears in <code class="docutils literal notranslate"><span class="pre">ps</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Linux / Windows</p></td>
+<td><p>The <code class="docutils literal notranslate"><span class="pre">keyring</span></code> package (Secret Service / Credential Manager) when installed. The JS SDK reads the Secret Service through <code class="docutils literal notranslate"><span class="pre">secret-tool</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>Otherwise</p></td>
+<td><p>A <code class="docutils literal notranslate"><span class="pre">0600</span></code> file <code class="docutils literal notranslate"><span class="pre">~/.opendesk/memory/key</span></code>. <strong>This is weaker</strong>: anything that can read your home directory, including backups and sync tools, can read the key.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The JS SDK cannot reach the Windows Credential Manager. If the Python SDK stored the key there, the JS SDK reports the key as unavailable rather than creating a second one; use <code class="docutils literal notranslate"><span class="pre">OPENDESK_MEMORY_KEYSTORE=file</span></code> on Windows if you run both SDKs. <code class="docutils literal notranslate"><span class="pre">~/.opendesk/memory/keyinfo.json</span></code> records which store holds the key, plus a non-secret key fingerprint, so both SDKs and later runs agree. <code class="docutils literal notranslate"><span class="pre">OPENDESK_MEMORY_KEYSTORE=keychain|keyring|file</span></code> forces a store. A custom <code class="docutils literal notranslate"><span class="pre">--home</span></code> keeps its key in the file store unless forced. That keeps test and sandbox homes out of your Keychain.</p>
+<p>If the key is lost, encrypted text and thumbnails cannot be recovered. They show as empty text and no image, and the store keeps working. <strong>Python needs the <code class="docutils literal notranslate"><span class="pre">cryptography</span></code> package for encryption.</strong> Without it, frames are stored unencrypted with a warning, and <code class="docutils literal notranslate"><span class="pre">status</span></code> says so.</p>
+<p><strong>Changing settings.</strong> New frames follow the current config immediately; the daemon reloads it every 10 s. To convert what is already stored, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>opendesk<span class="w"> </span>memory<span class="w"> </span>config<span class="w"> </span>--encrypt-text<span class="w"> </span>on
+opendesk<span class="w"> </span>memory<span class="w"> </span>reindex<span class="w">            </span><span class="c1"># encrypt/decrypt text + thumbnails, redact old secrets</span>
+</pre></div>
+</div>
+<p>Plaintext and encrypted frames can coexist in one store and are searched together. After rewriting text, <code class="docutils literal notranslate"><span class="pre">reindex</span></code> rebuilds the full-text index and <code class="docutils literal notranslate"><span class="pre">VACUUM</span></code>s the database (with <code class="docutils literal notranslate"><span class="pre">secure_delete</span></code> on) so the old plaintext does not linger in free pages.</p>
+</section>
+<hr class="docutils" />
+<section id="privacy-controls">
+<h2>Privacy controls<a class="headerlink" href="#privacy-controls" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Control</p></th>
+<th class="head"><p>How</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Per-app deny list</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">opendesk</span> <span class="pre">memory</span> <span class="pre">deny</span> <span class="pre">add</span> <span class="pre">&quot;Signal&quot;</span></code>. Matched case-insensitively against the frontmost app name <em>and</em> window title. Password managers <strong>and private/incognito browser windows</strong> (<code class="docutils literal notranslate"><span class="pre">Private</span> <span class="pre">Browsing</span></code>, <code class="docutils literal notranslate"><span class="pre">Incognito</span></code>, <code class="docutils literal notranslate"><span class="pre">InPrivate</span></code>) are excluded by default. A match skips the capture entirely; no pixels are read. Old config files get the private-browsing entries added once.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Redaction</strong></p></td>
+<td><p>On by default; see above. <code class="docutils literal notranslate"><span class="pre">opendesk</span> <span class="pre">memory</span> <span class="pre">config</span> <span class="pre">--redact</span> <span class="pre">off</span></code> to disable.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Encryption</strong></p></td>
+<td><p>Thumbnails by default, text opt-in; see above.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Pause hotkey</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Cmd+Shift+Alt+P</span></code> on macOS, <code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+Alt+P</span></code> elsewhere. Toggles capture from anywhere. Change it with <code class="docutils literal notranslate"><span class="pre">opendesk</span> <span class="pre">memory</span> <span class="pre">config</span> <span class="pre">--hotkey</span> <span class="pre">'&lt;ctrl&gt;+&lt;alt&gt;+m'</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Pause for a while</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">opendesk</span> <span class="pre">memory</span> <span class="pre">pause</span> <span class="pre">2h</span></code>, or ask the agent: <code class="docutils literal notranslate"><span class="pre">memory_manage(action=&quot;pause&quot;,</span> <span class="pre">duration=&quot;2h&quot;)</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Storage cap</strong></p></td>
+<td><p>Default 2 GB. When exceeded, the oldest frames are deleted first until usage is back under 90% of the cap.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Retention</strong></p></td>
+<td><p>Default 30 days. Older frames are deleted on every housekeeping pass.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Delete</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">opendesk</span> <span class="pre">memory</span> <span class="pre">clear</span> <span class="pre">--before</span> <span class="pre">7d</span></code>, <code class="docutils literal notranslate"><span class="pre">--app</span> <span class="pre">Chrome</span></code>, or everything. The agent’s <code class="docutils literal notranslate"><span class="pre">memory_manage(action=&quot;delete&quot;)</span></code> requires a scope and <code class="docutils literal notranslate"><span class="pre">confirm=true</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Duplicate suppression</strong></p></td>
+<td><p>Visually identical consecutive frames (idle screen) are not stored.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Everything under <code class="docutils literal notranslate"><span class="pre">~/.opendesk/memory</span></code> is created with mode <code class="docutils literal notranslate"><span class="pre">0600</span></code>/<code class="docutils literal notranslate"><span class="pre">0700</span></code>.</p>
+</section>
+<hr class="docutils" />
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h2>
+<section id="memory-read-only">
+<h3><code class="docutils literal notranslate"><span class="pre">memory</span></code> (read-only)<a class="headerlink" href="#memory-read-only" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">action</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">search</span></code> | <code class="docutils literal notranslate"><span class="pre">show</span></code> | <code class="docutils literal notranslate"><span class="pre">timeline</span></code> | <code class="docutils literal notranslate"><span class="pre">status</span></code></p></td>
+<td><p>required</p></td>
+<td><p>What to do</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">query</span></code></p></td>
+<td><p>str</p></td>
+<td><p>null</p></td>
+<td><p>Search terms (<code class="docutils literal notranslate"><span class="pre">search</span></code>). All terms must match; quote phrases; <code class="docutils literal notranslate"><span class="pre">invoice*</span></code> for prefix (plaintext frames only)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">since</span></code></p></td>
+<td><p>str</p></td>
+<td><p>null</p></td>
+<td><p>Start of the window: <code class="docutils literal notranslate"><span class="pre">2h</span></code>, <code class="docutils literal notranslate"><span class="pre">yesterday</span></code>, <code class="docutils literal notranslate"><span class="pre">tuesday</span></code>, <code class="docutils literal notranslate"><span class="pre">last</span> <span class="pre">week</span></code>, <code class="docutils literal notranslate"><span class="pre">this</span> <span class="pre">month</span></code>, <code class="docutils literal notranslate"><span class="pre">yesterday</span> <span class="pre">afternoon</span></code>, <code class="docutils literal notranslate"><span class="pre">2026-09-01</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">until</span></code></p></td>
+<td><p>str</p></td>
+<td><p>null</p></td>
+<td><p>End of the window (same formats)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">app</span></code></p></td>
+<td><p>str</p></td>
+<td><p>null</p></td>
+<td><p>Only frames whose app name or window title contains this</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">limit</span></code></p></td>
+<td><p>int</p></td>
+<td><p>15</p></td>
+<td><p>Max results for <code class="docutils literal notranslate"><span class="pre">search</span></code> / <code class="docutils literal notranslate"><span class="pre">timeline</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">id</span></code></p></td>
+<td><p>int</p></td>
+<td><p>null</p></td>
+<td><p>Frame id (<code class="docutils literal notranslate"><span class="pre">show</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">include_image</span></code></p></td>
+<td><p>bool</p></td>
+<td><p>true</p></td>
+<td><p>Attach the (decrypted) thumbnail on <code class="docutils literal notranslate"><span class="pre">show</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">show</span></code> results carry <code class="docutils literal notranslate"><span class="pre">text_source</span></code> (<code class="docutils literal notranslate"><span class="pre">ax</span></code> / <code class="docutils literal notranslate"><span class="pre">ocr</span></code> / <code class="docutils literal notranslate"><span class="pre">none</span></code>) and <code class="docutils literal notranslate"><span class="pre">encrypted</span></code> in their metadata. <code class="docutils literal notranslate"><span class="pre">status</span></code> reports the trigger mode, per-source frame counts, and encryption state; see <a class="reference internal" href="#status-fields">Status fields</a>.</p>
+</section>
+<section id="memory-manage-changes-settings-deletes">
+<h3><code class="docutils literal notranslate"><span class="pre">memory_manage</span></code> (changes settings / deletes)<a class="headerlink" href="#memory-manage-changes-settings-deletes" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">action</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pause</span></code> | <code class="docutils literal notranslate"><span class="pre">resume</span></code> | <code class="docutils literal notranslate"><span class="pre">deny</span></code> | <code class="docutils literal notranslate"><span class="pre">config</span></code> | <code class="docutils literal notranslate"><span class="pre">delete</span></code></p></td>
+<td><p>required</p></td>
+<td><p>What to do</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">duration</span></code></p></td>
+<td><p>str</p></td>
+<td><p>null</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pause</span></code> length, e.g. <code class="docutils literal notranslate"><span class="pre">30m</span></code>, <code class="docutils literal notranslate"><span class="pre">2h</span></code> (omit = until resumed)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">deny_add</span></code> / <code class="docutils literal notranslate"><span class="pre">deny_remove</span></code></p></td>
+<td><p>str</p></td>
+<td><p>null</p></td>
+<td><p>Deny-list edits (<code class="docutils literal notranslate"><span class="pre">deny</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">interval_seconds</span></code> / <code class="docutils literal notranslate"><span class="pre">storage_cap_mb</span></code> / <code class="docutils literal notranslate"><span class="pre">retention_days</span></code></p></td>
+<td><p>number</p></td>
+<td><p>null</p></td>
+<td><p>Settings (<code class="docutils literal notranslate"><span class="pre">config</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">trigger</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">events</span></code> | <code class="docutils literal notranslate"><span class="pre">interval</span></code></p></td>
+<td><p>null</p></td>
+<td><p>Capture trigger (<code class="docutils literal notranslate"><span class="pre">config</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">redact</span></code> / <code class="docutils literal notranslate"><span class="pre">encrypt_text</span></code> / <code class="docutils literal notranslate"><span class="pre">encrypt_thumbnails</span></code></p></td>
+<td><p>bool</p></td>
+<td><p>null</p></td>
+<td><p>Privacy settings (<code class="docutils literal notranslate"><span class="pre">config</span></code>). They apply to new frames; existing frames are converted with <code class="docutils literal notranslate"><span class="pre">opendesk</span> <span class="pre">memory</span> <span class="pre">reindex</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">since</span></code> / <code class="docutils literal notranslate"><span class="pre">until</span></code> / <code class="docutils literal notranslate"><span class="pre">app</span></code></p></td>
+<td><p>str</p></td>
+<td><p>null</p></td>
+<td><p>Scope for <code class="docutils literal notranslate"><span class="pre">delete</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">confirm</span></code></p></td>
+<td><p>bool</p></td>
+<td><p>false</p></td>
+<td><p>Required for <code class="docutils literal notranslate"><span class="pre">delete</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="configuration-keys-config-json">
+<h3>Configuration keys (<code class="docutils literal notranslate"><span class="pre">config.json</span></code>)<a class="headerlink" href="#configuration-keys-config-json" title="Link to this heading">#</a></h3>
+<p>Both SDKs share <code class="docutils literal notranslate"><span class="pre">~/.opendesk/memory/config.json</span></code> (snake_case keys). Older files keep working: missing keys take their defaults.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">trigger</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;events&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">events</span></code> or <code class="docutils literal notranslate"><span class="pre">interval</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">interval_seconds</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">30</span></code></p></td>
+<td><p>Interval mode: the period. Events mode: the idle fallback.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">poll_seconds</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1.0</span></code></p></td>
+<td><p>Events mode: frontmost-window probe period (minimum 0.2)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">min_interval_seconds</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2.0</span></code></p></td>
+<td><p>Events mode: minimum gap between captures</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ax_min_chars</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">40</span></code></p></td>
+<td><p>Accessibility text shorter than this falls back to OCR</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ocr_backend</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;auto&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">auto</span></code>, <code class="docutils literal notranslate"><span class="pre">tesseract</span></code>, <code class="docutils literal notranslate"><span class="pre">native</span></code>, … or <code class="docutils literal notranslate"><span class="pre">always</span></code> (OCR even when AX text exists)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">redact</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td><p>Scrub secrets before storing</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">encrypt_thumbnails</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td><p>AES-GCM thumbnails</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">encrypt_text</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td><p>AES-GCM text + blind index</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">deny_apps</span></code></p></td>
+<td><p>password managers + private browsing</p></td>
+<td><p>Deny-list patterns</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">storage_cap_mb</span></code> / <code class="docutils literal notranslate"><span class="pre">retention_days</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2048</span></code> / <code class="docutils literal notranslate"><span class="pre">30</span></code></p></td>
+<td><p>Housekeeping</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">thumbnail_width</span></code> / <code class="docutils literal notranslate"><span class="pre">thumbnail_quality</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">480</span></code> / <code class="docutils literal notranslate"><span class="pre">60</span></code></p></td>
+<td><p>JPEG thumbnails</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dedupe_threshold</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.02</span></code></p></td>
+<td><p>Visual-difference threshold for duplicate suppression</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pause_hotkey</span></code></p></td>
+<td><p>platform default</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">''</span></code> disables</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">config_version</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+<td><p>Lets old files receive new defaults (e.g. private-browsing deny entries) once</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="status-fields">
+<h3>Status fields<a class="headerlink" href="#status-fields" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">MemoryStore.stats()</span></code> (Python) / <code class="docutils literal notranslate"><span class="pre">store.stats()</span></code> (JS, camelCase) report:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Python</p></th>
+<th class="head"><p>JS</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">frames</span></code>, <code class="docutils literal notranslate"><span class="pre">oldest</span></code>, <code class="docutils literal notranslate"><span class="pre">newest</span></code>, <code class="docutils literal notranslate"><span class="pre">apps</span></code></p></td>
+<td><p>same</p></td>
+<td><p>Counts and span</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">thumb_bytes</span></code>, <code class="docutils literal notranslate"><span class="pre">db_bytes</span></code>, <code class="docutils literal notranslate"><span class="pre">total_bytes</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">thumbBytes</span></code>, <code class="docutils literal notranslate"><span class="pre">indexBytes</span></code>, <code class="docutils literal notranslate"><span class="pre">totalBytes</span></code></p></td>
+<td><p>Disk use</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">text_sources</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textSources</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{&quot;ax&quot;:</span> <span class="pre">n,</span> <span class="pre">&quot;ocr&quot;:</span> <span class="pre">n,</span> <span class="pre">&quot;none&quot;:</span> <span class="pre">n}</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">encrypted_text_frames</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">encryptedTextFrames</span></code></p></td>
+<td><p>Frames whose text is encrypted</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">thumbnails</span></code>, <code class="docutils literal notranslate"><span class="pre">encrypted_thumbnails</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">thumbnails</span></code>, <code class="docutils literal notranslate"><span class="pre">encryptedThumbnails</span></code></p></td>
+<td><p>Thumbnails stored / of those encrypted</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">encrypt_text</span></code>, <code class="docutils literal notranslate"><span class="pre">encrypt_thumbnails</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">encryptText</span></code>, <code class="docutils literal notranslate"><span class="pre">encryptThumbnails</span></code></p></td>
+<td><p>Current settings for new frames</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">key_store</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">keyStore</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">keychain</span></code> / <code class="docutils literal notranslate"><span class="pre">keyring</span></code> / <code class="docutils literal notranslate"><span class="pre">file</span></code>, or null before the first encrypted write</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">encryption_available</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">encryptionAvailable</span></code></p></td>
+<td><p>False when Python lacks <code class="docutils literal notranslate"><span class="pre">cryptography</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The daemon heartbeat (<code class="docutils literal notranslate"><span class="pre">daemon.json</span></code>) adds <code class="docutils literal notranslate"><span class="pre">trigger</span></code>, <code class="docutils literal notranslate"><span class="pre">poll_seconds</span></code>, <code class="docutils literal notranslate"><span class="pre">min_interval_seconds</span></code>, <code class="docutils literal notranslate"><span class="pre">last_reason</span></code> (<code class="docutils literal notranslate"><span class="pre">start</span></code> / <code class="docutils literal notranslate"><span class="pre">app_change</span></code> / <code class="docutils literal notranslate"><span class="pre">title_change</span></code> / <code class="docutils literal notranslate"><span class="pre">interval</span></code>), <code class="docutils literal notranslate"><span class="pre">last_text_source</span></code>, per-run <code class="docutils literal notranslate"><span class="pre">text_sources</span></code> and <code class="docutils literal notranslate"><span class="pre">reasons</span></code> counts, and <code class="docutils literal notranslate"><span class="pre">redactions</span></code>.</p>
+</section>
+<section id="time-phrases">
+<h3>Time phrases<a class="headerlink" href="#time-phrases" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Phrase</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">2h</span></code>, <code class="docutils literal notranslate"><span class="pre">45m</span></code>, <code class="docutils literal notranslate"><span class="pre">3d</span></code>, <code class="docutils literal notranslate"><span class="pre">1w</span></code></p></td>
+<td><p>The last N hours / minutes / days / weeks</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">today</span></code>, <code class="docutils literal notranslate"><span class="pre">yesterday</span></code>, <code class="docutils literal notranslate"><span class="pre">last</span> <span class="pre">night</span></code></p></td>
+<td><p>Whole day (or the evening)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tuesday</span></code>, <code class="docutils literal notranslate"><span class="pre">last</span> <span class="pre">tuesday</span></code></p></td>
+<td><p>Most recent Tuesday; the one before if today is Tuesday</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tuesday</span> <span class="pre">afternoon</span></code>, <code class="docutils literal notranslate"><span class="pre">yesterday</span> <span class="pre">morning</span></code></p></td>
+<td><p>Day parts: morning 05–12, afternoon 12–17, evening 17–22, night 20–24</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">this</span> <span class="pre">week</span></code>, <code class="docutils literal notranslate"><span class="pre">last</span> <span class="pre">week</span></code>, <code class="docutils literal notranslate"><span class="pre">this</span> <span class="pre">month</span></code>, <code class="docutils literal notranslate"><span class="pre">last</span> <span class="pre">month</span></code></p></td>
+<td><p>Calendar periods</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">days</span> <span class="pre">ago</span></code>, <code class="docutils literal notranslate"><span class="pre">an</span> <span class="pre">hour</span> <span class="pre">ago</span></code></p></td>
+<td><p>Relative points</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">2026-09-01</span></code>, <code class="docutils literal notranslate"><span class="pre">2026-09-01</span> <span class="pre">14:30</span></code></p></td>
+<td><p>ISO date (whole day) or datetime</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="sdk-examples">
+<h2>SDK examples<a class="headerlink" href="#sdk-examples" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="n">MemoryTool</span><span class="o">.</span><span class="n">Params</span>
+
+<span class="c1"># "What was the error in the terminal on Tuesday?"</span>
+<span class="n">r</span> <span class="o">=</span> <span class="k">await</span> <span class="n">tool</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">params</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">"search"</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="s2">"error"</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">"Terminal"</span><span class="p">,</span> <span class="n">since</span><span class="o">=</span><span class="s2">"tuesday"</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+<span class="c1"># Screen memory search 'error' — 2026-09-01 00:00:00 → 2026-09-02 00:00:00 — app~'Terminal'</span>
+<span class="c1"># 2 match(es), best first:</span>
+<span class="c1">#   #1412   2026-09-01 16:42:10  [Terminal] — zsh</span>
+<span class="c1">#           npm ERR! code ELIFECYCLE … [Error]: connect ECONNREFUSED 127.0.0.1:5432</span>
+<span class="c1">#   #1409   2026-09-01 16:40:31  [Terminal] — zsh</span>
+<span class="c1">#           … [error] TS2345: Argument of type …</span>
+
+<span class="c1"># Read one moment in full (text + decrypted thumbnail attachment)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="k">await</span> <span class="n">tool</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">params</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">"show"</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">1412</span><span class="p">))</span>
+<span class="n">r</span><span class="o">.</span><span class="n">attachments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">media_type</span>  <span class="c1"># "image/jpeg"</span>
+<span class="n">r</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s2">"text_source"</span><span class="p">]</span>    <span class="c1"># "ax" | "ocr" | "none"</span>
+
+<span class="c1"># "Every time the dashboard was open this month"</span>
+<span class="n">r</span> <span class="o">=</span> <span class="k">await</span> <span class="n">tool</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">params</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">"timeline"</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">"Grafana"</span><span class="p">,</span> <span class="n">since</span><span class="o">=</span><span class="s2">"this month"</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">50</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Privacy controls go through <code class="docutils literal notranslate"><span class="pre">memory_manage</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">opendesk.tools.memory</span><span class="w"> </span><span class="kn">import</span> <span class="n">MemoryManageTool</span>
+<span class="n">manage</span> <span class="o">=</span> <span class="n">MemoryManageTool</span><span class="p">()</span>
+<span class="n">mp</span> <span class="o">=</span> <span class="n">MemoryManageTool</span><span class="o">.</span><span class="n">Params</span>
+<span class="k">await</span> <span class="n">manage</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">mp</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">"pause"</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="s2">"1h"</span><span class="p">))</span>
+<span class="k">await</span> <span class="n">manage</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">mp</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">"deny"</span><span class="p">,</span> <span class="n">deny_add</span><span class="o">=</span><span class="s2">"bank"</span><span class="p">))</span>
+<span class="k">await</span> <span class="n">manage</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">mp</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">"config"</span><span class="p">,</span> <span class="n">storage_cap_mb</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">retention_days</span><span class="o">=</span><span class="mi">14</span><span class="p">))</span>
+<span class="k">await</span> <span class="n">manage</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">mp</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">"delete"</span><span class="p">,</span> <span class="n">since</span><span class="o">=</span><span class="s2">"yesterday"</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">"Slack"</span><span class="p">,</span> <span class="n">confirm</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+<section id="javascript-typescript">
+<h3>JavaScript / TypeScript<a class="headerlink" href="#javascript-typescript" title="Link to this heading">#</a></h3>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">OpenDeskClient</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">"@vitalops/opendesk-sdk"</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">OpenDeskClient</span><span class="p">();</span>
+
+<span class="c1">// "What was the error in the terminal on Tuesday?"</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">memory</span><span class="p">({</span><span class="w"> </span><span class="nx">action</span><span class="o">:</span><span class="w"> </span><span class="s2">"search"</span><span class="p">,</span><span class="w"> </span><span class="nx">query</span><span class="o">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w"> </span><span class="nx">app</span><span class="o">:</span><span class="w"> </span><span class="s2">"Terminal"</span><span class="p">,</span><span class="w"> </span><span class="nx">since</span><span class="o">:</span><span class="w"> </span><span class="s2">"tuesday"</span><span class="w"> </span><span class="p">});</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">output</span><span class="p">);</span>
+
+<span class="c1">// Full text + thumbnail (image/jpeg Buffer, decrypted)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">moment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">memory</span><span class="p">({</span><span class="w"> </span><span class="nx">action</span><span class="o">:</span><span class="w"> </span><span class="s2">"show"</span><span class="p">,</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">metadata</span><span class="p">.</span><span class="nx">ids</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="kt">number</span><span class="p">[])[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="p">});</span>
+
+<span class="c1">// "Every time the dashboard was open this month"</span>
+<span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">memory</span><span class="p">({</span><span class="w"> </span><span class="nx">action</span><span class="o">:</span><span class="w"> </span><span class="s2">"timeline"</span><span class="p">,</span><span class="w"> </span><span class="nx">app</span><span class="o">:</span><span class="w"> </span><span class="s2">"Grafana"</span><span class="p">,</span><span class="w"> </span><span class="nx">since</span><span class="o">:</span><span class="w"> </span><span class="s2">"this month"</span><span class="p">,</span><span class="w"> </span><span class="nx">limit</span><span class="o">:</span><span class="w"> </span><span class="kt">50</span><span class="w"> </span><span class="p">});</span>
+</pre></div>
+</div>
+<p>JS parameter names are camelCase (<code class="docutils literal notranslate"><span class="pre">denyAdd</span></code>, <code class="docutils literal notranslate"><span class="pre">includeImage</span></code>, <code class="docutils literal notranslate"><span class="pre">storageCapMb</span></code>, <code class="docutils literal notranslate"><span class="pre">encryptText</span></code>, …); everything else matches the tables above.</p>
+<p>Lower-level access:</p>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">MemoryStore</span><span class="p">,</span><span class="w"> </span><span class="nx">parseWhen</span><span class="p">,</span><span class="w"> </span><span class="nx">ScreenMemoryRecorder</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">"@vitalops/opendesk-sdk"</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">store</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">MemoryStore</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">start</span><span class="p">,</span><span class="w"> </span><span class="nx">end</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">parseWhen</span><span class="p">(</span><span class="s2">"last week"</span><span class="p">);</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">f</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">store</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="s2">"invoice"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">start</span><span class="p">,</span><span class="w"> </span><span class="nx">end</span><span class="w"> </span><span class="p">}))</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">f</span><span class="p">.</span><span class="nx">ts</span><span class="p">,</span><span class="w"> </span><span class="nx">f</span><span class="p">.</span><span class="nx">app</span><span class="p">,</span><span class="w"> </span><span class="nx">f</span><span class="p">.</span><span class="nx">text_source</span><span class="p">,</span><span class="w"> </span><span class="nx">f</span><span class="p">.</span><span class="nx">snippet</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">store</span><span class="p">.</span><span class="nx">stats</span><span class="p">().</span><span class="nx">textSources</span><span class="p">,</span><span class="w"> </span><span class="nx">store</span><span class="p">.</span><span class="nx">stats</span><span class="p">().</span><span class="nx">encryptedThumbnails</span><span class="p">);</span>
+
+<span class="c1">// Embed the capture loop in your own process (events trigger by default)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">rec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ScreenMemoryRecorder</span><span class="p">({</span><span class="w"> </span><span class="nx">intervalOverride</span><span class="o">:</span><span class="w"> </span><span class="kt">60</span><span class="w"> </span><span class="p">});</span>
+<span class="k">await</span><span class="w"> </span><span class="nx">rec</span><span class="p">.</span><span class="nx">run</span><span class="p">();</span><span class="w">   </span><span class="c1">// rec.stop() to end</span>
+</pre></div>
+</div>
+</section>
+<section id="direct-store-access-python">
+<h3>Direct store access (Python)<a class="headerlink" href="#direct-store-access-python" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">opendesk.memory</span><span class="w"> </span><span class="kn">import</span> <span class="n">MemoryStore</span><span class="p">,</span> <span class="n">parse_when</span>
+
+<span class="k">with</span> <span class="n">MemoryStore</span><span class="p">()</span> <span class="k">as</span> <span class="n">store</span><span class="p">:</span>
+    <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">parse_when</span><span class="p">(</span><span class="s2">"last week"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="n">store</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">"invoice"</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">when</span><span class="p">,</span> <span class="n">frame</span><span class="o">.</span><span class="n">app</span><span class="p">,</span> <span class="n">frame</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">frame</span><span class="o">.</span><span class="n">text_source</span><span class="p">,</span> <span class="n">frame</span><span class="o">.</span><span class="n">snippet</span><span class="p">)</span>
+        <span class="n">jpeg</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">thumbnail</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>      <span class="c1"># decrypted JPEG bytes</span>
+    <span class="n">st</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">stats</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">text_sources</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">encrypted_thumbnails</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">key_store</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="cli-reference">
+<h2>CLI reference<a class="headerlink" href="#cli-reference" title="Link to this heading">#</a></h2>
+<p>The JS CLI mirrors every command as <code class="docutils literal notranslate"><span class="pre">opendesk-js</span> <span class="pre">memory</span> <span class="pre">…</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">opendesk</span> <span class="n">memory</span> <span class="n">start</span> <span class="p">[</span><span class="o">--</span><span class="n">interval</span> <span class="n">N</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">log</span><span class="o">-</span><span class="n">file</span> <span class="n">PATH</span><span class="p">]</span>   <span class="n">run</span> <span class="n">the</span> <span class="n">capture</span> <span class="n">daemon</span>
+<span class="n">opendesk</span> <span class="n">memory</span> <span class="n">status</span>                                   <span class="n">daemon</span> <span class="o">/</span> <span class="n">storage</span> <span class="o">/</span> <span class="n">trigger</span> <span class="o">/</span> <span class="n">encryption</span>
+<span class="n">opendesk</span> <span class="n">memory</span> <span class="n">pause</span> <span class="p">[</span><span class="mi">30</span><span class="n">m</span><span class="o">|</span><span class="mi">2</span><span class="n">h</span><span class="p">]</span>                           <span class="n">pause</span> <span class="p">(</span><span class="n">optionally</span> <span class="k">for</span> <span class="n">a</span> <span class="n">duration</span><span class="p">)</span>
+<span class="n">opendesk</span> <span class="n">memory</span> <span class="n">resume</span>
+<span class="n">opendesk</span> <span class="n">memory</span> <span class="n">search</span> <span class="s2">"&lt;query&gt;"</span> <span class="p">[</span><span class="o">--</span><span class="n">since</span> <span class="o">..</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">until</span> <span class="o">..</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">app</span> <span class="o">..</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">limit</span> <span class="n">N</span><span class="p">]</span>
+<span class="n">opendesk</span> <span class="n">memory</span> <span class="n">timeline</span> <span class="p">[</span><span class="o">--</span><span class="n">since</span> <span class="o">..</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">app</span> <span class="o">..</span><span class="p">]</span>
+<span class="n">opendesk</span> <span class="n">memory</span> <span class="n">show</span> <span class="o">&lt;</span><span class="nb">id</span><span class="o">&gt;</span> <span class="p">[</span><span class="o">--</span><span class="n">save</span> <span class="n">out</span><span class="o">.</span><span class="n">jpg</span><span class="p">]</span>               <span class="n">full</span> <span class="n">text</span><span class="p">;</span> <span class="o">--</span><span class="n">save</span> <span class="n">writes</span> <span class="n">the</span> <span class="n">decrypted</span> <span class="n">thumbnail</span>
+<span class="n">opendesk</span> <span class="n">memory</span> <span class="n">deny</span> <span class="p">[</span><span class="nb">list</span><span class="o">|</span><span class="n">add</span> <span class="o">&lt;</span><span class="n">pattern</span><span class="o">&gt;|</span><span class="n">remove</span> <span class="o">&lt;</span><span class="n">pattern</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="n">opendesk</span> <span class="n">memory</span> <span class="n">config</span> <span class="p">[</span><span class="o">--</span><span class="n">trigger</span> <span class="n">events</span><span class="o">|</span><span class="n">interval</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">interval</span> <span class="n">N</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">poll</span> <span class="n">S</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="nb">min</span><span class="o">-</span><span class="n">interval</span> <span class="n">S</span><span class="p">]</span>
+                       <span class="p">[</span><span class="o">--</span><span class="n">redact</span> <span class="n">on</span><span class="o">|</span><span class="n">off</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">encrypt</span><span class="o">-</span><span class="n">text</span> <span class="n">on</span><span class="o">|</span><span class="n">off</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">encrypt</span><span class="o">-</span><span class="n">thumbnails</span> <span class="n">on</span><span class="o">|</span><span class="n">off</span><span class="p">]</span>
+                       <span class="p">[</span><span class="o">--</span><span class="n">cap</span> <span class="n">MB</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">retention</span> <span class="n">DAYS</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">hotkey</span> <span class="s1">'&lt;ctrl&gt;+&lt;alt&gt;+m'</span><span class="p">]</span>
+<span class="n">opendesk</span> <span class="n">memory</span> <span class="n">reindex</span> <span class="p">[</span><span class="o">-</span><span class="n">y</span><span class="p">]</span>                             <span class="n">re</span><span class="o">-</span><span class="n">encrypt</span> <span class="o">/</span> <span class="n">decrypt</span> <span class="o">/</span> <span class="n">redact</span> <span class="n">existing</span> <span class="n">frames</span>
+<span class="n">opendesk</span> <span class="n">memory</span> <span class="n">clear</span> <span class="p">[</span><span class="o">--</span><span class="n">before</span> <span class="o">&lt;</span><span class="n">when</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">app</span> <span class="o">..</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">y</span><span class="p">]</span>
+<span class="n">opendesk</span> <span class="n">memory</span> <span class="n">install</span><span class="o">-</span><span class="n">service</span> <span class="o">|</span> <span class="n">uninstall</span><span class="o">-</span><span class="n">service</span>
+</pre></div>
+</div>
+<p>All commands accept <code class="docutils literal notranslate"><span class="pre">--home</span> <span class="pre">DIR</span></code> (default <code class="docutils literal notranslate"><span class="pre">~/.opendesk</span></code>).</p>
+</section>
+<hr class="docutils" />
+<section id="how-it-works">
+<h2>How it works<a class="headerlink" href="#how-it-works" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>poll every 1s ─► paused? ─► frontmost app / title / pid ─► changed? (or 30s idle) ─► deny list? ─► capture
+                                                                                                  │
+         duplicate of last frame? (skipped after app switches) ◄──────────────────────────────────┘
+                 │
+          accessibility text (≥40 chars) ── else ──► OCR (pytesseract → macOS Vision → Windows WinRT)
+                 │
+          redact secrets  ─►  encrypt (thumbnail always*, text if encrypt_text)
+                 │
+          SQLite index.db  ──  FTS5 over text (or blind tokens) + app + title
+          thumbs/YYYY-MM-DD/&lt;id&gt;.jpg.enc
+                 │
+          housekeeping: retention_days, storage_cap_mb (oldest first)
+
+  * when encrypt_thumbnails is on (default)
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Storage.</strong> Python writes <code class="docutils literal notranslate"><span class="pre">~/.opendesk/memory/index.db</span></code> (SQLite, WAL, <code class="docutils literal notranslate"><span class="pre">secure_delete</span></code>) and <code class="docutils literal notranslate"><span class="pre">thumbs/</span></code>. JS writes <code class="docutils literal notranslate"><span class="pre">~/.opendesk/memory/frames/YYYY-MM-DD.jsonl</span></code> (no native modules) with the same <code class="docutils literal notranslate"><span class="pre">thumbs/</span></code> layout and the same encryption formats. Both share <code class="docutils literal notranslate"><span class="pre">config.json</span></code>, <code class="docutils literal notranslate"><span class="pre">paused.json</span></code>, <code class="docutils literal notranslate"><span class="pre">keyinfo.json</span></code>, the key, and the daemon heartbeat, so settings and pause state apply to either daemon. Run only one daemon per home. In a test run on a Mac, a frame cost about 16 KB of encrypted thumbnail (480 px wide) plus 1–3 KB of text and index. Event-driven capture stores a frame per app or window switch rather than one every 30 s, so a focused hour in one window is a handful of frames.</p></li>
+<li><p><strong>Search.</strong> Python uses FTS5 with BM25 ranking and highlighted snippets, falling back to <code class="docutils literal notranslate"><span class="pre">LIKE</span></code> without FTS5. JS scans only the day files inside the time window and ranks by term hits with title/app boosts. Encrypted frames are matched through the blind index and decrypted only when they are candidates. In both SDKs all terms are ANDed; if nothing matches, the query is retried as OR so near-misses still surface.</p></li>
+<li><p><strong>Processes.</strong> The daemon and the agent’s MCP server are separate processes. Pause state, config, and a daemon heartbeat are shared through small JSON files, so <code class="docutils literal notranslate"><span class="pre">status</span></code> can tell you whether capture is actually running.</p></li>
+<li><p><strong>Local only.</strong> The tools always read the local index and are deliberately not peer-routable.</p></li>
+</ul>
+<hr class="docutils" />
+<p>Next: <a class="reference internal" href="audit.html"><span class="std std-doc">audit →</span></a> — inspect everything the agent has done this session.</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="learn.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">learn</span></code> — Record and Replay Tasks</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="script.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">script</span></code> — Shell, AppleScript, JXA &amp; PowerShell</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ask-claude">Ask Claude</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-recording">Start recording</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-frames-are-captured">When frames are captured</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-the-text-comes-from">Where the text comes from</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redaction">Redaction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encryption-at-rest">Encryption at rest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#privacy-controls">Privacy controls</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-read-only"><code class="docutils literal notranslate"><span class="pre">memory</span></code> (read-only)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-manage-changes-settings-deletes"><code class="docutils literal notranslate"><span class="pre">memory_manage</span></code> (changes settings / deletes)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-keys-config-json">Configuration keys (<code class="docutils literal notranslate"><span class="pre">config.json</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#status-fields">Status fields</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-phrases">Time phrases</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sdk-examples">SDK examples</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#javascript-typescript">JavaScript / TypeScript</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-store-access-python">Direct store access (Python)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cli-reference">CLI reference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How it works</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Abhigith Neil Abraham, Fariz Rahman, Fadil Rahman
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Vitalops Technologies.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

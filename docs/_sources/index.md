@@ -1,6 +1,14 @@
-# opendesk
+# OpenDesk
 
-**Open Computer Use Agent** — gives any AI agent eyes and hands on your desktop. Works with any MCP client (Claude Code, Cursor, Windsurf, Continue) and any AI framework (Anthropic SDK, OpenAI, LangChain). Runs on macOS, Linux, and Windows.
+**OpenDesk by VitalOps** — open-source computer-use MCP server that lets AI agents see and control macOS, Windows and Linux desktops, locally or across paired machines. Works with any MCP client (Claude Code, Claude Desktop, Cursor, VS Code, Continue) and any AI framework (Anthropic SDK, OpenAI, LangChain). Not to be confused with the openDesk office suite.
+
+Quick install (Claude Code, needs [uv](https://docs.astral.sh/uv/)):
+
+```bash
+claude mcp add opendesk -- uvx --from opendesk opendesk-mcp
+```
+
+On macOS, run `opendesk check --open` (or `uvx opendesk check --open`) and grant Accessibility and Screen Recording to the app that runs OpenDesk. Other clients: see [MCP](mcp/index.md).
 
 ```{toctree}
 :maxdepth: 2
@@ -9,6 +17,7 @@
 getting-started/index
 getting-started/python
 getting-started/javascript
+getting-started/permissions
 ```
 
 ```{toctree}
@@ -51,6 +60,18 @@ tools/clipboard
 tools/ocr
 tools/audit
 tools/learn
+tools/memory
+tools/script
+tools/browser
+tools/fleet
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: Safety & Evaluation
+
+safety
+eval
 ```
 
 ```{toctree}
@@ -61,6 +82,7 @@ automation/index
 automation/claude-code
 automation/python-api
 automation/scheduler
+automation/compiled-replay
 ```
 
 ```{toctree}
@@ -73,6 +95,7 @@ architecture/protocol-layer
 architecture/remote-layer
 architecture/data-flow
 architecture/custom-tools
+architecture/native-helper
 ```
 
 ```{toctree}

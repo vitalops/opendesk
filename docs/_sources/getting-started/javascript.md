@@ -15,6 +15,15 @@ npx opendesk-js install
 npx opendesk-js uninstall   # to remove
 ```
 
+Or run the MCP server without installing anything:
+
+```bash
+npx -y @vitalops/opendesk-sdk            # runs the `opendesk-sdk` bin (the MCP server over stdio)
+npx -y -p @vitalops/opendesk-sdk opendesk-js-mcp   # same server, explicit bin name
+```
+
+On macOS, grant Accessibility and Screen Recording to the app that runs the server first (see [Permissions](permissions.md)).
+
 ## Try it via Claude
 
 Once registered, open Claude Code and ask:

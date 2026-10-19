@@ -1,0 +1,729 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Permissions &#8212; opendesk</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../_static/documentation_options.js?v=83a61292"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting-started/permissions';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="canonical" href="https://vitalops.github.io/opendesk/docs/getting-started/permissions.html" />
+    <link rel="icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="MCP Integration" href="../mcp/index.html" />
+    <link rel="prev" title="JavaScript / TypeScript Quickstart" href="javascript.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">opendesk — Open Computer Use Agent for any AI framework</div>
+</aside>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="opendesk - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="opendesk - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="javascript.html">JavaScript / TypeScript Quickstart</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Permissions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MCP</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../mcp/index.html">MCP Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcp/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcp/claude-code.html">Claude Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcp/claude-desktop.html">Claude Desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcp/cursor.html">Cursor &amp; VS Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcp/continue.html">Continue (VS Code / JetBrains)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcp/advanced.html">Advanced: HTTP Transport, In-process Server &amp; Restrictions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mcp/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Integrations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../integrations/index.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations/anthropic.html">Anthropic SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations/openai.html">OpenAI Function Calling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations/langchain.html">LangChain / LangGraph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations/javascript.html">JavaScript / TypeScript SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations/custom.html">Custom / Generic Integration</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/ui.html"><code class="docutils literal notranslate"><span class="pre">ui</span></code> — Accessibility-based UI Interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/screenshot.html"><code class="docutils literal notranslate"><span class="pre">screenshot</span></code> — Screen Capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/mouse.html"><code class="docutils literal notranslate"><span class="pre">mouse</span></code> — Mouse Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/keyboard.html"><code class="docutils literal notranslate"><span class="pre">keyboard</span></code> — Keyboard Input</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/app.html"><code class="docutils literal notranslate"><span class="pre">app</span></code> — Application Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/clipboard.html"><code class="docutils literal notranslate"><span class="pre">clipboard</span></code> — Clipboard Read/Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/ocr.html"><code class="docutils literal notranslate"><span class="pre">ocr</span></code> — Text Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/audit.html"><code class="docutils literal notranslate"><span class="pre">audit</span></code> — Session Audit Log &amp; Replay</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/learn.html"><code class="docutils literal notranslate"><span class="pre">learn</span></code> — Record and Replay Tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/memory.html"><code class="docutils literal notranslate"><span class="pre">memory</span></code> — Screen Memory (searchable desktop history)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/script.html"><code class="docutils literal notranslate"><span class="pre">script</span></code> — Shell, AppleScript, JXA &amp; PowerShell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/browser.html"><code class="docutils literal notranslate"><span class="pre">browser</span></code> — Chrome / Edge / Brave over DevTools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fleet.html"><code class="docutils literal notranslate"><span class="pre">fleet</span></code> — One Call, Many Machines</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Safety &amp; Evaluation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../safety.html">Safety — policy, approvals, kill switch, injection guard, audit, secrets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eval.html">Evaluation harness</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Automation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../automation/index.html">Automation — Learn, Replay &amp; Schedule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../automation/claude-code.html">Automation in Claude Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../automation/python-api.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../automation/scheduler.html">Scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../automation/compiled-replay.html">Compiled replay — deterministic <code class="docutils literal notranslate"><span class="pre">learn</span></code> programs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Architecture</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/layers.html">Computer &amp; Tools Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/protocol-layer.html">Protocol Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/remote-layer.html">Remote &amp; Integrations Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/data-flow.html">Data Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/custom-tools.html">Adding a Custom Tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/native-helper.html">Native helper (<code class="docutils literal notranslate"><span class="pre">opendesk-ax</span></code>)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Protocol</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../protocol/index.html">Protocol Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol/transport.html">Transport &amp; Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol/encryption.html">Encryption &amp; Identity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol/pairing.html">Pairing Handshake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol/auth.html">Auth Handshake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol/frames.html">Frames &amp; Errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol/session.html">Session Lifecycle &amp; Method Namespace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol/discovery.html">Discovery, Admin IPC &amp; Cryptographic Summary</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Remote — Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Computer Use — Python / CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/setup.html">One-time Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/running.html">Running</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/mcp.html">MCP Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/security.html">Trust &amp; Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/cli.html">CLI Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/service.html">Service Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/concurrency.html">Concurrency: One Controller at a Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/programmatic.html">Programmatic Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Remote — JS/TS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/index.html">Remote Computer Use — JavaScript / TypeScript SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/setup.html">One-time Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/running.html">Running</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/mcp.html">MCP Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/audit.html">Audit Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/security.html">Trust &amp; Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/cli.html">CLI Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/concurrency.html">Concurrency: One Controller at a Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/programmatic.html">Programmatic Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-js/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/vitalops/opendesk" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/vitalops/opendesk/issues/new?title=Issue%20on%20page%20%2Fgetting-started/permissions.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/getting-started/permissions.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Permissions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macos">macOS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="permissions">
+<h1>Permissions<a class="headerlink" href="#permissions" title="Link to this heading">#</a></h1>
+<p>Run the permission check before your first session:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>opendesk<span class="w"> </span>check<span class="w"> </span>--open<span class="w">        </span><span class="c1"># pip install</span>
+uvx<span class="w"> </span>opendesk<span class="w"> </span>check<span class="w"> </span>--open<span class="w">    </span><span class="c1"># no install, via uv</span>
+</pre></div>
+</div>
+<p>It reports which permissions are missing and opens the right System Settings pane. Without <code class="docutils literal notranslate"><span class="pre">--open</span></code> it only prints the report.</p>
+<hr class="docutils" />
+<section id="macos">
+<h2>macOS<a class="headerlink" href="#macos" title="Link to this heading">#</a></h2>
+<p>macOS gates desktop control behind two privacy permissions:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Permission</p></th>
+<th class="head"><p>Needed for</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Accessibility</strong></p></td>
+<td><p>Mouse and keyboard input, the <code class="docutils literal notranslate"><span class="pre">ui</span></code> tool (accessibility API), app control</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Screen Recording</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">screenshot</span></code>, <code class="docutils literal notranslate"><span class="pre">ocr</span></code>, Set-of-Marks, screen memory</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Grant <strong>both</strong> to <strong>the app that runs OpenDesk</strong>, not to OpenDesk itself:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>You use OpenDesk from</p></th>
+<th class="head"><p>Grant the permissions to</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Claude Desktop (the <code class="docutils literal notranslate"><span class="pre">.mcpb</span></code> bundle or a <code class="docutils literal notranslate"><span class="pre">claude_desktop_config.json</span></code> entry)</p></td>
+<td><p>Claude</p></td>
+</tr>
+<tr class="row-odd"><td><p>Claude Code</p></td>
+<td><p>Your terminal app: Terminal, iTerm2, Ghostty, Warp, …</p></td>
+</tr>
+<tr class="row-even"><td><p>Cursor</p></td>
+<td><p>Cursor</p></td>
+</tr>
+<tr class="row-odd"><td><p>VS Code (Copilot agent mode, Claude Code extension)</p></td>
+<td><p>Visual Studio Code</p></td>
+</tr>
+<tr class="row-even"><td><p>A controlled machine running <code class="docutils literal notranslate"><span class="pre">opendesk</span> <span class="pre">serve</span></code></p></td>
+<td><p>The terminal (or Python binary) that runs <code class="docutils literal notranslate"><span class="pre">serve</span></code>; for the login service, the Python the service launches</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Steps:</p>
+<ol class="arabic simple">
+<li><p>Open <strong>System Settings → Privacy &amp; Security → Accessibility</strong> and turn the app on. If it isn’t listed, click <strong>+</strong> and add it.</p></li>
+<li><p>Do the same under <strong>Privacy &amp; Security → Screen Recording</strong>.</p></li>
+<li><p><strong>Quit and reopen the app.</strong> macOS only applies the change to new processes.</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">opendesk</span> <span class="pre">check</span> <span class="pre">--open</span></code> jumps straight to the first missing pane.</p>
+</section>
+<section id="linux">
+<h2>Linux<a class="headerlink" href="#linux" title="Link to this heading">#</a></h2>
+<p>No permission prompts, but the accessibility and clipboard tools need system packages:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>xclip<span class="w"> </span>xdotool<span class="w"> </span>python3-pyatspi
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">python3-pyatspi</span></code> provides AT-SPI2 for the <code class="docutils literal notranslate"><span class="pre">ui</span></code> tool. Screen capture and input work best under X11; on Wayland, most compositors block global screen capture and synthetic input, so log in to an X11 session (or use XWayland apps) if screenshots come back empty or clicks are ignored.</p>
+</section>
+<section id="windows">
+<h2>Windows<a class="headerlink" href="#windows" title="Link to this heading">#</a></h2>
+<p>Nothing to set up. OpenDesk uses UI Automation and Win32 input, which need no extra permissions. To control elevated (admin) windows, run the MCP client elevated too.</p>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Symptom</p></th>
+<th class="head"><p>Missing permission</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Screenshots are black, show only the wallpaper, or capture fails</p></td>
+<td><p>Screen Recording</p></td>
+</tr>
+<tr class="row-odd"><td><p>Clicks and typing are silently ignored</p></td>
+<td><p>Accessibility</p></td>
+</tr>
+<tr class="row-even"><td><p>AppleScript errors <code class="docutils literal notranslate"><span class="pre">-1719</span></code> (“not allowed assistive access”) or <code class="docutils literal notranslate"><span class="pre">-1002</span></code></p></td>
+<td><p>Accessibility</p></td>
+</tr>
+<tr class="row-odd"><td><p>Granted, but still failing</p></td>
+<td><p>The app wasn’t restarted, or the permission went to a different app than the one launching OpenDesk</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>When a tool fails for one of these reasons, its error message now ends with the fix: which app needs the permission and the <code class="docutils literal notranslate"><span class="pre">opendesk</span> <span class="pre">check</span> <span class="pre">--open</span></code> command. The MCP server also returns these failures with <code class="docutils literal notranslate"><span class="pre">isError:</span> <span class="pre">true</span></code>, so the agent can stop and tell you instead of retrying blindly.</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="javascript.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">JavaScript / TypeScript Quickstart</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../mcp/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">MCP Integration</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macos">macOS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Abhigith Neil Abraham, Fariz Rahman, Fadil Rahman
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Vitalops Technologies.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

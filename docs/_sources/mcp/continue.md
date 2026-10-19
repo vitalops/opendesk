@@ -1,43 +1,38 @@
-# Continue (VS Code)
+# Continue (VS Code / JetBrains)
 
-Edit `.continue/config.json`:
+Add a server under `mcpServers` in your Continue config (`.continue/config.yaml`, or `config.json` in older versions).
 
-## Python
+## Python (via uv)
 
-```json
-{
-  "mcpServers": [
-    {
-      "name": "opendesk",
-      "command": "opendesk-mcp",
-      "transport": "stdio"
-    }
-  ]
-}
+```yaml
+mcpServers:
+  - name: opendesk
+    command: uvx
+    args: ["--from", "opendesk", "opendesk-mcp"]
 ```
 
-## JavaScript / TypeScript
+## JavaScript / TypeScript (via npx)
 
-```json
-{
-  "mcpServers": [
-    {
-      "name": "opendesk",
-      "command": "node",
-      "args": ["/path/to/node_modules/@vitalops/opendesk-sdk/bin/opendesk-mcp.js"],
-      "transport": "stdio"
-    }
-  ]
-}
+```yaml
+mcpServers:
+  - name: opendesk
+    command: npx
+    args: ["-y", "-p", "@vitalops/opendesk-sdk", "opendesk-js-mcp"]
 ```
+
+If you pip-installed OpenDesk, `command: opendesk-mcp` with no args works too.
+
+On macOS, grant Accessibility and Screen Recording to the editor that runs Continue
+(see [Permissions](../getting-started/permissions.md)).
 
 ---
 
 ## Any other MCP client
 
-The pattern is always the same — point the client at the `opendesk-mcp` command with stdio transport.
-opendesk follows the MCP spec exactly, so it works with any compliant client.
+The pattern is always the same: run `uvx --from opendesk opendesk-mcp` (or `npx -y -p @vitalops/opendesk-sdk opendesk-js-mcp`)
+over stdio. Clients that only speak HTTP can use the [streamable HTTP transport](advanced.md#streamable-http-transport).
+OpenDesk follows the MCP spec, so it works with any compliant client.
 
 ---
 
-Need a custom permission policy or want to embed the server in your own process? See [Advanced →](advanced.md)
+Need a custom permission policy, HTTP transport or want to embed the server in your own process? See [Advanced →](advanced.md)

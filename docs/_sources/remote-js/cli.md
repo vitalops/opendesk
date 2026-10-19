@@ -37,6 +37,24 @@ opendesk-js uninstall
 opendesk-js mcp                            # run MCP server over stdio
 ```
 
+## Screen memory
+
+```
+opendesk-js memory start [--interval N]            run the capture daemon (Ctrl-C to stop)
+opendesk-js memory status                          daemon / storage / config
+opendesk-js memory pause [30m|2h]                  pause (optionally for a duration)
+opendesk-js memory resume
+opendesk-js memory search "<query>" [--since ..] [--until ..] [--app ..] [--limit N]
+opendesk-js memory timeline [--since ..] [--app ..]
+opendesk-js memory show <id>
+opendesk-js memory deny [list|add <pattern>|remove <pattern>]
+opendesk-js memory config [--interval N] [--cap MB] [--retention DAYS] [--hotkey '<ctrl>+<alt>+m']
+opendesk-js memory clear [--before <when>] [--app ..] [--yes]
+opendesk-js memory install-service | uninstall-service
+```
+
+See [tools/memory](../tools/memory.md) for the full reference.
+
 ---
 
 Next: [Concurrency →](concurrency.md) — the single-controller policy and how to hand off between machines.

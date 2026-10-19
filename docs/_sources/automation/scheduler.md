@@ -34,7 +34,9 @@ To list schedules without starting the daemon:
 opendesk scheduler list
 ```
 
-Natural language tasks (non-replay) require Claude API access:
+`replay <name>` tasks run the task's [compiled program](compiled-replay.md) first, with no LLM and no API key. They fall back to an LLM only when there is no program or it stops at a step.
+
+Natural-language tasks, and replay fallbacks, need Claude: either the Anthropic API, or headless Claude Code (`claude -p`, using your subscription login) when no API key is set and the `claude` CLI is installed:
 
 ```bash
 export ANTHROPIC_API_KEY=sk-ant-...

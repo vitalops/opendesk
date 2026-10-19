@@ -1,28 +1,30 @@
 # MCP Integration
 
-MCP (Model Context Protocol) is how AI coding tools like Claude Code, Cursor, and Continue
-connect to external capabilities. opendesk ships as an MCP server — you install it once, register
-it with your client, and from then on any conversation can use screenshot, mouse, keyboard, ui,
-app, clipboard, and ocr without any extra setup.
+MCP (Model Context Protocol) is how AI clients like Claude Code, Claude Desktop, Cursor, VS Code and Continue
+connect to external capabilities. OpenDesk ships as an MCP server: register it once with your client and
+every conversation can see and control the desktop.
+
+Quickest start (Claude Code, needs [uv](https://docs.astral.sh/uv/)):
+
+```bash
+claude mcp add opendesk -- uvx --from opendesk opendesk-mcp
+```
 
 ---
 
 ## How it works
 
 ```
-Your AI client (Claude Code / Cursor / Continue)
+Your AI client (Claude Code / Claude Desktop / Cursor / VS Code)
        |
-       | MCP over stdio
+       | MCP over stdio (or streamable HTTP)
        v
   opendesk-mcp  <-- the server this package installs
        |
-       +-- screenshot tool  (captures screen, returns PNG to the LLM)
-       +-- ui tool          (clicks elements by name via AX tree)
-       +-- mouse tool       (pixel-level mouse control with Retina scaling)
-       +-- keyboard tool    (types text, presses keys, hotkeys)
-       +-- app tool         (opens, closes, focuses apps)
-       +-- clipboard tool   (read/write clipboard)
-       +-- ocr tool         (extracts text from any screen region)
+       +-- computer-use tools  (screenshot, ui, mouse, keyboard, app, clipboard, ocr)
+       +-- automation tools    (learn, schedule, audit)
+       +-- screen memory       (memory, memory_manage)
+       +-- peer admin tools    (opendesk_peers, opendesk_use, ...)
 ```
 
 The LLM decides when to call a tool, calls it, gets the result (including PNG screenshots),
@@ -32,20 +34,38 @@ and continues. You never write tool-calling code yourself.
 
 ## What the LLM sees
 
-Once registered, the LLM sees these tools in every conversation:
-
 | Tool | When the LLM uses it |
 |------|---------------------|
-| `screenshot` | "Let me see what's on the screen" |
-| `ui` | "Click the Save button" (finds it via AX tree, no coordinates) |
+| `screenshot` | "Let me see what's on the screen" (read-only; `marks=true` numbers interactive elements) |
+| `ui` | "Click the Save button" (finds it via the accessibility tree, no coordinates) |
 | `mouse` | Last resort for canvas areas with no accessible elements |
 | `keyboard` | "Type this text into the field" |
 | `app` | "Open Terminal" / "List running apps" |
 | `clipboard` | "Copy this to clipboard" / "What did I copy?" |
-| `ocr` | "Read the text in that region" |
+| `ocr` | "Read the text in that region" (read-only) |
+| `learn` | Record a workflow once, replay it later |
+| `schedule` | Run a task or learned workflow on a timer |
+| `audit` | Show the session audit log, replay a session |
+| `memory` | Search what was on screen earlier (read-only) |
+| `memory_manage` | Pause capture, edit the deny list, change retention, delete history |
 
-The LLM follows the priority rule automatically because it's in each tool's description:
-`ui` first, then `screenshot(marks=True)` to see numbered elements, then `mouse` as last resort.
+Session admin tools for [remote machines](../remote/mcp.md):
+
+| Tool | Purpose |
+|------|---------|
+| `opendesk_peers` | List this machine and the paired peers |
+| `opendesk_discover` | Find OpenDesk peers on the LAN (mDNS) |
+| `opendesk_use` | Set the default target for later calls |
+| `opendesk_status` | Current default peer and open connections |
+| `opendesk_describe` | What a peer is for and what it can access |
+| `opendesk_capabilities` | What a peer's backend can do |
+| `opendesk_disconnect` | Close a cached remote connection |
+
+Computer-use tools also accept an optional `peer` argument to run a single call on another machine.
+
+Every tool carries a `title` and MCP annotations (`readOnlyHint`, `destructiveHint`, …), failures come back
+with `isError: true`, and the server sends `instructions` that teach the agent the preferred order:
+`ui` first, then `screenshot(marks=true)`, then `mouse`. See [Advanced](advanced.md#what-the-server-tells-the-agent).
 
 ---
 
@@ -63,11 +83,9 @@ Once connected, just describe what you want in plain English:
 
 > "What text is in that dialog box?"
 
-> "Read the text on screen"
-
 > "Show me the audit log"
 
-> "Replay everything from this session"
+> "What was the error I saw in the terminal on Tuesday?"
 
 Claude decides which tool to call, calls it, and responds with the result — you never write any code.
 
@@ -75,5 +93,6 @@ Claude decides which tool to call, calls it, and responds with the result — yo
 
 ## Setup
 
-1. [Install](install.md) the package
-2. Register with your client: [Claude Code](claude-code.md) · [Claude Desktop](claude-desktop.md) · [Cursor](cursor.md) · [Continue](continue.md)
+1. [Install](install.md) (or skip it and use `uvx` / `npx`)
+2. Grant [permissions](../getting-started/permissions.md) on macOS: `opendesk check --open`
+3. Register with your client: [Claude Code](claude-code.md) · [Claude Desktop](claude-desktop.md) · [Cursor & VS Code](cursor.md) · [Continue](continue.md)

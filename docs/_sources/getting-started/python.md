@@ -3,8 +3,10 @@
 ## Install
 
 ```bash
-pip install 'opendesk[core,mcp]'
+pip install opendesk
 ```
+
+This includes the MCP server and local computer use. The `core` and `mcp` extras are kept as aliases, so `pip install 'opendesk[core,mcp]'` still works.
 
 Register the MCP server with Claude Code globally:
 
@@ -17,6 +19,15 @@ To remove:
 ```bash
 opendesk uninstall
 ```
+
+No install at all? With [uv](https://docs.astral.sh/uv/) you can run the server directly:
+
+```bash
+uvx opendesk mcp                          # or: uvx --from opendesk opendesk-mcp
+claude mcp add opendesk -- uvx --from opendesk opendesk-mcp
+```
+
+On macOS, grant permissions first: `opendesk check --open` (see [Permissions](permissions.md)).
 
 ## Try it via Claude
 
