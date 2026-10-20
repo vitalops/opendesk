@@ -554,8 +554,8 @@
 <td><p>Read-only</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">memory_manage</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">pause</span></code>, <code class="docutils literal notranslate"><span class="pre">resume</span></code>, <code class="docutils literal notranslate"><span class="pre">deny</span></code>, <code class="docutils literal notranslate"><span class="pre">config</span></code>, <code class="docutils literal notranslate"><span class="pre">delete</span></code></p></td>
-<td><p>Changes capture settings or deletes history</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pause</span></code>, <code class="docutils literal notranslate"><span class="pre">resume</span></code>, <code class="docutils literal notranslate"><span class="pre">deny</span></code>, <code class="docutils literal notranslate"><span class="pre">config</span></code>, <code class="docutils literal notranslate"><span class="pre">delete</span></code>, <code class="docutils literal notranslate"><span class="pre">export</span></code></p></td>
+<td><p>Changes capture settings, deletes or exports history</p></td>
 </tr>
 </tbody>
 </table>
@@ -826,7 +826,10 @@ opendesk<span class="w"> </span>memory<span class="w"> </span>reindex<span class
 <tr class="row-odd"><td><p><strong>Delete</strong></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">opendesk</span> <span class="pre">memory</span> <span class="pre">clear</span> <span class="pre">--before</span> <span class="pre">7d</span></code>, <code class="docutils literal notranslate"><span class="pre">--app</span> <span class="pre">Chrome</span></code>, or everything. The agent’s <code class="docutils literal notranslate"><span class="pre">memory_manage(action=&quot;delete&quot;)</span></code> requires a scope and <code class="docutils literal notranslate"><span class="pre">confirm=true</span></code>.</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>Duplicate suppression</strong></p></td>
+<tr class="row-even"><td><p><strong>Export</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">opendesk</span> <span class="pre">memory</span> <span class="pre">export</span> <span class="pre">--format</span> <span class="pre">json|csv|html</span></code> writes a decrypted copy (text + thumbnails) to a new folder, owner-only. The agent’s <code class="docutils literal notranslate"><span class="pre">memory_manage(action=&quot;export&quot;)</span></code> is high-risk, so it asks for approval first.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Duplicate suppression</strong></p></td>
 <td><p>Visually identical consecutive frames (idle screen) are not stored.</p></td>
 </tr>
 </tbody>
@@ -905,7 +908,7 @@ opendesk<span class="w"> </span>memory<span class="w"> </span>reindex<span class
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">action</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">pause</span></code> | <code class="docutils literal notranslate"><span class="pre">resume</span></code> | <code class="docutils literal notranslate"><span class="pre">deny</span></code> | <code class="docutils literal notranslate"><span class="pre">config</span></code> | <code class="docutils literal notranslate"><span class="pre">delete</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pause</span></code> | <code class="docutils literal notranslate"><span class="pre">resume</span></code> | <code class="docutils literal notranslate"><span class="pre">deny</span></code> | <code class="docutils literal notranslate"><span class="pre">config</span></code> | <code class="docutils literal notranslate"><span class="pre">delete</span></code> | <code class="docutils literal notranslate"><span class="pre">export</span></code></p></td>
 <td><p>required</p></td>
 <td><p>What to do</p></td>
 </tr>
@@ -937,12 +940,32 @@ opendesk<span class="w"> </span>memory<span class="w"> </span>reindex<span class
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">since</span></code> / <code class="docutils literal notranslate"><span class="pre">until</span></code> / <code class="docutils literal notranslate"><span class="pre">app</span></code></p></td>
 <td><p>str</p></td>
 <td><p>null</p></td>
-<td><p>Scope for <code class="docutils literal notranslate"><span class="pre">delete</span></code></p></td>
+<td><p>Scope for <code class="docutils literal notranslate"><span class="pre">delete</span></code> and <code class="docutils literal notranslate"><span class="pre">export</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">confirm</span></code></p></td>
 <td><p>bool</p></td>
 <td><p>false</p></td>
 <td><p>Required for <code class="docutils literal notranslate"><span class="pre">delete</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">path</span></code></p></td>
+<td><p>str</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">~/Downloads/opendesk-memory-&lt;time&gt;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">export</span></code>: new or empty folder to write to</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">format</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">json</span></code> | <code class="docutils literal notranslate"><span class="pre">csv</span></code> | <code class="docutils literal notranslate"><span class="pre">html</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">json</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">export</span></code>: <code class="docutils literal notranslate"><span class="pre">frames.json</span></code>, <code class="docutils literal notranslate"><span class="pre">frames.csv</span></code>, or a browsable <code class="docutils literal notranslate"><span class="pre">index.html</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">query</span></code></p></td>
+<td><p>str</p></td>
+<td><p>null</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">export</span></code>: only moments matching this search</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">thumbnails</span></code></p></td>
+<td><p>bool</p></td>
+<td><p>true</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">export</span></code>: include decrypted JPEG thumbnails in <code class="docutils literal notranslate"><span class="pre">thumbs/</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -1203,6 +1226,8 @@ opendesk<span class="w"> </span>memory<span class="w"> </span>reindex<span class
                        <span class="p">[</span><span class="o">--</span><span class="n">cap</span> <span class="n">MB</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">retention</span> <span class="n">DAYS</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">hotkey</span> <span class="s1">'&lt;ctrl&gt;+&lt;alt&gt;+m'</span><span class="p">]</span>
 <span class="n">opendesk</span> <span class="n">memory</span> <span class="n">reindex</span> <span class="p">[</span><span class="o">-</span><span class="n">y</span><span class="p">]</span>                             <span class="n">re</span><span class="o">-</span><span class="n">encrypt</span> <span class="o">/</span> <span class="n">decrypt</span> <span class="o">/</span> <span class="n">redact</span> <span class="n">existing</span> <span class="n">frames</span>
 <span class="n">opendesk</span> <span class="n">memory</span> <span class="n">clear</span> <span class="p">[</span><span class="o">--</span><span class="n">before</span> <span class="o">&lt;</span><span class="n">when</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">app</span> <span class="o">..</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">y</span><span class="p">]</span>
+<span class="n">opendesk</span> <span class="n">memory</span> <span class="n">export</span> <span class="p">[</span><span class="o">--</span><span class="n">out</span> <span class="n">DIR</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="nb">format</span> <span class="n">json</span><span class="o">|</span><span class="n">csv</span><span class="o">|</span><span class="n">html</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">since</span> <span class="o">..</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">until</span> <span class="o">..</span><span class="p">]</span>
+                       <span class="p">[</span><span class="o">--</span><span class="n">app</span> <span class="o">..</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">query</span> <span class="o">..</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">limit</span> <span class="n">N</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">thumbnails</span><span class="p">]</span>
 <span class="n">opendesk</span> <span class="n">memory</span> <span class="n">install</span><span class="o">-</span><span class="n">service</span> <span class="o">|</span> <span class="n">uninstall</span><span class="o">-</span><span class="n">service</span>
 </pre></div>
 </div>

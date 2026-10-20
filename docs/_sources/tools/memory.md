@@ -9,7 +9,7 @@ Two agent tools sit on top of the store:
 | Tool | Actions | Side effects |
 |---|---|---|
 | `memory` | `search`, `show`, `timeline`, `status` | Read-only |
-| `memory_manage` | `pause`, `resume`, `deny`, `config`, `delete` | Changes capture settings or deletes history |
+| `memory_manage` | `pause`, `resume`, `deny`, `config`, `delete`, `export` | Changes capture settings, deletes or exports history |
 
 Keeping the read path separate lets you grant an agent recall without letting it switch capture off or erase anything.
 
@@ -194,6 +194,7 @@ Plaintext and encrypted frames can coexist in one store and are searched togethe
 | **Storage cap** | Default 2 GB. When exceeded, the oldest frames are deleted first until usage is back under 90% of the cap. |
 | **Retention** | Default 30 days. Older frames are deleted on every housekeeping pass. |
 | **Delete** | `opendesk memory clear --before 7d`, `--app Chrome`, or everything. The agent's `memory_manage(action="delete")` requires a scope and `confirm=true`. |
+| **Export** | `opendesk memory export --format json\|csv\|html` writes a decrypted copy (text + thumbnails) to a new folder, owner-only. The agent's `memory_manage(action="export")` is high-risk, so it asks for approval first. |
 | **Duplicate suppression** | Visually identical consecutive frames (idle screen) are not stored. |
 
 Everything under `~/.opendesk/memory` is created with mode `0600`/`0700`.
@@ -221,14 +222,18 @@ Everything under `~/.opendesk/memory` is created with mode `0600`/`0700`.
 
 | Parameter | Type | Default | Description |
 |---|---|---|---|
-| `action` | `pause` \| `resume` \| `deny` \| `config` \| `delete` | required | What to do |
+| `action` | `pause` \| `resume` \| `deny` \| `config` \| `delete` \| `export` | required | What to do |
 | `duration` | str | null | `pause` length, e.g. `30m`, `2h` (omit = until resumed) |
 | `deny_add` / `deny_remove` | str | null | Deny-list edits (`deny`) |
 | `interval_seconds` / `storage_cap_mb` / `retention_days` | number | null | Settings (`config`) |
 | `trigger` | `events` \| `interval` | null | Capture trigger (`config`) |
 | `redact` / `encrypt_text` / `encrypt_thumbnails` | bool | null | Privacy settings (`config`). They apply to new frames; existing frames are converted with `opendesk memory reindex`. |
-| `since` / `until` / `app` | str | null | Scope for `delete` |
+| `since` / `until` / `app` | str | null | Scope for `delete` and `export` |
 | `confirm` | bool | false | Required for `delete` |
+| `path` | str | `~/Downloads/opendesk-memory-<time>` | `export`: new or empty folder to write to |
+| `format` | `json` \| `csv` \| `html` | `json` | `export`: `frames.json`, `frames.csv`, or a browsable `index.html` |
+| `query` | str | null | `export`: only moments matching this search |
+| `thumbnails` | bool | true | `export`: include decrypted JPEG thumbnails in `thumbs/` |
 
 ### Configuration keys (`config.json`)
 
@@ -387,6 +392,8 @@ opendesk memory config [--trigger events|interval] [--interval N] [--poll S] [--
                        [--cap MB] [--retention DAYS] [--hotkey '<ctrl>+<alt>+m']
 opendesk memory reindex [-y]                             re-encrypt / decrypt / redact existing frames
 opendesk memory clear [--before <when>] [--app ..] [-y]
+opendesk memory export [--out DIR] [--format json|csv|html] [--since ..] [--until ..]
+                       [--app ..] [--query ..] [--limit N] [--no-thumbnails]
 opendesk memory install-service | uninstall-service
 ```
 
