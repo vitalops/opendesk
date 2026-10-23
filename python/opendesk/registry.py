@@ -72,6 +72,8 @@ def create_registry() -> ToolRegistry:
     - ``fleet``      — run one tool call across many paired peers in parallel
     - ``memory``     — search the local screen-memory history (read-only recall)
     - ``memory_manage`` — pause / deny-list / config / delete screen memory
+    - ``reward``     — verifiable task rewards, goal states, episode bookkeeping
+    - ``diagnose``   — where a session stalled, and why
     """
     from opendesk.tools.screenshot import ScreenshotTool
     from opendesk.tools.mouse import MouseTool
@@ -86,6 +88,8 @@ def create_registry() -> ToolRegistry:
     from opendesk.tools.browser import BrowserTool
     from opendesk.tools.fleet import FleetTool
     from opendesk.tools.memory import MemoryManageTool, MemoryTool
+    from opendesk.tools.reward import RewardTool
+    from opendesk.tools.diagnose import DiagnoseTool
 
     registry = ToolRegistry()
     for tool_cls in (
@@ -104,6 +108,8 @@ def create_registry() -> ToolRegistry:
         BrowserTool,
         FleetTool,
         MemoryManageTool,
+        RewardTool,
+        DiagnoseTool,
     ):
         registry.register(tool_cls())
 

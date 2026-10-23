@@ -20,6 +20,8 @@ All tools share the same interface: `await tool.execute(ctx, params) -> ToolResu
 | `schedule` | acts | Run a task or learned workflow on a timer (see [Scheduler](../automation/scheduler.md)) |
 | [`memory`](memory.md) | read-only | Screen memory — search a local, OCR'd history of what was on screen |
 | [`memory_manage`](memory.md) | acts | Pause / resume capture, deny list, config, delete history |
+| [`reward`](reward.md) | acts | Declare and check machine-verifiable success criteria |
+| [`diagnose`](diagnose.md) | read-only | Where a session's actions looped, stalled or had no effect |
 | [`fleet`](fleet.md) | acts | Run a task across several paired machines |
 
 **Kind** mirrors the MCP annotations each tool declares: *read-only* tools set `readOnlyHint: true`;

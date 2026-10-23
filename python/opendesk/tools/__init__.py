@@ -11,6 +11,8 @@ from opendesk.tools.mouse import MouseTool
 from opendesk.tools.ocr import OCRTool
 from opendesk.tools.screenshot import ScreenshotTool
 from opendesk.tools.script import ScriptTool
+from opendesk.tools.diagnose import DiagnoseTool
+from opendesk.tools.reward import RewardTool
 from opendesk.tools.ui import UITool
 
 __all__ = [
@@ -18,12 +20,14 @@ __all__ = [
     "AuditTool",
     "BrowserTool",
     "ClipboardTool",
+    "DiagnoseTool",
     "FleetTool",
     "KeyboardTool",
     "MemoryManageTool",
     "MemoryTool",
     "MouseTool",
     "OCRTool",
+    "RewardTool",
     "ScreenshotTool",
     "ScriptTool",
     "UITool",

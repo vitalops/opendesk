@@ -20,7 +20,7 @@ behaviour lives in the active :class:`Computer` backend.
 from __future__ import annotations
 
 import asyncio
-from typing import List, Literal, Optional
+from typing import Any, List, Literal, Optional
 
 from pydantic import Field
 
@@ -62,6 +62,20 @@ def _find_by_ref(root: UIElement, ref: str) -> Optional[UIElement]:
         if node.ref == ref:
             return node
     return None
+
+
+def _hash_tree(tree: Any) -> Optional[str]:
+    """Content digest of an accessibility tree, or ``None`` if it cannot be taken.
+
+    Never raises: the digest is a side benefit of an action, and a tree shape it
+    cannot digest must not fail the action itself.
+    """
+    try:
+        from opendesk.computer.a11y import content_hash
+
+        return content_hash(tree)
+    except Exception:
+        return None
 
 
 def _find_element(
@@ -170,7 +184,9 @@ class UITool(Tool):
         "  get_value  — read the current text value of a named element\n"
         "get_tree shows each element as [ref] [role] label. Pass ref=<ref> to "
         "click / type / get_value / press_key on exactly that element — fastest "
-        "and most reliable; refs stay the same while the UI does."
+        "and most reliable; refs stay the same while the UI does.\n"
+        "type / press_key accept verify=true to report whether the interface "
+        "content actually changed."
     )
 
     class Params(Tool.Params):
@@ -226,6 +242,16 @@ class UITool(Tool):
             ),
         )
         window_index: int = Field(default=1, description="Window index (1 = frontmost).")
+        verify: bool = Field(
+            default=False,
+            description=(
+                "For 'type' / 'press_key': read the accessibility tree again "
+                "afterwards and report whether the *content* changed. Answers "
+                "'did my keystrokes land' without a follow-up get_tree, and does "
+                "it by content rather than pixels, so a ticking clock does not "
+                "read as success. Costs one extra tree read."
+            ),
+        )
 
     async def execute(self, ctx: ToolContext, params: "UITool.Params") -> ToolResult:
         from opendesk.computer.sandbox import ActionType, get_sandbox
@@ -250,6 +276,9 @@ class UITool(Tool):
         try:
             result_msg = await self._dispatch(ctx, params)
         except (RuntimeError, ValueError, ImportError, NotImplementedError) as exc:
+            # Recorded like any other step: an expected failure (no such element,
+            # app missing) is a real thing the agent did and must be visible to
+            # diagnosis and to the trajectory.
             await sandbox.record_action(
                 ActionType.UI_ACTION, _summary, error=str(exc), replay_params=_replay_p,
             )
@@ -259,7 +288,20 @@ class UITool(Tool):
                 error=True,
             )
         except Exception as exc:
-            return ToolResult(title=f"UI error: {params.action}", output=str(exc), error=True)
+            # An unexpected failure is recorded too.  Swallowing it here used to
+            # mean the step silently vanished from the audit log — so a run that
+            # failed for a reason nobody anticipated produced a *clean-looking*
+            # trajectory with the failure simply absent, which is the worst
+            # possible way to lose it.
+            await sandbox.record_action(
+                ActionType.UI_ACTION, _summary, error=f"{type(exc).__name__}: {exc}",
+                replay_params=_replay_p,
+            )
+            return ToolResult(
+                title=f"UI error: {params.action} in {params.app}",
+                output=f"{type(exc).__name__}: {exc}",
+                error=True,
+            )
 
         await sandbox.record_action(
             ActionType.UI_ACTION, _summary, result=result_msg[:200], replay_params=_replay_p,
@@ -270,11 +312,85 @@ class UITool(Tool):
             output=result_msg,
         )
 
+    async def _read_tree(self, ctx: ToolContext, app: Optional[str]):
+        """Read the accessibility tree and record its content digest.
+
+        The digest lands on the sandbox, so every action recorded from here on
+        carries it and state diagnosis can group states by *content* instead of
+        by layout — which is the difference between noticing an edited glyph and
+        not.  It is free: the tree is read anyway to resolve the target.
+        """
+        tree = await ctx.computer.ui_tree(app=app)
+        self._record_digest(ctx, _hash_tree(tree))
+        return tree
+
+    @staticmethod
+    def _record_digest(ctx: ToolContext, digest: Optional[str]) -> None:
+        if digest is None:
+            return
+        try:
+            from opendesk.computer.sandbox import get_sandbox
+
+            get_sandbox(ctx.session_id).current_ui = digest
+        except Exception:
+            pass
+
+    async def _digest(self, ctx: ToolContext, app: Optional[str]) -> Optional[str]:
+        """Content digest of the interface right now, or ``None`` if unreadable.
+
+        ``None`` means *unknown*, not *unchanged*: a host without accessibility
+        or an app that renders everything itself.  Callers must not read it as
+        evidence that nothing happened.
+        """
+        try:
+            return _hash_tree(await ctx.computer.ui_tree(app=app))
+        except Exception:
+            return None
+
+    async def _observe(self, ctx: ToolContext, app: Optional[str]) -> Optional[str]:
+        """Stamp the current digest, swallowing a read failure.
+
+        Used by actions that mutate the interface but do not need the tree to
+        resolve a target (``type``, ``press_key``, a native ``click_menu``).
+        Without this they would stamp whatever digest an *earlier* action left
+        behind, so an edit they made would be credited to whichever step next
+        read a tree — or to no step at all, if none did.
+
+        A failure is not a failure of the action: a keyboard action works on
+        hosts where accessibility does not, and refusing to type because the
+        tree is unreadable would be a far worse trade.
+        """
+        digest = await self._digest(ctx, app)
+        self._record_digest(ctx, digest)
+        return digest
+
+    async def _verify(
+        self, ctx: ToolContext, params: "UITool.Params", before: Optional[str],
+    ) -> str:
+        """Report whether the interface content changed, when asked.
+
+        Opt-in, because it costs a second tree read.  It answers the question a
+        keyboard action otherwise leaves open — *did that land* — without a
+        follow-up ``get_tree``, and it answers it by content rather than by
+        pixels, so a caret blink or a ticking clock does not read as success.
+        """
+        if not params.verify:
+            return ""
+        after = await self._digest(ctx, params.app)
+        if before is None or after is None:
+            return "\n  verification: unavailable (no accessibility tree to read)"
+        if before == after:
+            return (
+                "\n  verification: content UNCHANGED — the keystrokes may not "
+                "have reached an editable target (check focus, or run get_tree)."
+            )
+        return f"\n  verification: content changed ({before[:8]} → {after[:8]})."
+
     async def _dispatch(self, ctx: ToolContext, params: "UITool.Params") -> str:
         comp = ctx.computer
 
         if params.action == "get_tree":
-            tree = await comp.ui_tree(app=params.app)
+            tree = await self._read_tree(ctx, params.app)
             text = _format_tree(tree)
             return text or (
                 f"No accessible elements in '{params.app}'. App may use custom "
@@ -287,13 +403,13 @@ class UITool(Tool):
                 direct = self._ref_element(params)
                 if await _try_perform_action(comp, direct, "click", params.app):
                     return f"Clicked [{params.ref}] in {params.app} (via a11y)."
-                tree = await comp.ui_tree(app=params.app)
+                tree = await self._read_tree(ctx, params.app)
                 element = self._require_ref(tree, params)
                 used_a11y = False
             else:
                 if not params.title and not params.role:
                     raise ValueError("Provide 'ref', or at least 'title' or 'role', for click.")
-                tree = await comp.ui_tree(app=params.app)
+                tree = await self._read_tree(ctx, params.app)
                 element = _find_element(tree, title=params.title, role=params.role)
                 if element is None:
                     raise RuntimeError(
@@ -320,6 +436,10 @@ class UITool(Tool):
             if not params.menu or not params.menu_item:
                 raise ValueError("Both 'menu' and 'menu_item' are required for click_menu.")
             await comp.focus_app(params.app)
+            # The native-action path below reads no tree, so without this its
+            # entry would carry a stale digest and the menu's effect would be
+            # credited to whatever step next read a tree.
+            await self._observe(ctx, params.app)
             synth = UIElement(
                 role="menu item",
                 name=params.menu_item,
@@ -329,7 +449,7 @@ class UITool(Tool):
             if used_a11y:
                 return f"Clicked {params.menu} → {params.menu_item} in {params.app} (via a11y)."
 
-            tree = await comp.ui_tree(app=params.app)
+            tree = await self._read_tree(ctx, params.app)
             menu_el = _find_element(tree, title=params.menu, role=None)
             if menu_el is None or menu_el.bounds is None:
                 raise RuntimeError(
@@ -337,7 +457,7 @@ class UITool(Tool):
                 )
             await comp.click(menu_el.bounds.center)
             await asyncio.sleep(0.3)
-            tree2 = await comp.ui_tree(app=params.app)
+            tree2 = await self._read_tree(ctx, params.app)
             item_el = _find_element(tree2, title=params.menu_item, role=None)
             if item_el is None or item_el.bounds is None:
                 raise RuntimeError(
@@ -358,14 +478,18 @@ class UITool(Tool):
                     role="application", name=params.app, value=params.text,
                     metadata={"app": params.app},
                 )
+                before = await self._observe(ctx, params.app)
                 await self._background_perform(comp, target, "type", params)
-                return f"Typed {len(params.text)} chars into {where} (background): {preview!r}"
+                message = f"Typed {len(params.text)} chars into {where} (background): {preview!r}"
+                return message + await self._verify(ctx, params, before)
             await comp.focus_app(params.app)
             await asyncio.sleep(0.2)
             if params.ref:
                 await self._focus_ref(comp, params)
+            before = await self._observe(ctx, params.app)
             await comp.type_text(params.text)
-            return f"Typed {len(params.text)} chars into {where}: {preview!r}"
+            message = f"Typed {len(params.text)} chars into {where}: {preview!r}"
+            return message + await self._verify(ctx, params, before)
 
         if params.action == "press_key":
             if not params.key:
@@ -377,23 +501,27 @@ class UITool(Tool):
                     role="application", name=params.app,
                 )
                 target.metadata.update(meta)
+                before = await self._observe(ctx, params.app)
                 await self._background_perform(comp, target, "key", params)
-                return f"Pressed {combo} in {params.app} (background)."
+                message = f"Pressed {combo} in {params.app} (background)."
+                return message + await self._verify(ctx, params, before)
             await comp.focus_app(params.app)
             await asyncio.sleep(0.15)
             if params.ref:
                 await self._focus_ref(comp, params)
+            before = await self._observe(ctx, params.app)
             await comp.press(params.key, modifiers=_to_modifiers(params.modifiers))
-            return f"Pressed {combo} in {params.app}."
+            message = f"Pressed {combo} in {params.app}."
+            return message + await self._verify(ctx, params, before)
 
         if params.action == "get_value":
             if params.ref:
-                tree = await comp.ui_tree(app=params.app)
+                tree = await self._read_tree(ctx, params.app)
                 element = self._require_ref(tree, params)
                 return element.value or element.name or "(no value)"
             if not params.title and not params.role:
                 raise ValueError("Provide 'ref', 'title' or 'role' for get_value.")
-            tree = await comp.ui_tree(app=params.app)
+            tree = await self._read_tree(ctx, params.app)
             element = _find_element(tree, title=params.title, role=params.role)
             if element is None:
                 raise RuntimeError(
