@@ -63,6 +63,13 @@ class AuditEntry:
     result: str | None = None
     error: str | None = None
     replay_params: dict[str, Any] | None = None
+    #: Content digest of the accessibility tree this action was issued against
+    #: (see :func:`opendesk.computer.a11y.content_hash`).  The perceptual
+    #: ``screen`` fingerprint groups states by *layout*, so a single edited glyph
+    #: does not register as a new state.  This one groups by *content*, so it
+    #: does — and a clock tick does not, because the clock is text that did not
+    #: change.
+    ui: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         d = {
@@ -76,6 +83,8 @@ class AuditEntry:
         }
         if self.replay_params is not None:
             d["replay_params"] = self.replay_params
+        if self.ui is not None:
+            d["ui"] = self.ui
         return d
 
 
@@ -103,6 +112,10 @@ class ComputerSandbox:
     allowed_apps: list[str] = field(default_factory=list)
     screen_region: tuple[int, int, int, int] | None = None
     last_screenshot: bytes | None = field(default=None, repr=False)
+    #: Content digest of the most recent accessibility tree read.  Captured onto
+    #: each action so the audit log can be grouped by semantic content, which
+    #: distinguishes content edits that look identical in pixels.
+    current_ui: str | None = None
     audit_log: list[AuditEntry] = field(default_factory=list)
     _lock: asyncio.Lock = field(default_factory=asyncio.Lock, repr=False)
 
@@ -138,6 +151,7 @@ class ComputerSandbox:
             result=result,
             error=error,
             replay_params=replay_params,
+            ui=self.current_ui,
         )
         async with self._lock:
             self.audit_log.append(entry)

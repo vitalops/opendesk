@@ -14,8 +14,8 @@ tool = UITool()
 | `get_tree` | `app` | List the accessible elements in the app's window, each with its `[ref]` |
 | `click` | `app`, `ref` or `title`/`role` | Press a button or element |
 | `click_menu` | `app`, `menu`, `menu_item` | Click a menu bar item: `File → Save` |
-| `type` | `app`, `text` (optional `ref`) | Type text into the focused element, or into `ref` (Unicode-safe) |
-| `press_key` | `app`, `key` (optional `ref`) | Press a key or chord |
+| `type` | `app`, `text` (optional `ref`) | Type text into the focused element, or into `ref` (Unicode-safe). `verify=true` reports whether the content changed |
+| `press_key` | `app`, `key` (optional `ref`) | Press a key or chord. `verify=true` as above |
 | `get_value` | `app`, `ref` or `title`/`role` | Read the current text value of an element |
 
 ## Element refs

@@ -41,6 +41,7 @@ Three load-bearing properties:
 | Layer | Guide |
 |---|---|
 | Computer & Tools | [Computer & Tools](layers.md) |
+| Accessibility | [The Accessibility Channel](accessibility.md) |
 | Protocol | [Protocol Layer](protocol-layer.md) |
 | Remote & Integrations | [Remote & Integrations](remote-layer.md) |
 | Data Flow | [Data Flow](data-flow.md) |

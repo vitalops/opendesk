@@ -114,6 +114,7 @@ nav:
   - Architecture:
     - architecture/index.md
     - Computer & Tools: architecture/layers.md
+    - The Accessibility Channel: architecture/accessibility.md
     - Protocol Layer: architecture/protocol-layer.md
     - Remote & Integrations: architecture/remote-layer.md
     - Data Flow: architecture/data-flow.md

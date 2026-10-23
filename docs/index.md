@@ -91,6 +91,7 @@ automation/compiled-replay
 
 architecture/index
 architecture/layers
+architecture/accessibility
 architecture/protocol-layer
 architecture/remote-layer
 architecture/data-flow
