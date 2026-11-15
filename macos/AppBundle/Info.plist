@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleExecutable</key>
+	<string>OpenDesk</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon</string>
+	<key>CFBundleIdentifier</key>
+	<string>ai.opendesk.macos</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>OpenDesk</string>
+	<key>CFBundleDisplayName</key>
+	<string>OpenDesk</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.2.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>14.0</string>
+	<key>LSUIElement</key>
+	<false/>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>OpenDesk uses AppleScript to query the accessibility tree of focused applications so Claude can click, type, and read native UI elements precisely. No data leaves your machine without your action.</string>
+	<key>NSAccessibilityUsageDescription</key>
+	<string>OpenDesk needs the Accessibility permission to control the mouse and keyboard and to read the focused app's UI tree. Without this, Claude cannot operate your computer.</string>
+	<key>NSScreenCaptureUsageDescription</key>
+	<string>OpenDesk captures screenshots so Claude can see what is on your screen and annotate interactive elements with numbered marks.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>OpenDesk does not use the camera.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>OpenDesk does not use the microphone.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>OpenDesk discovers and pairs with other OpenDesk machines on your LAN via mDNS so you can control them remotely with end-to-end encryption.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_opendesk._tcp</string>
+	</array>
+	<key>NSSupportsAutomaticGraphicsSwitching</key>
+	<true/>
+</dict>
+</plist>
