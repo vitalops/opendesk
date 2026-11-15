@@ -85,6 +85,7 @@ nav:
     - Anthropic SDK: integrations/anthropic.md
     - OpenAI: integrations/openai.md
     - Local models: integrations/local.md
+    - Local model results: integrations/local-results.md
     - LangChain: integrations/langchain.md
     - JavaScript SDK: integrations/javascript.md
     - Custom: integrations/custom.md

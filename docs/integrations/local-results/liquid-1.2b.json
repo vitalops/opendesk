@@ -1,0 +1,316 @@
+{
+  "model": "LiquidAI/LFM2.5-1.2B-Instruct-MLX-4bit",
+  "backend": "mlx",
+  "full_catalog": false,
+  "kind": "command-generation-only",
+  "cases": [
+    {
+      "tool": "screenshot",
+      "task": "Take a screenshot.",
+      "expected": {},
+      "passed": true,
+      "seconds": 1.35,
+      "attempts": 1,
+      "command": {
+        "tool": "screenshot",
+        "arguments": {}
+      },
+      "error": null,
+      "raw": "{\"tool\": \"screenshot\", \"arguments\": {}}"
+    },
+    {
+      "tool": "mouse",
+      "task": "Move the mouse to x=120 and y=80.",
+      "expected": {
+        "action": "move",
+        "x": 120,
+        "y": 80
+      },
+      "passed": true,
+      "seconds": 2.12,
+      "attempts": 1,
+      "command": {
+        "tool": "mouse",
+        "arguments": {
+          "action": "move",
+          "x": 120,
+          "y": 80
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\": \"mouse\", \"arguments\": {\"action\": \"move\", \"x\": 120, \"y\": 80}}"
+    },
+    {
+      "tool": "keyboard",
+      "task": "Type exactly the text: hello locally",
+      "expected": {
+        "action": "type",
+        "text": "hello locally"
+      },
+      "passed": true,
+      "seconds": 1.42,
+      "attempts": 1,
+      "command": {
+        "tool": "keyboard",
+        "arguments": {
+          "action": "type",
+          "text": "hello locally"
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\": \"keyboard\", \"arguments\": {\"action\": \"type\", \"text\": \"hello locally\"}}"
+    },
+    {
+      "tool": "app",
+      "task": "Open Calculator.",
+      "expected": {
+        "action": "open",
+        "name": "Calculator"
+      },
+      "passed": true,
+      "seconds": 2.03,
+      "attempts": 2,
+      "command": {
+        "tool": "app",
+        "arguments": {
+          "action": "open",
+          "name": "Calculator"
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\": \"app\", \"arguments\": {\"action\": \"open\", \"name\": \"Calculator\"}}"
+    },
+    {
+      "tool": "ui",
+      "task": "Inspect the accessibility tree of Calculator.",
+      "expected": {
+        "action": "get_tree",
+        "app": "Calculator"
+      },
+      "passed": true,
+      "seconds": 2.25,
+      "attempts": 1,
+      "command": {
+        "tool": "ui",
+        "arguments": {
+          "action": "get_tree",
+          "app": "Calculator"
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\": \"ui\", \"arguments\": {\"action\": \"get_tree\", \"app\": \"Calculator\"}}"
+    },
+    {
+      "tool": "clipboard",
+      "task": "Read the clipboard.",
+      "expected": {
+        "action": "read"
+      },
+      "passed": true,
+      "seconds": 0.9,
+      "attempts": 1,
+      "command": {
+        "tool": "clipboard",
+        "arguments": {
+          "action": "read"
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\": \"clipboard\", \"arguments\": {\"action\": \"read\"}}"
+    },
+    {
+      "tool": "ocr",
+      "task": "Read the text on the screen using OCR.",
+      "expected": {},
+      "passed": true,
+      "seconds": 1.03,
+      "attempts": 1,
+      "command": {
+        "tool": "ocr",
+        "arguments": {
+          "region": [
+            45,
+            30,
+            800,
+            600
+          ]
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\": \"ocr\", \"arguments\": {\"region\": [45, 30, 800, 600]}}"
+    },
+    {
+      "tool": "learn",
+      "task": "List learned procedures.",
+      "expected": {
+        "action": "list"
+      },
+      "passed": true,
+      "seconds": 1.93,
+      "attempts": 1,
+      "command": {
+        "tool": "learn",
+        "arguments": {
+          "action": "list"
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\": \"learn\", \"arguments\": {\"action\": \"list\"}}"
+    },
+    {
+      "tool": "schedule",
+      "task": "List scheduled tasks.",
+      "expected": {
+        "action": "list"
+      },
+      "passed": true,
+      "seconds": 1.03,
+      "attempts": 1,
+      "command": {
+        "tool": "schedule",
+        "arguments": {
+          "action": "list"
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\": \"schedule\", \"arguments\": {\"action\": \"list\"}}"
+    },
+    {
+      "tool": "audit",
+      "task": "Show the audit log.",
+      "expected": {
+        "action": "show"
+      },
+      "passed": true,
+      "seconds": 1.22,
+      "attempts": 1,
+      "command": {
+        "tool": "audit",
+        "arguments": {
+          "session_id": "current",
+          "skip_errors": true
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\": \"audit\", \"arguments\": {\"session_id\": \"current\", \"skip_errors\": true}}"
+    },
+    {
+      "tool": "memory",
+      "task": "Search screen memory for invoice today.",
+      "expected": {
+        "action": "search",
+        "query": "invoice",
+        "since": "today"
+      },
+      "passed": false,
+      "seconds": 5.12,
+      "attempts": 3,
+      "command": {
+        "tool": "memory",
+        "arguments": {
+          "action": "status",
+          "query": "invoice*"
+        }
+      },
+      "error": "Expected arguments {'action': 'search', 'query': 'invoice', 'since': 'today'}",
+      "raw": "{\"tool\": \"memory\", \"arguments\": {\"action\": \"status\", \"query\": \"invoice*\"}}"
+    },
+    {
+      "tool": "script",
+      "task": "Run the shell command pwd.",
+      "expected": {
+        "action": "shell",
+        "code": "pwd"
+      },
+      "passed": false,
+      "seconds": 4.34,
+      "attempts": 3,
+      "command": {
+        "tool": "script",
+        "arguments": {
+          "action": "jxa",
+          "code": "run 'pwd' command",
+          "timeout": 30,
+          "cwd": "/home/user"
+        }
+      },
+      "error": "Expected arguments {'action': 'shell', 'code': 'pwd'}",
+      "raw": "{\"tool\": \"script\", \"arguments\": {\"action\": \"jxa\", \"code\": \"run 'pwd' command\", \"timeout\": 30, \"cwd\": \"/home/user\"}}"
+    },
+    {
+      "tool": "browser",
+      "task": "List browser tabs.",
+      "expected": {
+        "action": "tabs"
+      },
+      "passed": true,
+      "seconds": 2.26,
+      "attempts": 1,
+      "command": {
+        "tool": "browser",
+        "arguments": {
+          "action": "tabs"
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\": \"browser\", \"arguments\": {\"action\": \"tabs\"}}"
+    },
+    {
+      "tool": "fleet",
+      "task": "On the paired peer demo run app list.",
+      "expected": {
+        "peers": [
+          "demo"
+        ],
+        "tool": "app",
+        "params": {
+          "action": "list"
+        }
+      },
+      "passed": false,
+      "seconds": 5.96,
+      "attempts": 3,
+      "command": {
+        "tool": "fleet",
+        "arguments": {
+          "peers": "all",
+          "tool": "script",
+          "concurrency": 4,
+          "timeout": 120,
+          "include_images": false
+        }
+      },
+      "error": "Expected arguments {'peers': ['demo'], 'tool': 'app', 'params': {'action': 'list'}}",
+      "raw": "{\"tool\": \"fleet\", \"arguments\": {\"peers\": \"all\", \"tool\": \"script\", \"concurrency\": 4, \"timeout\": 120, \"include_images\": false}}"
+    },
+    {
+      "tool": "memory_manage",
+      "task": "Pause screen memory for 1h.",
+      "expected": {
+        "action": "pause",
+        "duration": "1h"
+      },
+      "passed": true,
+      "seconds": 2.85,
+      "attempts": 1,
+      "command": {
+        "tool": "memory_manage",
+        "arguments": {
+          "action": "pause",
+          "duration": "1h"
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\": \"memory_manage\", \"arguments\": {\"action\": \"pause\", \"duration\": \"1h\"}}"
+    }
+  ],
+  "passed": 12,
+  "total": 15,
+  "versions": {
+    "opendesk": "0.1.2",
+    "mlx": "0.32.4",
+    "mlx-lm": "0.32.2"
+  },
+  "source_version": "0.3.0",
+  "peak_metal_gib": 1.28
+}

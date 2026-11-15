@@ -10,6 +10,28 @@ import fs from "fs";
 import path from "path";
 import os from "os";
 
+async function cmdAgent(argv: string[]): Promise<void> {
+  const { pos, flags } = parseFlags(argv);
+  if (flags['help']) {
+    console.log('opendesk-js agent "TASK" --model MODEL [--base-url http://127.0.0.1:1234/v1] [--vision] [--mode all|memory|desktop] [--allow-actions] [--tools app,ui] [--max-steps 8]');
+    return;
+  }
+  const { LocalAgent, LocalHTTPBackend } = await import('./integrations/local.js');
+  if (!pos.length) fatal('agent requires a task');
+  const home = resolveHome(str(flags['home']) || undefined);
+  if (home) process.env.OPENDESK_HOME = home;
+  const backend = new LocalHTTPBackend(str(flags['model']), str(flags['base-url']) || undefined, bool(flags['vision']), bool(flags['structured']));
+  const agent = new LocalAgent(backend, {
+    mode: (str(flags['mode']) || 'all') as 'all' | 'memory' | 'desktop',
+    allowActions: bool(flags['allow-actions']), maxSteps: num(flags['max-steps'], 8),
+    tools: flags['tools'] ? str(flags['tools']).split(',') : undefined,
+    trace: message => process.stderr.write(message + '\n'),
+  });
+  const r = await agent.run(pos.join(' '));
+  console.log(r.output);
+  if (r.error) process.exitCode = 1;
+}
+
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
@@ -932,6 +954,7 @@ Controller commands (run on the machine that drives others):
   unpair        Revoke a paired peer
 
 Shared:
+  agent         Local model agent over all registered tools (--model, --base-url, --vision)
   install       Register the native MCP server with Claude Code
   uninstall     Remove the MCP server registration from Claude Code
   mcp           Run the MCP server (stdio; --http [--host 127.0.0.1] [--port 8765]
@@ -1006,6 +1029,7 @@ export async function main(): Promise<void> {
         await runSafetyCommand(command, rest);
         return;
       }
+      case "agent":       return await cmdAgent(rest);
       case "memory":      return await cmdMemory(rest);
       default:
         printHelp();

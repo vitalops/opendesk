@@ -93,8 +93,106 @@ class LocalAgentTests(unittest.IsolatedAsyncioTestCase):
     async def test_tool_subset_changes_prompt_and_dispatch(self):
         agent = LocalAgent(backend('{"tool":"memory","arguments":{"action":"status"}}'),
                            mode='desktop', allow_actions=True, tools=['app'], max_steps=1)
-        self.assertIn('"action":"open"', agent.instructions())
-        self.assertNotIn('"tool":"memory"', agent.instructions())
+        self.assertIn("open", agent.allowed["app"])
+        self.assertNotIn("memory", agent.allowed)
         with patch('opendesk.integrations.local.run_tool', new_callable=AsyncMock) as dispatch:
             self.assertTrue((await agent.run('test')).error)
         dispatch.assert_not_called()
+
+    async def test_every_registered_tool_uses_guard(self):
+        from opendesk.eval.local_models import CASES
+        from opendesk.registry import create_registry
+        self.assertEqual({n for n, _, _ in CASES}, set(create_registry().names()))
+        for name, _, params in CASES:
+            with self.subTest(tool=name):
+                calls = backend(json.dumps({'tool': name, 'arguments': params}), '{"answer":"done"}')
+                agent = LocalAgent(calls, mode='all', allow_actions=True, tools=[name])
+                with patch('opendesk.integrations.local.run_tool', new_callable=AsyncMock) as dispatch:
+                    dispatch.return_value = ToolResult(title='fixture', output='success')
+                    outcome = await agent.run('fixture task')
+                self.assertFalse(outcome.error)
+                dispatch.assert_awaited_once()
+                self.assertEqual(dispatch.call_args.args[0].name, name)
+
+    async def test_describe_is_not_an_observation(self):
+        agent = LocalAgent(backend('{"describe":"app"}', '{"answer":"done"}'), max_steps=2)
+        self.assertTrue((await agent.run('test')).error)
+
+    async def test_images_forwarded_only_to_vision_backend(self):
+        from opendesk.tools.base import Attachment
+        for vision in [True, False]:
+            messages = []
+            def model(history):
+                messages.append(history)
+                return '{"tool":"screenshot","arguments":{}}' if len(messages) == 1 else '{"answer":"seen"}'
+            model.vision = vision
+            agent = LocalAgent(model, tools=['screenshot'])
+            with patch('opendesk.integrations.local.run_tool', new_callable=AsyncMock) as dispatch:
+                dispatch.return_value = ToolResult(title='frame', output='frame', attachments=[Attachment('x.png', b'png', 'image/png')])
+                self.assertFalse((await agent.run('look')).error)
+            content = messages[1][-1]['content']
+            self.assertEqual(isinstance(content, list), vision)
+            if vision:
+                self.assertTrue(content[1]['image_url']['url'].startswith('data:image/png;base64,'))
+
+    async def test_scheduler_local_selection_never_calls_cloud(self):
+        from opendesk.automation.runner import _run_natural_language
+        from pathlib import Path
+        with patch.dict('os.environ', {'OPENDESK_AGENT_BACKEND': 'local-http', 'OPENDESK_MODEL': 'fixture'}):
+            with patch('opendesk.integrations.local.run_local_process', new_callable=AsyncMock) as local:
+                with patch('opendesk.automation.runner._run_with_claude_code', new_callable=AsyncMock) as cloud:
+                    local.return_value = ToolResult(title='local', output='completed')
+                    output = await _run_natural_language('test', Path('/tmp'))
+                    self.assertIn('ok (local)', output)
+                    self.assertEqual(local.call_args.kwargs['backend'], 'http')
+                    cloud.assert_not_called()
+
+    async def test_response_schema_covers_registry_without_allowing_final_before_observation(self):
+        import jsonschema
+        from opendesk.eval.local_models import CASES
+        agent = LocalAgent(backend(), mode='all', allow_actions=True)
+        schema = agent.response_schema(allow_answer=False)
+        validator = jsonschema.Draft202012Validator(schema)
+        for name, _, args in CASES:
+            validator.validate({'tool': name, 'arguments': args})
+        with self.assertRaises(jsonschema.ValidationError):
+            validator.validate({'answer': 'done'})
+        with self.assertRaises(jsonschema.ValidationError):
+            validator.validate({'tool': 'unknown', 'arguments': {}})
+
+    async def test_local_eval_backend_uses_local_subprocess(self):
+        from opendesk.eval.backends import get_backend
+        from opendesk.eval.task import EvalTask
+        for name in ['local-mlx', 'local-http']:
+            with patch('opendesk.integrations.local.run_local_process', new_callable=AsyncMock) as local:
+                local.return_value = ToolResult(title='local', output='done', metadata={'steps': 2})
+                runner = get_backend(name, model='fixture', max_turns=4)
+                r = await runner.run(EvalTask(id='fixture', instruction='test'), 'test', workdir='/tmp', timeout=10)
+                self.assertIsNone(r.error)
+                self.assertEqual(r.turns, 2)
+                self.assertEqual(local.call_args.kwargs['backend'], name.removeprefix('local-'))
+
+    async def test_local_subprocess_killed_on_timeout(self):
+        import asyncio
+        from opendesk.integrations.local import run_local_process
+        from unittest.mock import Mock
+        process = Mock(returncode=None)
+        async def slow():
+            await asyncio.sleep(60)
+        process.communicate = slow
+        process.wait = AsyncMock()
+        with patch('asyncio.create_subprocess_exec', new_callable=AsyncMock, return_value=process):
+            with self.assertRaises(asyncio.TimeoutError):
+                await run_local_process('test', timeout=0.01)
+        process.kill.assert_called_once()
+        process.wait.assert_awaited_once()
+
+    async def test_local_subprocess_rejects_malformed_success_output(self):
+        from unittest.mock import Mock
+        from opendesk.integrations.local import run_local_process
+        process = Mock(returncode=0)
+        process.communicate = AsyncMock(return_value=(b'not a tool result', b''))
+        with patch('asyncio.create_subprocess_exec', new_callable=AsyncMock, return_value=process) as spawn:
+            result = await run_local_process('test', structured=True)
+        self.assertTrue(result.error)
+        self.assertIn('--structured', spawn.call_args.args)

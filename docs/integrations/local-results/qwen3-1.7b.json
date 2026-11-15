@@ -1,0 +1,249 @@
+{
+  "model": "mlx-community/Qwen3-1.7B-4bit",
+  "backend": "mlx",
+  "full_catalog": false,
+  "kind": "command-generation-only",
+  "cases": [
+    {
+      "tool": "screenshot",
+      "passed": true,
+      "seconds": 2.96,
+      "attempts": 1,
+      "command": {
+        "tool": "screenshot",
+        "arguments": {
+          "region": null,
+          "save_path": null,
+          "show_cursor": false,
+          "marks": false,
+          "zoom": null
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\": \"screenshot\", \"arguments\": {\"region\": null, \"save_path\": null, \"show_cursor\": false, \"marks\": false, \"zoom\": null}}"
+    },
+    {
+      "tool": "mouse",
+      "passed": true,
+      "seconds": 3.33,
+      "attempts": 1,
+      "command": {
+        "tool": "mouse",
+        "arguments": {
+          "action": "move",
+          "x": 120,
+          "y": 80
+        }
+      },
+      "error": null,
+      "raw": "{\n  \"tool\": \"mouse\",\n  \"arguments\": {\n    \"action\": \"move\",\n    \"x\": 120,\n    \"y\": 80\n  }\n}"
+    },
+    {
+      "tool": "keyboard",
+      "passed": true,
+      "seconds": 1.89,
+      "attempts": 1,
+      "command": {
+        "tool": "keyboard",
+        "arguments": {
+          "action": "type",
+          "text": "hello locally"
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\":\"keyboard\",\"arguments\":{\"action\":\"type\",\"text\":\"hello locally\"}}"
+    },
+    {
+      "tool": "app",
+      "passed": true,
+      "seconds": 1.47,
+      "attempts": 1,
+      "command": {
+        "tool": "app",
+        "arguments": {
+          "action": "open",
+          "name": "Calculator"
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\": \"app\", \"arguments\": {\"action\": \"open\", \"name\": \"Calculator\"}}"
+    },
+    {
+      "tool": "ui",
+      "passed": true,
+      "seconds": 3.3,
+      "attempts": 1,
+      "command": {
+        "tool": "ui",
+        "arguments": {
+          "action": "get_tree",
+          "app": "Calculator"
+        }
+      },
+      "error": null,
+      "raw": "{\n  \"tool\": \"ui\",\n  \"arguments\": {\n    \"action\": \"get_tree\",\n    \"app\": \"Calculator\"\n  }\n}"
+    },
+    {
+      "tool": "clipboard",
+      "passed": true,
+      "seconds": 1.15,
+      "attempts": 1,
+      "command": {
+        "tool": "clipboard",
+        "arguments": {
+          "action": "read"
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\":\"clipboard\",\"arguments\":{\"action\":\"read\"}}"
+    },
+    {
+      "tool": "ocr",
+      "passed": true,
+      "seconds": 1.42,
+      "attempts": 1,
+      "command": {
+        "tool": "ocr",
+        "arguments": {
+          "region": null
+        }
+      },
+      "error": null,
+      "raw": "{\n  \"tool\": \"ocr\",\n  \"arguments\": {\n    \"region\": null\n  }\n}"
+    },
+    {
+      "tool": "learn",
+      "passed": true,
+      "seconds": 3.21,
+      "attempts": 1,
+      "command": {
+        "tool": "learn",
+        "arguments": {
+          "action": "list"
+        }
+      },
+      "error": null,
+      "raw": "{\n  \"tool\": \"learn\",\n  \"arguments\": {\n    \"action\": \"list\"\n  }\n}"
+    },
+    {
+      "tool": "schedule",
+      "passed": true,
+      "seconds": 1.9,
+      "attempts": 1,
+      "command": {
+        "tool": "schedule",
+        "arguments": {
+          "action": "list"
+        }
+      },
+      "error": null,
+      "raw": "{\n  \"tool\": \"schedule\",\n  \"arguments\": {\n    \"action\": \"list\"\n  }\n}"
+    },
+    {
+      "tool": "audit",
+      "passed": true,
+      "seconds": 2.04,
+      "attempts": 1,
+      "command": {
+        "tool": "audit",
+        "arguments": {
+          "action": "show",
+          "format": "full"
+        }
+      },
+      "error": null,
+      "raw": "{\n  \"tool\": \"audit\",\n  \"arguments\": {\n    \"action\": \"show\",\n    \"format\": \"full\"\n  }\n}"
+    },
+    {
+      "tool": "memory",
+      "passed": false,
+      "seconds": 9.26,
+      "attempts": 3,
+      "command": {
+        "tool": "memory",
+        "arguments": {
+          "action": "search",
+          "query": "invoice today",
+          "limit": 15
+        }
+      },
+      "error": "Expected arguments {'action': 'search', 'query': 'invoice', 'since': 'today'}",
+      "raw": "{\n  \"tool\": \"memory\",\n  \"arguments\": {\n    \"action\": \"search\",\n    \"query\": \"invoice today\",\n    \"limit\": 15\n  }\n}"
+    },
+    {
+      "tool": "script",
+      "passed": true,
+      "seconds": 3.05,
+      "attempts": 1,
+      "command": {
+        "tool": "script",
+        "arguments": {
+          "action": "shell",
+          "code": "pwd",
+          "timeout": 60.0,
+          "cwd": null
+        }
+      },
+      "error": null,
+      "raw": "{\n  \"tool\": \"script\",\n  \"arguments\": {\n    \"action\": \"shell\",\n    \"code\": \"pwd\",\n    \"timeout\": 60.0,\n    \"cwd\": null\n  }\n}"
+    },
+    {
+      "tool": "browser",
+      "passed": true,
+      "seconds": 3.51,
+      "attempts": 1,
+      "command": {
+        "tool": "browser",
+        "arguments": {
+          "action": "tabs"
+        }
+      },
+      "error": null,
+      "raw": "{\n  \"tool\": \"browser\",\n  \"arguments\": {\n    \"action\": \"tabs\"\n  }\n}"
+    },
+    {
+      "tool": "fleet",
+      "passed": false,
+      "seconds": 9.58,
+      "attempts": 3,
+      "command": {
+        "tool": "fleet",
+        "arguments": {
+          "peers": "all",
+          "tool": "script",
+          "params": {
+            "command": "ls -la"
+          },
+          "match": [
+            "app list"
+          ]
+        }
+      },
+      "error": "Expected arguments {'peers': ['demo'], 'tool': 'app', 'params': {'action': 'list'}}",
+      "raw": "{\n  \"tool\": \"fleet\",\n  \"arguments\": {\n    \"peers\": \"all\",\n    \"tool\": \"script\",\n    \"params\": {\n      \"command\": \"ls -la\"\n    },\n    \"match\": [\"app list\"]\n  }\n}"
+    },
+    {
+      "tool": "memory_manage",
+      "passed": true,
+      "seconds": 4.56,
+      "attempts": 1,
+      "command": {
+        "tool": "memory_manage",
+        "arguments": {
+          "action": "pause",
+          "duration": "1h"
+        }
+      },
+      "error": null,
+      "raw": "{\n  \"tool\": \"memory_manage\",\n  \"arguments\": {\n    \"action\": \"pause\",\n    \"duration\": \"1h\"\n  }\n}"
+    }
+  ],
+  "passed": 13,
+  "total": 15,
+  "versions": {
+    "opendesk": "0.1.2",
+    "mlx": "0.32.4",
+    "mlx-lm": "0.32.2"
+  },
+  "peak_metal_gib": 1.69
+}
