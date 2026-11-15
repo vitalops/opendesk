@@ -1,20 +1,34 @@
-# Local Models workspace
+# Workspace developer guide
 
-The app opens on **Local Models**. Select Qwen2.5 3B, Liquid LFM2.5 1.2B,
-or Qwen3 1.7B, enter a task, and press **Run locally** (⌘Return). Example
-buttons fill the composer; they do not execute until you press Run.
+The consumer UI is **My workspace**, with a task composer, folder chooser,
+workflow suggestions, an explicit change toggle, answers and Stop. Preferences
+contains native access controls. No model, provider, CLI or tool terminology is
+exposed in navigation, menus or the task composer. Legacy cloud views remain in
+source but are not reachable from the app shell and are not initialized at launch.
 
-- **Desktop**, **Screen memory**, and **All tools** select the Python agent scope.
-- **Allow actions** enables changes through the existing Python safety policy.
-  The older cloud chat's approval preferences do not override that policy.
-- **See screenshots** uses Liquid LFM2.5-VL 1.6B to observe images, then loads
-  the selected text model to plan. Loading is sequential.
-- **Stop** (⌘.) cancels the local process tree. Runs also have a five-minute
-  deadline. Stopping cannot undo completed actions.
-- Results and diagnostics stay in this app session; each run starts fresh.
-  The existing OpenDesk tools may persist audit logs or memory as configured.
+## Routing
 
-## Setup and build
+The Swift service invokes `python -m opendesk.integrations.workspace`.
+
+- Current folder-list questions read immediate filesystem children directly;
+  they do not depend on screen history or inference. GitHub resolves to the
+  existing Documents/GitHub or home GitHub folder. Downloads, Documents and
+  Desktop names are supported; other locations use the folder chooser.
+- Liquid LFM2.5 1.2B selects current screen, applications, past activity, or a
+  general task for other requests. JSON-schema constraints bound this selection.
+- Current screen help captures through the existing safety guard, then uses
+  Liquid LFM2.5-VL 1.6B for a visual answer. The routing model is released first.
+- App/general requests use the text agent. Past activity alone can use screen
+  memory; an empty history produces an everyday explanation, not daemon commands.
+- Changes remain opt-in, with the existing Python safety guard. File listing
+  never runs shell commands, opens file contents, or recursively traverses folders.
+
+This is a bounded initial workflow surface, not a general filesystem search or
+file editing UI. Models can misroute requests or give inaccurate answers.
+Screen help requires macOS permissions. History recording is not started
+implicitly; file questions work without it. Each request starts fresh.
+
+## Setup
 
 Requires Apple Silicon, macOS 14+, Swift Command Line Tools and `uv`.
 
@@ -24,34 +38,21 @@ Requires Apple Silicon, macOS 14+, Swift Command Line Tools and `uv`.
 open macos/build/OpenDesk.app
 ```
 
-Setup installs the editable Python source with local inference and memory extras
-into `~/Library/Application Support/OpenDesk/local-venv`. It downloads the four
-model repositories into the Hugging Face cache (several GB on a fresh setup).
-The GUI uses cached models only (`HF_HUB_OFFLINE=1`). Keep the checkout in place;
-this development build is not a self-contained, notarized distribution.
-Runtime settings can override the Python executable and Python source directory.
-
-macOS may require Accessibility and Screen Recording permission for desktop
-operations. Use the Privacy & Security button in Runtime settings.
-
-Memory capture is separate and is not enabled just by opening the app:
-
-```sh
-"$HOME/Library/Application Support/OpenDesk/local-venv/bin/opendesk" memory start
-```
-
-Then select Recall history in the app. Existing cloud chat remains a separate
-workspace and still uses its configured Claude credentials. Local Models does
-not call that service or fall back to it.
+Setup installs the editable Python package under
+`~/Library/Application Support/OpenDesk/local-venv` and caches the two Liquid
+models. GUI inference uses `HF_HUB_OFFLINE=1`. Keep this checkout in place: this
+is a development bundle, not a self-contained notarized installer. The build
+with `local` preserves any existing `/Applications/OpenDesk.app`.
 
 ## Checks
 
 ```sh
 ./macos/test-local.sh
-OPENDESK_LIVE_TEST=1 ./macos/test-local.sh
+python -m pytest python/tests/test_workspace.py -q
 ```
 
-The standalone Swift runner works without XCTest. It checks result parsing,
-stderr capture, offline configuration, malformed responses, and cancellation.
-The optional live check uses cached Qwen2.5 3B and verifies an `app.list` call.
-Run it when the app is idle to avoid loading two models on a small Mac.
+The Swift checks cover process results, errors, cancellation and offline mode.
+Python checks cover filesystem reads without inference/history, path selection,
+limits, past-file routing, empty history, and guarded screenshot observation.
+Live checks used Liquid for application listing and screenshot description;
+the exact GitHub-folder request was checked against the real directory.

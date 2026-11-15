@@ -62,61 +62,26 @@ enum AppSection: String, CaseIterable, Identifiable, Hashable {
 }
 
 struct RootView: View {
-    @State private var selection: AppSection? = .local
-    @State private var sidebarVisibility: NavigationSplitViewVisibility = .all
-
+    @State private var preferences = false
     var body: some View {
-        NavigationSplitView(columnVisibility: $sidebarVisibility) {
-            Sidebar(selection: $selection)
-                .navigationSplitViewColumnWidth(min: 220, ideal: 240, max: 280)
+        NavigationSplitView {
+            VStack(alignment: .leading, spacing: 20) {
+                Label("OpenDesk", systemImage: "square.grid.2x2.fill")
+                    .font(.title2.bold()).padding(.bottom, 20)
+                Button { preferences = false } label: { Label("My workspace", systemImage: "house") }
+                Button { preferences = true } label: { Label("Preferences", systemImage: "slider.horizontal.3") }
+                Spacer()
+                Text("Make room for your work.").font(.caption).foregroundStyle(.secondary)
+            }.buttonStyle(.plain).padding(24)
+                .navigationSplitViewColumnWidth(min: 200, ideal: 220)
         } detail: {
-            DetailContainer(selection: selection ?? .overview)
-        }
-        .navigationSplitViewStyle(.balanced)
-        .onReceive(NotificationCenter.default.publisher(for: .newChat)) { _ in
-            selection = .chat
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .openSettings)) { _ in
-            selection = .settings
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .quickScreenshot)) { _ in
-            selection = .tools
-        }
-    }
-}
-
-struct DetailContainer: View {
-    let selection: AppSection
-
-    var body: some View {
-        ZStack {
-            // Subtle ambient gradient background that picks up the brand color
-            LinearGradient(
-                colors: [
-                    Theme.brandStart.opacity(0.08),
-                    Color.clear,
-                    Theme.accent.opacity(0.05)
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .ignoresSafeArea()
-
             Group {
-                switch selection {
-                case .local: LocalModelsView()
-                case .overview:  OverviewView()
-                case .chat:      ChatView()
-                case .tools:     ToolsView()
-                case .workflows: WorkflowsView()
-                case .schedules: SchedulesView()
-                case .peers:     PeersView()
-                case .audit:     AuditView()
-                case .settings:  SettingsView()
-                }
+                if preferences { WorkspacePreferences() }
+                else { LocalModelsView() }
             }
-            .transition(.opacity.combined(with: .move(edge: .trailing)))
-            .animation(.easeOut(duration: 0.18), value: selection)
+            .background(Theme.brandStart.opacity(0.035))
         }
+        .onReceive(NotificationCenter.default.publisher(for: .openSettings)) { _ in preferences = true }
+        .onReceive(NotificationCenter.default.publisher(for: .newChat)) { _ in preferences = false }
     }
 }

@@ -1,17 +1,13 @@
 # OpenDesk for macOS
 
-The app now opens in **Local Models**, a native workspace for the tested MLX
-models, screen memory and computer use. Start with the
-[local setup and controls](LOCAL_MODELS.md). The cloud integrations below remain
-available separately. Use `./build.sh local` to build without replacing an
-existing `/Applications/OpenDesk.app`.
+OpenDesk opens in **My workspace**, with everyday requests for exploring folders,
+checking open apps, understanding the current screen, and recalling earlier work.
+Choose a folder, type a request, and press **Help me**. Preferences contains access
+controls. Technical configuration and provider choices are not part of this UI.
 
-A beautiful native SwiftUI front end for OpenDesk — gives Claude (Opus 4.7,
-Sonnet 4.6, Haiku 4.5) eyes, hands and a keyboard on your Mac.
-
-Everything OpenDesk can do — screenshots, mouse/keyboard, app control, OCR,
-workflows, schedules, encrypted LAN remote control, audit trail — is wrapped
-in a polished GUI you can hand to a non-developer.
+Build and setup details are in [the developer guide](LOCAL_MODELS.md).
+The following describes retained legacy components, which are no longer exposed
+in the workspace navigation or menus.
 
 ## Two ways to talk to Claude
 

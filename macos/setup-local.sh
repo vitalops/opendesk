@@ -12,8 +12,6 @@ uv pip install --python "$RUNTIME/bin/python" -e "$HERE/../python[local,local-vi
 from huggingface_hub import snapshot_download
 for model in [
     'LiquidAI/LFM2.5-1.2B-Instruct-MLX-4bit',
-    'mlx-community/Qwen3-1.7B-4bit',
-    'mlx-community/Qwen2.5-3B-Instruct-4bit',
     'mlx-community/LFM2.5-VL-1.6B-4bit',
 ]:
     print(f'Caching {model}', flush=True)

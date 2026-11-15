@@ -14,14 +14,14 @@ final class LocalAgentService: ObservableObject {
 
     func stop() { child?.cancel() }
 
-    func run(python: String, source: String, arguments: [String]) async {
+    func run(python: String, source: String, arguments: [String], module: String = "opendesk.cli") async {
         guard !running else { return }
         guard FileManager.default.isExecutableFile(atPath: python) else {
             failed = true; status = "Setup needed"
-            answer = "Choose a Python runtime with OpenDesk installed in Runtime settings below."
+            answer = "OpenDesk needs its support files restored. Please run the setup included with the app and reopen it."
             return
         }
-        running = true; failed = false; answer = ""; log = ""; status = "Loading local model…"
+        running = true; failed = false; answer = ""; log = ""; status = "Getting ready…"
         let process = CancellableProcess()
         child = process
         let output = LocalOutputBuffer()
@@ -35,7 +35,7 @@ final class LocalAgentService: ObservableObject {
         let monitor = Task { @MainActor in
             while !Task.isCancelled {
                 self.log = errors.text
-                if self.log.contains("Step ") { self.status = "Running tools…" }
+                if self.log.contains("Step ") { self.status = "Working on it…" }
                 try? await Task.sleep(for: .milliseconds(200))
             }
         }
@@ -45,7 +45,7 @@ final class LocalAgentService: ObservableObject {
             if !Task.isCancelled { process.cancel() }
         }
         let outcome = await process.run(executable: URL(fileURLWithPath: python),
-                                        arguments: ["-m", "opendesk.cli"] + arguments,
+                                        arguments: ["-m", module] + arguments,
                                         environment: environment)
         monitor.cancel(); deadline.cancel()
         // Handlers stop on termination; drain remaining bytes only after a normal exit.
@@ -65,7 +65,7 @@ final class LocalAgentService: ObservableObject {
                let text = result["output"] as? String, let error = result["error"] as? Bool {
                 answer = text; failed = error || code != 0
             } else {
-                answer = output.text.isEmpty ? log : output.text
+                answer = "I could not complete that request. Please try again, or check access in Preferences."
                 failed = true
             }
             status = failed ? "Needs attention" : "Finished"
