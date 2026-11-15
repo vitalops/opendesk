@@ -41,6 +41,7 @@ mcp/troubleshooting
 integrations/index
 integrations/anthropic
 integrations/openai
+integrations/local
 integrations/langchain
 integrations/javascript
 integrations/custom

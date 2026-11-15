@@ -1655,12 +1655,17 @@ def main() -> None:
     from opendesk.safety import cli as safety_cli
     safety_cli.register(sub)
 
+    from opendesk.integrations.local import register_cli, cmd_agent
+    register_cli(sub)
+
     args = parser.parse_args()
 
     if safety_cli.dispatch(args):
         return
 
-    if args.command == "install":
+    if args.command == "agent":
+        cmd_agent(args)
+    elif args.command == "install":
         cmd_install(scope=args.scope)
     elif args.command == "uninstall":
         cmd_uninstall()

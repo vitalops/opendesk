@@ -47,6 +47,9 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+# Apple Silicon local memory and accessibility agent
+local = ["mlx-lm>=0.32.2; sys_platform == 'darwin' and platform_machine == 'arm64'"]
+
 # Compatibility aliases: these used to be required for computer use and the
 # MCP server; both are now base dependencies.
 core = []
