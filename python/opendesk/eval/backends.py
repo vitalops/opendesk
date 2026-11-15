@@ -387,7 +387,51 @@ class FakeBackend(Backend):
         return out
 
 
+class LocalModelBackend(Backend):
+    """Full registry, local inference; the harness still checks real task outcomes."""
+    name = "local-mlx"
+    inference = "mlx"
+
+    def local_model(self):
+        from opendesk.integrations.local_backends import DEFAULT_MODEL as LOCAL_MODEL, DEFAULT_VISION_MODEL
+        if self.model == DEFAULT_MODEL and self.inference == "mlx":
+            return DEFAULT_VISION_MODEL if os.environ.get("OPENDESK_LOCAL_VISION") == "1" else LOCAL_MODEL
+        return self.model
+
+    def describe(self, task, instruction, *, workdir):
+        return {"backend": self.name, "model": self.local_model(), "instruction": instruction,
+                "workdir": workdir, "max_steps": min(30, self.turns_for(task))}
+
+    async def run(self, task, instruction, *, workdir, timeout):
+        from opendesk.integrations.local import run_local_process
+        start = time.monotonic()
+        model = self.local_model()
+        if self.inference == "http" and self.model == DEFAULT_MODEL:
+            return AgentRun(error="Specify --model for a local HTTP evaluation")
+        try:
+            result = await run_local_process(
+                instruction, model=model, backend=self.inference, workdir=workdir,
+                timeout=timeout, max_steps=min(30, self.turns_for(task)),
+                vision=os.environ.get("OPENDESK_LOCAL_VISION") == "1",
+                base_url=os.environ.get("OPENDESK_LOCAL_URL"),
+                structured=os.environ.get("OPENDESK_LOCAL_STRUCTURED") == "1",
+                planner_model=os.environ.get("OPENDESK_LOCAL_PLANNER"))
+            return AgentRun(final_text=result.output, error=(result.output or result.metadata.get("stderr") or "Local task failed") if result.error else None,
+                            turns=result.metadata.get("steps", 0),
+                            wall_time_s=time.monotonic() - start, extra=result.metadata)
+        except Exception as exc:
+            return AgentRun(error=f"Local model failed: {type(exc).__name__}: {exc}",
+                            wall_time_s=time.monotonic() - start)
+
+
+class LocalHTTPBackend(LocalModelBackend):
+    name = "local-http"
+    inference = "http"
+
+
 BACKENDS = {
+    "local-mlx": LocalModelBackend,
+    "local-http": LocalHTTPBackend,
     "claude-code": ClaudeCodeBackend,
     "anthropic-api": AnthropicAPIBackend,
     "anthropic-native-computer": AnthropicNativeComputerBackend,

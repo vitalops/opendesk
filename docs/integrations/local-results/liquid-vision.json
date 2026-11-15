@@ -1,0 +1,14 @@
+{
+  "model": "mlx-community/LFM2.5-VL-1.6B-4bit",
+  "backend": "mlx",
+  "kind": "synthetic-vision-fixture",
+  "answer": "4826",
+  "passed": true,
+  "seconds": 1.54,
+  "versions": {
+    "opendesk": "0.1.2",
+    "mlx": "0.32.4",
+    "mlx-vlm": "0.7.12"
+  },
+  "peak_metal_gib": 1.8
+}

@@ -1,0 +1,239 @@
+{
+  "model": "mlx-community/Qwen2.5-3B-Instruct-4bit",
+  "backend": "mlx",
+  "full_catalog": true,
+  "kind": "command-generation-only",
+  "cases": [
+    {
+      "tool": "screenshot",
+      "passed": true,
+      "seconds": 8.29,
+      "attempts": 1,
+      "command": {
+        "tool": "screenshot",
+        "arguments": {
+          "region": null
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\":\"screenshot\",\"arguments\":{\"region\":null}}"
+    },
+    {
+      "tool": "mouse",
+      "passed": true,
+      "seconds": 7.34,
+      "attempts": 1,
+      "command": {
+        "tool": "mouse",
+        "arguments": {
+          "action": "move",
+          "x": 120,
+          "y": 80
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\": \"mouse\", \"arguments\": {\"action\": \"move\", \"x\": 120, \"y\": 80}}"
+    },
+    {
+      "tool": "keyboard",
+      "passed": true,
+      "seconds": 7.31,
+      "attempts": 1,
+      "command": {
+        "tool": "keyboard",
+        "arguments": {
+          "action": "type",
+          "text": "hello locally"
+        }
+      },
+      "error": null,
+      "raw": "{\n  \"tool\": \"keyboard\",\n  \"arguments\": {\n    \"action\": \"type\",\n    \"text\": \"hello locally\"\n  }\n}"
+    },
+    {
+      "tool": "app",
+      "passed": true,
+      "seconds": 7.03,
+      "attempts": 1,
+      "command": {
+        "tool": "app",
+        "arguments": {
+          "action": "open",
+          "name": "Calculator"
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\":\"app\", \"arguments\":{\"action\":\"open\", \"name\":\"Calculator\"}}"
+    },
+    {
+      "tool": "ui",
+      "passed": true,
+      "seconds": 6.65,
+      "attempts": 1,
+      "command": {
+        "tool": "ui",
+        "arguments": {
+          "action": "get_tree",
+          "app": "Calculator"
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\":\"ui\",\"arguments\":{\"action\":\"get_tree\",\"app\":\"Calculator\"}}"
+    },
+    {
+      "tool": "clipboard",
+      "passed": true,
+      "seconds": 7.15,
+      "attempts": 1,
+      "command": {
+        "tool": "clipboard",
+        "arguments": {
+          "action": "read"
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\":\"clipboard\",\"arguments\":{\"action\":\"read\"}}"
+    },
+    {
+      "tool": "ocr",
+      "passed": true,
+      "seconds": 7.35,
+      "attempts": 1,
+      "command": {
+        "tool": "ocr",
+        "arguments": {
+          "region": [
+            0,
+            0,
+            1920,
+            1080
+          ]
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\":\"ocr\",\"arguments\":{\"region\":[0,0,1920,1080]}}"
+    },
+    {
+      "tool": "learn",
+      "passed": true,
+      "seconds": 6.81,
+      "attempts": 1,
+      "command": {
+        "tool": "learn",
+        "arguments": {
+          "action": "list"
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\":\"learn\",\"arguments\":{\"action\":\"list\"}}"
+    },
+    {
+      "tool": "schedule",
+      "passed": true,
+      "seconds": 6.62,
+      "attempts": 1,
+      "command": {
+        "tool": "schedule",
+        "arguments": {
+          "action": "list"
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\":\"schedule\",\"arguments\":{\"action\":\"list\"}}"
+    },
+    {
+      "tool": "audit",
+      "passed": true,
+      "seconds": 7.4,
+      "attempts": 1,
+      "command": {
+        "tool": "audit",
+        "arguments": {
+          "action": "show"
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\":\"audit\",\"arguments\":{\"action\":\"show\"}}"
+    },
+    {
+      "tool": "memory",
+      "passed": false,
+      "seconds": 22.31,
+      "attempts": 3,
+      "command": {
+        "tool": "memory",
+        "arguments": {
+          "action": "search",
+          "query": "invoice today"
+        }
+      },
+      "error": "Expected arguments {'action': 'search', 'query': 'invoice', 'since': 'today'}",
+      "raw": "{\"tool\":\"memory\",\"arguments\":{\"action\":\"search\",\"query\":\"invoice today\"}}"
+    },
+    {
+      "tool": "script",
+      "passed": true,
+      "seconds": 7.69,
+      "attempts": 1,
+      "command": {
+        "tool": "script",
+        "arguments": {
+          "action": "shell",
+          "code": "pwd"
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\":\"script\",\"arguments\":{\"action\":\"shell\",\"code\":\"pwd\"}}"
+    },
+    {
+      "tool": "browser",
+      "passed": true,
+      "seconds": 7.41,
+      "attempts": 1,
+      "command": {
+        "tool": "browser",
+        "arguments": {
+          "action": "tabs"
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\":\"browser\",\"arguments\":{\"action\":\"tabs\"}}"
+    },
+    {
+      "tool": "fleet",
+      "passed": false,
+      "seconds": 23.51,
+      "attempts": 3,
+      "command": {
+        "tool": "app",
+        "arguments": {
+          "action": "list"
+        }
+      },
+      "error": "Expected tool fleet",
+      "raw": "{\"tool\":\"app\",\"arguments\":{\"action\":\"list\"}}"
+    },
+    {
+      "tool": "memory_manage",
+      "passed": true,
+      "seconds": 8.56,
+      "attempts": 1,
+      "command": {
+        "tool": "memory_manage",
+        "arguments": {
+          "action": "pause",
+          "duration": "1h"
+        }
+      },
+      "error": null,
+      "raw": "{\"tool\": \"memory_manage\", \"arguments\": {\"action\": \"pause\", \"duration\": \"1h\"}}"
+    }
+  ],
+  "passed": 13,
+  "total": 15,
+  "versions": {
+    "opendesk": "0.1.2",
+    "mlx": "0.32.4",
+    "mlx-lm": "0.32.2"
+  },
+  "peak_metal_gib": 2.28
+}

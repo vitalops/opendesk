@@ -12,4 +12,7 @@ See [ui-testing/](ui-testing/) for setup and examples.
 
 ---
 
-More examples coming soon.
+## Local screen-memory AI
+
+Local memory questions and accessibility-based computer use are available via
+`opendesk agent`. See [local model setup](../docs/integrations/local.md).

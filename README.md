@@ -527,6 +527,20 @@ Works with Anthropic SDK, OpenAI, and LangChain — see [docs/integrations](docs
 
 ### On-device models (Ollama, LM Studio, vLLM, llama.cpp)
 
+OpenDesk also includes a bounded local agent for all registered tools, including
+screen memory and computer use. On Apple Silicon, run from this checkout:
+
+```sh
+pip install -e './python[local,memory]'
+opendesk agent 'Open Calculator, then list apps to verify it is running' \
+  --model mlx-community/Qwen2.5-3B-Instruct-4bit --tools app --allow-actions
+```
+
+Python supports direct MLX text/vision inference; both Python and JavaScript can
+use a loopback inference server. Scheduled tasks and evaluations can select local
+backends too. See [local model setup](docs/integrations/local.md) and
+[measured results and limitations](docs/integrations/local-results.md).
+
 Any OpenAI-compatible local server works out of the box:
 
 ```python

@@ -66,3 +66,6 @@ export { PROTOCOL_VERSION, type Frame, type HelloFrame, type ReqFrame, type ResF
 // Safety — policy, approvals, kill switch, injection guard, chained audit, secrets
 export * as safety from "./safety/index.js";
 export { runTool, guardedCall, classify, decide, type GuardOptions } from "./safety/index.js";
+
+export { LocalAgent, LocalHTTPBackend } from "./integrations/local.js";
+export type { LocalBackend, LocalAgentOptions } from "./integrations/local.js";

@@ -89,12 +89,29 @@ async def _run_replay(name: str, project_dir: Path) -> str:
 
 
 async def _run_natural_language(task: str, project_dir: Path) -> str:
-    """Send a natural language task to Claude with opendesk tools."""
+    """Run a natural language task with the configured inference backend."""
     return await _run_with_claude(task, project_dir)
 
 
 async def _run_with_claude(prompt: str, project_dir: Path | None = None) -> str:
-    """Run a prompt through Claude with all opendesk tools available."""
+    """Use the selected local backend, or Claude by default."""
+    backend = os.environ.get("OPENDESK_AGENT_BACKEND", "cloud")
+    if backend in {"local-mlx", "local-http"}:
+        from opendesk.integrations.local import run_local_process
+        try:
+            result = await run_local_process(
+                prompt, model=os.environ.get("OPENDESK_MODEL"),
+                backend=backend.removeprefix("local-"), workdir=str(project_dir) if project_dir else None,
+                vision=os.environ.get("OPENDESK_LOCAL_VISION") == "1",
+                base_url=os.environ.get("OPENDESK_LOCAL_URL"),
+                structured=os.environ.get("OPENDESK_LOCAL_STRUCTURED") == "1",
+                planner_model=os.environ.get("OPENDESK_LOCAL_PLANNER"),
+            )
+            return ("Error: " if result.error else "ok (local): ") + (result.output or result.metadata.get("stderr", ""))[:1000]
+        except Exception as exc:
+            return f"Error: local inference failed: {exc}"
+    if backend != "cloud":
+        return f"Error: unknown OPENDESK_AGENT_BACKEND {backend!r}"
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:
         if shutil.which("claude"):
